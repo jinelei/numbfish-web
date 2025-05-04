@@ -9,10 +9,10 @@ import {
 import { FormInstance } from '@arco-design/web-react/es/Form';
 import { IconLock, IconUser } from '@arco-design/web-react/icon';
 import React, { useEffect, useRef, useState } from 'react';
-import axios from 'axios';
 import useStorage from '@/utils/useStorage';
 import useLocale from '@/utils/useLocale';
 import locale from './locale';
+import api from '@/apis';
 import styles from './style/index.module.less';
 
 export default function LoginForm() {
@@ -42,14 +42,13 @@ export default function LoginForm() {
   function login(params) {
     setErrorMessage('');
     setLoading(true);
-    axios
-      .post('/api/user/login', params)
+    api.user
+      .login(params)
       .then((res) => {
-        const { status, msg } = res.data;
-        if (status === 'ok') {
+        if (res.data.code === 200) {
           afterLoginSuccess(params);
         } else {
-          setErrorMessage(msg || t['login.form.login.errMsg']);
+          setErrorMessage(res.data.message || t['login.form.login.errMsg']);
         }
       })
       .finally(() => {
@@ -84,15 +83,15 @@ export default function LoginForm() {
         className={styles['login-form']}
         layout="vertical"
         ref={formRef}
-        initialValues={{ userName: 'admin', password: 'admin' }}
+        initialValues={{ username: 'admin', password: 'admin' }}
       >
         <Form.Item
-          field="userName"
-          rules={[{ required: true, message: t['login.form.userName.errMsg'] }]}
+          field="username"
+          rules={[{ required: true, message: t['login.form.username.errMsg'] }]}
         >
           <Input
             prefix={<IconUser />}
-            placeholder={t['login.form.userName.placeholder']}
+            placeholder={t['login.form.username.placeholder']}
             onPressEnter={onSubmitClick}
           />
         </Form.Item>

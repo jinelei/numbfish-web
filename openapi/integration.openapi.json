@@ -9,12 +9,6 @@
     },
     "version": "v1"
   },
-  "servers": [
-    {
-      "url": "authorization",
-      "description": "Generated server url"
-    }
-  ],
   "externalDocs": {
     "description": "外部文档",
     "url": "https://springshop.wiki.github.org/docs"
