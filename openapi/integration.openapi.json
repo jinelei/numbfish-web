@@ -1,0 +1,5780 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "授权服务",
+    "description": "## Authorization\n\n授权服务API文档\n\n## Equipment\n\n设备服务API文档",
+    "license": {
+      "name": "Apache 2.0",
+      "url": "https://jinelei.com/authorization/"
+    },
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9998/authorization",
+      "description": "Generated server url"
+    }
+  ],
+  "externalDocs": {
+    "description": "外部文档",
+    "url": "https://springshop.wiki.github.org/docs"
+  },
+  "paths": {
+    "/user/update": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "更新用户",
+        "operationId": "update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/updatePassword": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "用户修改密码",
+        "operationId": "updatePassword",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdatePasswordRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/page": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "获取用户分页",
+        "operationId": "page",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestUserQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewUserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/logout": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "用户登出",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/login": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "用户登陆",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserLoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewString"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/list": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "获取用户列表",
+        "operationId": "list",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewUserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/info": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "用户信息",
+        "operationId": "info",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewUserInfoResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/get": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "获取用户",
+        "operationId": "get",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewUserResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/delete": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "删除用户",
+        "operationId": "delete",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/create": {
+      "post": {
+        "tags": ["用户管理"],
+        "summary": "创建用户",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/setup/init": {
+      "post": {
+        "tags": ["任务管理"],
+        "operationId": "init",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewBoolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/setup/check": {
+      "post": {
+        "tags": ["任务管理"],
+        "operationId": "checkIsSetup",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewBoolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/update": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "更新角色",
+        "operationId": "update_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/tree": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "获取角色树",
+        "operationId": "tree",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewListRoleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/regist": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "注册角色",
+        "operationId": "regist",
+        "parameters": [
+          {
+            "name": "roles",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/RoleDeclarationObject"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewBoolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/page": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "获取角色分页",
+        "operationId": "page_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestRoleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewRoleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/list": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "获取角色列表",
+        "operationId": "list_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewRoleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/get": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "获取角色",
+        "operationId": "get_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewRoleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/delete": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "删除角色",
+        "operationId": "delete_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/role/create": {
+      "post": {
+        "tags": ["角色管理"],
+        "summary": "创建角色",
+        "operationId": "create_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RoleCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/update": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "更新权限",
+        "operationId": "update_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/tree": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "获取权限树",
+        "operationId": "tree_1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewListPermissionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/regist": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "注册权限",
+        "operationId": "regist_1",
+        "parameters": [
+          {
+            "name": "permissions",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/PermissionDeclarationObject"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewBoolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/page": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "获取权限分页",
+        "operationId": "page_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestPermissionQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewPermissionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/list": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "获取权限列表",
+        "operationId": "list_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewPermissionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/get": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "获取权限",
+        "operationId": "get_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewPermissionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/delete": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "删除权限",
+        "operationId": "delete_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/permission/create": {
+      "post": {
+        "tags": ["权限管理"],
+        "summary": "创建权限",
+        "operationId": "create_2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PermissionCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/update": {
+      "post": {
+        "tags": ["客户端管理"],
+        "summary": "更新客户端",
+        "operationId": "update_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/page": {
+      "post": {
+        "tags": ["客户端管理"],
+        "summary": "获取客户端分页",
+        "operationId": "page_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestClientQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewClientResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/list": {
+      "post": {
+        "tags": ["客户端管理"],
+        "summary": "获取客户端列表",
+        "operationId": "list_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewClientResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/get": {
+      "post": {
+        "tags": ["客户端管理"],
+        "summary": "获取客户端",
+        "operationId": "get_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewClientResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/delete": {
+      "post": {
+        "tags": ["客户端管理"],
+        "summary": "删除客户端",
+        "operationId": "delete_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/client/create": {
+      "post": {
+        "tags": ["客户端管理"],
+        "summary": "创建客户端",
+        "operationId": "create_3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClientCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/structure/update": {
+      "post": {
+        "tags": ["结构管理"],
+        "summary": "更新结构",
+        "operationId": "update1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StructureUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/structure/page": {
+      "post": {
+        "tags": ["结构管理"],
+        "summary": "获取结构分页列表",
+        "operationId": "page1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestStructureQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewStructureResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/structure/list": {
+      "post": {
+        "tags": ["结构管理"],
+        "summary": "获取结构列表",
+        "operationId": "list1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StructureQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewStructureResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/structure/get": {
+      "post": {
+        "tags": ["结构管理"],
+        "summary": "获取结构",
+        "operationId": "get1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StructureQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewStructureResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/structure/delete": {
+      "post": {
+        "tags": ["结构管理"],
+        "summary": "删除结构",
+        "operationId": "delete1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StructureDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/structure/create": {
+      "post": {
+        "tags": ["结构管理"],
+        "summary": "创建结构",
+        "operationId": "create1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StructureCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeRule/update": {
+      "post": {
+        "tags": ["Oee规则管理"],
+        "summary": "更新Oee规则",
+        "operationId": "update_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeRuleUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeRule/page": {
+      "post": {
+        "tags": ["Oee规则管理"],
+        "summary": "获取Oee规则分页列表",
+        "operationId": "page_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestOeeRuleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewOeeRuleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeRule/list": {
+      "post": {
+        "tags": ["Oee规则管理"],
+        "summary": "获取Oee规则列表",
+        "operationId": "list_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeRuleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewOeeRuleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeRule/get": {
+      "post": {
+        "tags": ["Oee规则管理"],
+        "summary": "获取Oee规则",
+        "operationId": "get_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeRuleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewOeeRuleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeRule/delete": {
+      "post": {
+        "tags": ["Oee规则管理"],
+        "summary": "删除Oee规则",
+        "operationId": "delete_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeRuleDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeRule/create": {
+      "post": {
+        "tags": ["Oee规则管理"],
+        "summary": "创建Oee规则",
+        "operationId": "create_11",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeRuleCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeHistory/page": {
+      "post": {
+        "tags": ["Oee历史管理"],
+        "summary": "获取Oee历史分页列表",
+        "operationId": "page_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestOeeHistoryQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewOeeHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeHistory/list": {
+      "post": {
+        "tags": ["Oee历史管理"],
+        "summary": "获取Oee历史列表",
+        "operationId": "list_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeHistoryQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewOeeHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeHistory/get": {
+      "post": {
+        "tags": ["Oee历史管理"],
+        "summary": "获取Oee历史",
+        "operationId": "get_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeHistoryQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewOeeHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oeeHistory/delete": {
+      "post": {
+        "tags": ["Oee历史管理"],
+        "summary": "删除Oee历史",
+        "operationId": "delete_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OeeHistoryDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/update": {
+      "post": {
+        "tags": ["字典管理"],
+        "summary": "更新字典",
+        "operationId": "update_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DictUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/page": {
+      "post": {
+        "tags": ["字典管理"],
+        "summary": "获取字典分页列表",
+        "operationId": "page_31",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestDictQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewDictResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/list": {
+      "post": {
+        "tags": ["字典管理"],
+        "summary": "获取字典列表",
+        "operationId": "list_31",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DictQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewDictResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/get": {
+      "post": {
+        "tags": ["字典管理"],
+        "summary": "获取字典",
+        "operationId": "get_31",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DictQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewDictResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/delete": {
+      "post": {
+        "tags": ["字典管理"],
+        "summary": "删除字典",
+        "operationId": "delete_31",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DictDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/dict/create": {
+      "post": {
+        "tags": ["字典管理"],
+        "summary": "创建字典",
+        "operationId": "create_21",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DictCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/update": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "更新设备",
+        "operationId": "update_31",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/update/runningState": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "更新设备运行状态",
+        "operationId": "updateRunningState",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceRunningStateUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/update/activateState": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "更新设备激活状态",
+        "operationId": "updateActivateState",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceActivateStateUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/page": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "获取设备分页列表",
+        "operationId": "page_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestDeviceQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewDeviceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/list": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "获取设备列表",
+        "operationId": "list_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewDeviceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/get": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "获取设备",
+        "operationId": "get_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewDeviceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/delete": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "删除设备",
+        "operationId": "delete_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/device/create": {
+      "post": {
+        "tags": ["设备管理"],
+        "summary": "创建设备",
+        "operationId": "create_31",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeviceCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmRule/update": {
+      "post": {
+        "tags": ["报警规则管理"],
+        "summary": "更新报警规则",
+        "operationId": "update_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmRuleUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmRule/page": {
+      "post": {
+        "tags": ["报警规则管理"],
+        "summary": "获取报警规则分页列表",
+        "operationId": "page_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestAlarmRuleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewAlarmRuleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmRule/list": {
+      "post": {
+        "tags": ["报警规则管理"],
+        "summary": "获取报警规则列表",
+        "operationId": "list_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmRuleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewAlarmRuleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmRule/get": {
+      "post": {
+        "tags": ["报警规则管理"],
+        "summary": "获取报警规则",
+        "operationId": "get_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmRuleQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewAlarmRuleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmRule/delete": {
+      "post": {
+        "tags": ["报警规则管理"],
+        "summary": "删除报警规则",
+        "operationId": "delete_5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmRuleDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmRule/create": {
+      "post": {
+        "tags": ["报警规则管理"],
+        "summary": "创建报警规则",
+        "operationId": "create_4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmRuleCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmHistory/page": {
+      "post": {
+        "tags": ["报警历史管理"],
+        "summary": "获取报警历史分页列表",
+        "operationId": "page_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PageRequestAlarmHistoryQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageViewAlarmHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmHistory/list": {
+      "post": {
+        "tags": ["报警历史管理"],
+        "summary": "获取报警历史列表",
+        "operationId": "list_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmHistoryQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListViewAlarmHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmHistory/get": {
+      "post": {
+        "tags": ["报警历史管理"],
+        "summary": "获取报警历史",
+        "operationId": "get_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmHistoryQueryRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewAlarmHistoryResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/alarmHistory/delete": {
+      "post": {
+        "tags": ["报警历史管理"],
+        "summary": "删除报警历史",
+        "operationId": "delete_6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmHistoryDeleteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UserUpdateRequest": {
+        "required": ["id", "roleIds", "username"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
+          "roleIds": {
+            "type": "array",
+            "description": "角色列表",
+            "items": {
+              "type": "integer",
+              "description": "角色列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "用户修改请求对象"
+      },
+      "BaseViewVoid": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "object",
+            "description": "数据"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "UserUpdatePasswordRequest": {
+        "required": ["username"],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          }
+        },
+        "description": "用户更新密码请求对象"
+      },
+      "BaseViewString": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "string",
+            "description": "数据"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "PageRequestUserQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/UserQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "UserQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          },
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
+          "roleIds": {
+            "type": "array",
+            "description": "角色列表",
+            "items": {
+              "type": "integer",
+              "description": "角色列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "用户查询请求对象"
+      },
+      "PageViewUserResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/UserResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "PermissionResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "权限实体的唯一标识",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限代码"
+          },
+          "type": {
+            "type": "string",
+            "description": "权限类型",
+            "enum": ["DIRECTORY", "MENU", "ACTION"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "权限排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父权限 ID",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "权限备注信息"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "是否启用，0 表示启用，1 表示禁用"
+          },
+          "createdUserId": {
+            "type": "string",
+            "description": "创建人用户 ID"
+          },
+          "createdTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updatedUserId": {
+            "type": "string",
+            "description": "更新人用户 ID"
+          },
+          "updatedTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "deletedUserId": {
+            "type": "string",
+            "description": "删除人用户 ID"
+          },
+          "deletedTime": {
+            "type": "string",
+            "description": "删除时间",
+            "format": "date-time"
+          },
+          "children": {
+            "type": "array",
+            "description": "子级",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          }
+        },
+        "description": "权限响应对象"
+      },
+      "RoleResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "角色实体的唯一标识",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色代码"
+          },
+          "type": {
+            "type": "string",
+            "description": "角色类型",
+            "enum": ["NORMAL", "ADMIN"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "角色排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "父角色 ID",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "角色备注信息"
+          },
+          "deleted": {
+            "type": "boolean",
+            "description": "是否启用，0 表示启用，1 表示禁用"
+          },
+          "createdUserId": {
+            "type": "string",
+            "description": "创建人用户 ID"
+          },
+          "createdTime": {
+            "type": "string",
+            "description": "创建时间",
+            "format": "date-time"
+          },
+          "updatedUserId": {
+            "type": "string",
+            "description": "更新人用户 ID"
+          },
+          "updatedTime": {
+            "type": "string",
+            "description": "更新时间",
+            "format": "date-time"
+          },
+          "deletedUserId": {
+            "type": "string",
+            "description": "删除人用户 ID"
+          },
+          "deletedTime": {
+            "type": "string",
+            "description": "删除时间",
+            "format": "date-time"
+          },
+          "children": {
+            "type": "array",
+            "description": "子级",
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
+          },
+          "whitePermissionIds": {
+            "type": "array",
+            "description": "白名单权限列表",
+            "items": {
+              "type": "integer",
+              "description": "白名单权限列表",
+              "format": "int64"
+            }
+          },
+          "whitePermissions": {
+            "type": "array",
+            "description": "白名单权限实体列表",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          },
+          "blackPermissionIds": {
+            "type": "array",
+            "description": "黑名单权限列表",
+            "items": {
+              "type": "integer",
+              "description": "黑名单权限列表",
+              "format": "int64"
+            }
+          },
+          "blackPermissions": {
+            "type": "array",
+            "description": "黑名单权限列表",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          }
+        },
+        "description": "角色响应对象"
+      },
+      "UserResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "用户实体的唯一标识",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
+          "roleIds": {
+            "type": "array",
+            "description": "角色列表",
+            "items": {
+              "type": "integer",
+              "description": "角色列表",
+              "format": "int64"
+            }
+          },
+          "roles": {
+            "type": "array",
+            "description": "角色实体列表",
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
+          },
+          "permissions": {
+            "type": "array",
+            "description": "权限列表",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          }
+        },
+        "description": "用户响应对象"
+      },
+      "UserLoginRequest": {
+        "required": ["password", "username"],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          }
+        },
+        "description": "用户登陆请求对象"
+      },
+      "ListViewUserResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/UserResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewUserInfoResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserInfoResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "UserInfoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户名"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "permissions": {
+            "type": "array",
+            "description": "权限列表",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          },
+          "roles": {
+            "type": "array",
+            "description": "角色列表",
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
+          }
+        },
+        "description": "用户信息响应对象"
+      },
+      "BaseViewUserResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "UserDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "用户删除请求对象"
+      },
+      "UserCreateRequest": {
+        "required": ["roleIds", "username"],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
+          "roleIds": {
+            "type": "array",
+            "description": "角色列表",
+            "items": {
+              "type": "integer",
+              "description": "角色列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "用户创建请求对象"
+      },
+      "SetupRequest": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          }
+        },
+        "description": "用户权限初始化请求对象"
+      },
+      "BaseViewBoolean": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "boolean",
+            "description": "数据"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "RoleUpdateRequest": {
+        "required": [
+          "blackPermissionIds",
+          "code",
+          "id",
+          "name",
+          "type",
+          "whitePermissionIds"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "角色类型",
+            "enum": ["NORMAL", "ADMIN"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级角色编码",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "角色备注"
+          },
+          "whitePermissionIds": {
+            "type": "array",
+            "description": "白名单权限列表",
+            "items": {
+              "type": "integer",
+              "description": "白名单权限列表",
+              "format": "int64"
+            }
+          },
+          "blackPermissionIds": {
+            "type": "array",
+            "description": "黑名单权限列表",
+            "items": {
+              "type": "integer",
+              "description": "黑名单权限列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "角色修改请求对象"
+      },
+      "RoleQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "角色类型",
+            "enum": ["NORMAL", "ADMIN"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级角色编码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "角色备注"
+          },
+          "mode": {
+            "type": "string",
+            "description": "树构建模式",
+            "enum": [
+              "ALL",
+              "PARENT",
+              "PARENT_AND_CURRENT",
+              "CHILD",
+              "CHILD_AND_CURRENT"
+            ]
+          }
+        },
+        "description": "角色查询请求对象"
+      },
+      "BaseViewListRoleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "PermissionDeclarationObject": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "parent": {
+            "type": "object",
+            "description": "父级权限"
+          },
+          "type": {
+            "type": "string",
+            "description": "权限类型",
+            "enum": ["DIRECTORY", "MENU", "ACTION"]
+          },
+          "code": {
+            "type": "string",
+            "description": "权限编码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "权限描述"
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          }
+        },
+        "description": "权限声明对象"
+      },
+      "RoleDeclarationObject": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "parent": {
+            "type": "object",
+            "description": "父级角色"
+          },
+          "permissions": {
+            "type": "array",
+            "description": "关联权限",
+            "items": {
+              "$ref": "#/components/schemas/PermissionDeclarationObject"
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "角色类型",
+            "enum": ["NORMAL", "ADMIN"]
+          },
+          "code": {
+            "type": "string",
+            "description": "角色编码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "角色描述"
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          }
+        },
+        "description": "角色声明对象"
+      },
+      "PageRequestRoleQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RoleQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "PageViewRoleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewRoleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewRoleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RoleResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "RoleDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级角色编码",
+            "format": "int64"
+          }
+        },
+        "description": "角色删除请求对象"
+      },
+      "RoleCreateRequest": {
+        "required": [
+          "blackPermissionIds",
+          "code",
+          "name",
+          "type",
+          "whitePermissionIds"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "角色类型",
+            "enum": ["NORMAL", "ADMIN"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级角色编码",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "角色备注"
+          },
+          "whitePermissionIds": {
+            "type": "array",
+            "description": "白名单权限列表",
+            "items": {
+              "type": "integer",
+              "description": "白名单权限列表",
+              "format": "int64"
+            }
+          },
+          "blackPermissionIds": {
+            "type": "array",
+            "description": "黑名单权限列表",
+            "items": {
+              "type": "integer",
+              "description": "黑名单权限列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "角色创建请求对象"
+      },
+      "PermissionUpdateRequest": {
+        "required": ["code", "id", "name", "type"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "权限类型",
+            "enum": ["DIRECTORY", "MENU", "ACTION"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级权限编码",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "权限备注"
+          }
+        },
+        "description": "权限修改请求对象"
+      },
+      "PermissionQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "权限类型",
+            "enum": ["DIRECTORY", "MENU", "ACTION"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "string",
+            "description": "上级权限编码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "权限备注"
+          },
+          "mode": {
+            "type": "string",
+            "description": "树构建模式",
+            "enum": [
+              "ALL",
+              "PARENT",
+              "PARENT_AND_CURRENT",
+              "CHILD",
+              "CHILD_AND_CURRENT"
+            ]
+          }
+        },
+        "description": "权限查询请求对象"
+      },
+      "BaseViewListPermissionResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "PageRequestPermissionQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PermissionQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "PageViewPermissionResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewPermissionResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewPermissionResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PermissionResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "PermissionDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级权限编码",
+            "format": "int64"
+          }
+        },
+        "description": "权限删除请求对象"
+      },
+      "PermissionCreateRequest": {
+        "required": ["code", "name", "type"],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限编码"
+          },
+          "type": {
+            "type": "string",
+            "description": "权限类型",
+            "enum": ["DIRECTORY", "MENU", "ACTION"]
+          },
+          "sortValue": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级权限编码",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "权限备注"
+          }
+        },
+        "description": "权限创建请求对象"
+      },
+      "ClientUpdateRequest": {
+        "required": ["id"],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
+          "expiredAt": {
+            "type": "string",
+            "description": "过期时间",
+            "format": "date-time"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "permissionIds": {
+            "type": "array",
+            "description": "权限Id列表",
+            "items": {
+              "type": "integer",
+              "description": "权限Id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "客户端修改请求对象"
+      },
+      "ClientQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
+          "expiredAt": {
+            "type": "string",
+            "description": "过期时间",
+            "format": "date-time"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
+        },
+        "description": "客户端查询请求对象"
+      },
+      "PageRequestClientQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/ClientQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "ClientResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
+          "expiredAt": {
+            "type": "string",
+            "description": "过期时间",
+            "format": "date-time"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "permissions": {
+            "type": "array",
+            "description": "权限列表",
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
+          }
+        },
+        "description": "客户端响应对象"
+      },
+      "PageViewClientResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/ClientResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewClientResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/ClientResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewClientResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClientResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "ClientDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "客户端删除请求对象"
+      },
+      "ClientCreateRequest": {
+        "required": ["accessKey", "expiredAt", "secretKey"],
+        "type": "object",
+        "properties": {
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
+          "expiredAt": {
+            "type": "string",
+            "description": "过期时间",
+            "format": "date-time"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
+          "permissionIds": {
+            "type": "array",
+            "description": "权限Id列表",
+            "items": {
+              "type": "integer",
+              "description": "权限Id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "客户端创建请求对象"
+      },
+      "StructureUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "结构编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "结构名称"
+          },
+          "type": {
+            "type": "string",
+            "description": "结构类型",
+            "enum": [
+              "DEFAULT",
+              "FACTORY",
+              "WORKSHOP",
+              "LINE",
+              "STATION",
+              "EQUIPMENT"
+            ]
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级结构id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "结构描述"
+          }
+        },
+        "description": "结构更新请求对象"
+      },
+      "PageRequestStructureQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/StructureQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "StructureQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "结构编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "结构名称"
+          },
+          "type": {
+            "type": "string",
+            "description": "结构类型",
+            "enum": [
+              "DEFAULT",
+              "FACTORY",
+              "WORKSHOP",
+              "LINE",
+              "STATION",
+              "EQUIPMENT"
+            ]
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级结构id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "结构描述"
+          }
+        },
+        "description": "结构查询请求对象"
+      },
+      "PageViewStructureResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/StructureResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "StructureResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "code": {
+            "type": "string",
+            "description": "结构编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "结构名称"
+          },
+          "type": {
+            "type": "string",
+            "description": "结构类型",
+            "enum": [
+              "DEFAULT",
+              "FACTORY",
+              "WORKSHOP",
+              "LINE",
+              "STATION",
+              "EQUIPMENT"
+            ]
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级结构id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "结构描述"
+          }
+        },
+        "description": "结构响应对象"
+      },
+      "ListViewStructureResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/StructureResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewStructureResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/StructureResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "StructureDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "结构删除请求对象"
+      },
+      "StructureCreateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "code": {
+            "type": "string",
+            "description": "结构编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "结构名称"
+          },
+          "type": {
+            "type": "string",
+            "description": "结构类型",
+            "enum": [
+              "DEFAULT",
+              "FACTORY",
+              "WORKSHOP",
+              "LINE",
+              "STATION",
+              "EQUIPMENT"
+            ]
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级结构id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "结构描述"
+          }
+        },
+        "description": "结构创建请求对象"
+      },
+      "OeeRuleUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Oee启用"
+          },
+          "oeeRule": {
+            "type": "string",
+            "description": "Oee规则"
+          },
+          "oeeRuleRender": {
+            "type": "string",
+            "description": "Oee规则-渲染"
+          },
+          "oeeRuleEdit": {
+            "type": "string",
+            "description": "Oee规则-编辑"
+          },
+          "availabilityRule": {
+            "type": "string",
+            "description": "可用性规则"
+          },
+          "availabilityRuleRender": {
+            "type": "string",
+            "description": "可用性规则-渲染"
+          },
+          "availabilityRuleEdit": {
+            "type": "string",
+            "description": "可用性规则-编辑"
+          },
+          "performanceRule": {
+            "type": "string",
+            "description": "性能规则"
+          },
+          "performanceRuleRender": {
+            "type": "string",
+            "description": "性能规则-渲染"
+          },
+          "performanceRuleEdit": {
+            "type": "string",
+            "description": "性能规则-编辑"
+          },
+          "qualityRule": {
+            "type": "string",
+            "description": "质量规则"
+          },
+          "qualityRuleRender": {
+            "type": "string",
+            "description": "质量规则-渲染"
+          },
+          "qualityRuleEdit": {
+            "type": "string",
+            "description": "质量规则-编辑"
+          }
+        },
+        "description": "Oee规则更新请求对象"
+      },
+      "OeeRuleQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Oee启用"
+          },
+          "oeeRule": {
+            "type": "string",
+            "description": "Oee规则"
+          },
+          "oeeRuleRender": {
+            "type": "string",
+            "description": "Oee规则-渲染"
+          },
+          "oeeRuleEdit": {
+            "type": "string",
+            "description": "Oee规则-编辑"
+          },
+          "availabilityRule": {
+            "type": "string",
+            "description": "可用性规则"
+          },
+          "availabilityRuleRender": {
+            "type": "string",
+            "description": "可用性规则-渲染"
+          },
+          "availabilityRuleEdit": {
+            "type": "string",
+            "description": "可用性规则-编辑"
+          },
+          "performanceRule": {
+            "type": "string",
+            "description": "性能规则"
+          },
+          "performanceRuleRender": {
+            "type": "string",
+            "description": "性能规则-渲染"
+          },
+          "performanceRuleEdit": {
+            "type": "string",
+            "description": "性能规则-编辑"
+          },
+          "qualityRule": {
+            "type": "string",
+            "description": "质量规则"
+          },
+          "qualityRuleRender": {
+            "type": "string",
+            "description": "质量规则-渲染"
+          },
+          "qualityRuleEdit": {
+            "type": "string",
+            "description": "质量规则-编辑"
+          }
+        },
+        "description": "Oee规则查询请求对象"
+      },
+      "PageRequestOeeRuleQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/OeeRuleQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "OeeRuleResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Oee启用"
+          },
+          "oeeRule": {
+            "type": "string",
+            "description": "Oee规则"
+          },
+          "oeeRuleRender": {
+            "type": "string",
+            "description": "Oee规则-渲染"
+          },
+          "oeeRuleEdit": {
+            "type": "string",
+            "description": "Oee规则-编辑"
+          },
+          "availabilityRule": {
+            "type": "string",
+            "description": "可用性规则"
+          },
+          "availabilityRuleRender": {
+            "type": "string",
+            "description": "可用性规则-渲染"
+          },
+          "availabilityRuleEdit": {
+            "type": "string",
+            "description": "可用性规则-编辑"
+          },
+          "performanceRule": {
+            "type": "string",
+            "description": "性能规则"
+          },
+          "performanceRuleRender": {
+            "type": "string",
+            "description": "性能规则-渲染"
+          },
+          "performanceRuleEdit": {
+            "type": "string",
+            "description": "性能规则-编辑"
+          },
+          "qualityRule": {
+            "type": "string",
+            "description": "质量规则"
+          },
+          "qualityRuleRender": {
+            "type": "string",
+            "description": "质量规则-渲染"
+          },
+          "qualityRuleEdit": {
+            "type": "string",
+            "description": "质量规则-编辑"
+          }
+        },
+        "description": "Oee规则响应对象"
+      },
+      "PageViewOeeRuleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/OeeRuleResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewOeeRuleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/OeeRuleResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewOeeRuleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OeeRuleResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "OeeRuleDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "Oee规则删除请求对象"
+      },
+      "OeeRuleCreateRequest": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Oee启用"
+          },
+          "oeeRule": {
+            "type": "string",
+            "description": "Oee规则"
+          },
+          "oeeRuleRender": {
+            "type": "string",
+            "description": "Oee规则-渲染"
+          },
+          "oeeRuleEdit": {
+            "type": "string",
+            "description": "Oee规则-编辑"
+          },
+          "availabilityRule": {
+            "type": "string",
+            "description": "可用性规则"
+          },
+          "availabilityRuleRender": {
+            "type": "string",
+            "description": "可用性规则-渲染"
+          },
+          "availabilityRuleEdit": {
+            "type": "string",
+            "description": "可用性规则-编辑"
+          },
+          "performanceRule": {
+            "type": "string",
+            "description": "性能规则"
+          },
+          "performanceRuleRender": {
+            "type": "string",
+            "description": "性能规则-渲染"
+          },
+          "performanceRuleEdit": {
+            "type": "string",
+            "description": "性能规则-编辑"
+          },
+          "qualityRule": {
+            "type": "string",
+            "description": "质量规则"
+          },
+          "qualityRuleRender": {
+            "type": "string",
+            "description": "质量规则-渲染"
+          },
+          "qualityRuleEdit": {
+            "type": "string",
+            "description": "质量规则-编辑"
+          }
+        },
+        "description": "Oee规则创建请求对象"
+      },
+      "OeeHistoryQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "oeeRuleId": {
+            "type": "integer",
+            "description": "Oee规则id",
+            "format": "int64"
+          },
+          "deviceId": {
+            "type": "integer",
+            "description": "设备id",
+            "format": "int64"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Oee历史开始时间",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "Oee历史结束时间",
+            "format": "date-time"
+          }
+        },
+        "description": "Oee历史查询请求对象"
+      },
+      "PageRequestOeeHistoryQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/OeeHistoryQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "OeeHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "deviceId": {
+            "type": "integer",
+            "description": "设备id",
+            "format": "int64"
+          },
+          "oeeRuleId": {
+            "type": "integer",
+            "description": "oee规则id",
+            "format": "int64"
+          },
+          "recordDate": {
+            "type": "string",
+            "description": "记录日期",
+            "format": "date"
+          },
+          "oee": {
+            "type": "number",
+            "description": "oee",
+            "format": "double"
+          },
+          "availability": {
+            "type": "number",
+            "description": "可用性",
+            "format": "double"
+          },
+          "performance": {
+            "type": "number",
+            "description": "性能",
+            "format": "double"
+          },
+          "quality": {
+            "type": "number",
+            "description": "质量",
+            "format": "double"
+          },
+          "traceData": {
+            "type": "string",
+            "description": "跟踪数据"
+          }
+        },
+        "description": "报警历史查询请求对象"
+      },
+      "PageViewOeeHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/OeeHistoryResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewOeeHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/OeeHistoryResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewOeeHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OeeHistoryResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "OeeHistoryDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "Oee历史删除请求对象"
+      },
+      "DictUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "字典编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "字典名称"
+          },
+          "value": {
+            "type": "string",
+            "description": "字典值"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级字典id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "字典描述"
+          },
+          "sort": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          }
+        },
+        "description": "字典查询更新对象"
+      },
+      "DictQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "字典编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "字典名称"
+          },
+          "value": {
+            "type": "string",
+            "description": "字典值"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级字典id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "字典描述"
+          },
+          "sort": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          }
+        },
+        "description": "字典查询请求对象"
+      },
+      "PageRequestDictQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/DictQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "DictResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "code": {
+            "type": "string",
+            "description": "字典编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "字典名称"
+          },
+          "value": {
+            "type": "string",
+            "description": "字典值"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级字典id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "字典描述"
+          },
+          "sort": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          }
+        },
+        "description": "字典响应对象"
+      },
+      "PageViewDictResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/DictResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewDictResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/DictResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewDictResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DictResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "DictDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "字典删除请求对象"
+      },
+      "DictCreateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "code": {
+            "type": "string",
+            "description": "字典编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "字典名称"
+          },
+          "value": {
+            "type": "string",
+            "description": "字典值"
+          },
+          "parentId": {
+            "type": "integer",
+            "description": "上级字典id",
+            "format": "int64"
+          },
+          "remark": {
+            "type": "string",
+            "description": "字典描述"
+          },
+          "sort": {
+            "type": "integer",
+            "description": "排序值",
+            "format": "int32"
+          }
+        },
+        "description": "字典创建请求对象"
+      },
+      "DeviceUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "设备编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "设备名称"
+          },
+          "deviceType": {
+            "type": "string",
+            "description": "设备类型",
+            "enum": [
+              "METER",
+              "SWITCH",
+              "SENSOR",
+              "CONTROLLER",
+              "MONITOR",
+              "CAMERA",
+              "SERVER",
+              "ROUTER",
+              "SWITCHBOARD",
+              "UPS",
+              "GENERATOR"
+            ]
+          },
+          "remark": {
+            "type": "string",
+            "description": "设备描述"
+          }
+        },
+        "description": "设备更新请求对象"
+      },
+      "DeviceRunningStateUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "deviceCode": {
+            "type": "string"
+          },
+          "runningState": {
+            "type": "string",
+            "enum": ["ALL", "STOP", "RUN", "IDLE", "OFFLINE", "DEBUG"]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DeviceActivateStateUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "deviceCode": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DeviceQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "设备编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "设备名称"
+          },
+          "deviceType": {
+            "type": "string",
+            "description": "设备类型",
+            "enum": [
+              "METER",
+              "SWITCH",
+              "SENSOR",
+              "CONTROLLER",
+              "MONITOR",
+              "CAMERA",
+              "SERVER",
+              "ROUTER",
+              "SWITCHBOARD",
+              "UPS",
+              "GENERATOR"
+            ]
+          },
+          "runningState": {
+            "type": "string",
+            "description": "设备状态",
+            "enum": ["ALL", "STOP", "RUN", "IDLE", "OFFLINE", "DEBUG"]
+          },
+          "remark": {
+            "type": "string",
+            "description": "设备描述"
+          },
+          "deviceState": {
+            "type": "string",
+            "writeOnly": true,
+            "enum": ["ALL", "STOP", "RUN", "IDLE", "OFFLINE", "DEBUG"]
+          }
+        },
+        "description": "设备查询请求对象"
+      },
+      "PageRequestDeviceQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/DeviceQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "DeviceResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "code": {
+            "type": "string",
+            "description": "设备编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "设备名称"
+          },
+          "deviceType": {
+            "type": "string",
+            "description": "设备类型",
+            "enum": [
+              "METER",
+              "SWITCH",
+              "SENSOR",
+              "CONTROLLER",
+              "MONITOR",
+              "CAMERA",
+              "SERVER",
+              "ROUTER",
+              "SWITCHBOARD",
+              "UPS",
+              "GENERATOR"
+            ]
+          },
+          "runningState": {
+            "type": "string",
+            "description": "设备状态",
+            "enum": ["ALL", "STOP", "RUN", "IDLE", "OFFLINE", "DEBUG"]
+          },
+          "remark": {
+            "type": "string",
+            "description": "设备描述"
+          }
+        },
+        "description": "设备响应对象"
+      },
+      "PageViewDeviceResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/DeviceResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewDeviceResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/DeviceResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewDeviceResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/DeviceResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "DeviceDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "设备删除请求对象"
+      },
+      "DeviceCreateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "code": {
+            "type": "string",
+            "description": "设备编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "设备名称"
+          },
+          "deviceType": {
+            "type": "string",
+            "description": "设备类型",
+            "enum": [
+              "METER",
+              "SWITCH",
+              "SENSOR",
+              "CONTROLLER",
+              "MONITOR",
+              "CAMERA",
+              "SERVER",
+              "ROUTER",
+              "SWITCHBOARD",
+              "UPS",
+              "GENERATOR"
+            ]
+          },
+          "runningState": {
+            "type": "string",
+            "description": "设备状态",
+            "enum": ["ALL", "STOP", "RUN", "IDLE", "OFFLINE", "DEBUG"]
+          },
+          "remark": {
+            "type": "string",
+            "description": "设备描述"
+          }
+        },
+        "description": "设备创建请求对象"
+      },
+      "AlarmRuleUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "报警规则编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "报警规则名称"
+          },
+          "alarmRule": {
+            "type": "string",
+            "description": "报警规则"
+          },
+          "alarmRuleRender": {
+            "type": "string",
+            "description": "报警规则-渲染"
+          },
+          "alarmRuleEdit": {
+            "type": "string",
+            "description": "报警规则-编辑"
+          },
+          "remark": {
+            "type": "string",
+            "description": "报警规则描述"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "报警启用"
+          },
+          "level": {
+            "type": "string",
+            "description": "报警级别",
+            "enum": ["SEVERE", "URGENT", "ALARM", "NOTICE"]
+          }
+        },
+        "description": "报警规则修改请求对象"
+      },
+      "AlarmRuleQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "code": {
+            "type": "string",
+            "description": "报警规则编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "报警规则名称"
+          },
+          "alarmRule": {
+            "type": "string",
+            "description": "报警规则"
+          },
+          "alarmRuleRender": {
+            "type": "string",
+            "description": "报警规则-渲染"
+          },
+          "alarmRuleEdit": {
+            "type": "string",
+            "description": "报警规则-编辑"
+          },
+          "remark": {
+            "type": "string",
+            "description": "报警规则描述"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "报警启用"
+          },
+          "level": {
+            "type": "string",
+            "description": "报警级别",
+            "enum": ["SEVERE", "URGENT", "ALARM", "NOTICE"]
+          }
+        },
+        "description": "报警规则查询请求对象"
+      },
+      "PageRequestAlarmRuleQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/AlarmRuleQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "AlarmRuleResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "code": {
+            "type": "string",
+            "description": "报警规则编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "报警规则名称"
+          },
+          "alarmRule": {
+            "type": "string",
+            "description": "报警规则"
+          },
+          "alarmRuleRender": {
+            "type": "string",
+            "description": "报警规则-渲染"
+          },
+          "alarmRuleEdit": {
+            "type": "string",
+            "description": "报警规则-编辑"
+          },
+          "remark": {
+            "type": "string",
+            "description": "报警规则描述"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "报警启用"
+          },
+          "level": {
+            "type": "string",
+            "description": "报警级别",
+            "enum": ["SEVERE", "URGENT", "ALARM", "NOTICE"]
+          }
+        },
+        "description": "报警规则响应"
+      },
+      "PageViewAlarmRuleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/AlarmRuleResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewAlarmRuleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/AlarmRuleResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewAlarmRuleResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AlarmRuleResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "AlarmRuleDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "报警规则删除请求对象"
+      },
+      "AlarmRuleCreateRequest": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "报警规则编码"
+          },
+          "name": {
+            "type": "string",
+            "description": "报警规则名称"
+          },
+          "alarmRule": {
+            "type": "string",
+            "description": "报警规则"
+          },
+          "alarmRuleRender": {
+            "type": "string",
+            "description": "报警规则-渲染"
+          },
+          "alarmRuleEdit": {
+            "type": "string",
+            "description": "报警规则-编辑"
+          },
+          "remark": {
+            "type": "string",
+            "description": "报警规则描述"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "报警启用"
+          },
+          "level": {
+            "type": "string",
+            "description": "报警级别",
+            "enum": ["SEVERE", "URGENT", "ALARM", "NOTICE"]
+          }
+        },
+        "description": "报警规则创建请求对象"
+      },
+      "AlarmHistoryQueryRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "ids",
+            "items": {
+              "type": "integer",
+              "description": "ids",
+              "format": "int64"
+            }
+          },
+          "alarmRuleId": {
+            "type": "integer",
+            "description": "报警规则id",
+            "format": "int64"
+          },
+          "deviceId": {
+            "type": "integer",
+            "description": "设备id",
+            "format": "int64"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "报警历史开始时间",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "报警历史结束时间",
+            "format": "date-time"
+          },
+          "level": {
+            "type": "string",
+            "description": "报警级别",
+            "enum": ["SEVERE", "URGENT", "ALARM", "NOTICE"]
+          },
+          "result": {
+            "type": "boolean",
+            "description": "报警结果"
+          }
+        },
+        "description": "报警历史查询请求对象"
+      },
+      "PageRequestAlarmHistoryQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/AlarmHistoryQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
+      "AlarmHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "deviceId": {
+            "type": "integer",
+            "description": "设备id",
+            "format": "int64"
+          },
+          "alarmRuleId": {
+            "type": "integer",
+            "description": "报警规则id",
+            "format": "int64"
+          },
+          "recordDateTime": {
+            "type": "string",
+            "description": "报警历史时间",
+            "format": "date-time"
+          },
+          "result": {
+            "type": "boolean",
+            "description": "报警结果"
+          }
+        },
+        "description": "报警历史查询请求对象"
+      },
+      "PageViewAlarmHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/AlarmHistoryResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          },
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          }
+        },
+        "description": "分页视图对象"
+      },
+      "ListViewAlarmHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "array",
+            "description": "数据",
+            "items": {
+              "$ref": "#/components/schemas/AlarmHistoryResponse"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "记录总数",
+            "format": "int32"
+          }
+        },
+        "description": "列表视图对象"
+      },
+      "BaseViewAlarmHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "description": "错误码",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AlarmHistoryResponse"
+          }
+        },
+        "description": "基础视图对象"
+      },
+      "AlarmHistoryDeleteRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "ids": {
+            "type": "array",
+            "description": "id列表",
+            "items": {
+              "type": "integer",
+              "description": "id列表",
+              "format": "int64"
+            }
+          }
+        },
+        "description": "报警历史删除请求对象"
+      }
+    }
+  }
+}

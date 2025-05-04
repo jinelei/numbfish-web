@@ -1,0 +1,22 @@
+{
+  'inputs':
+    [
+      {
+        'inputFile': './modules/authorization.openapi.json',
+        'description':
+          {
+            'append': true,
+            'title': { 'value': 'Authorization', 'headingLevel': 2 },
+          },
+      },
+      {
+        'inputFile': './modules/equipment.openapi.json',
+        'description':
+          {
+            'append': true,
+            'title': { 'value': 'Equipment', 'headingLevel': 2 },
+          },
+      },
+    ],
+  'output': './integration.openapi.json',
+}

@@ -1,14 +1,13 @@
 import './style/global.less';
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { ConfigProvider } from '@arco-design/web-react';
 import zhCN from '@arco-design/web-react/es/locale/zh-CN';
 import enUS from '@arco-design/web-react/es/locale/en-US';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import axios from 'axios';
-import rootReducer from './store';
+import api from '@/apis';
+import store from './store';
 import PageLayout from './layout';
 import { GlobalContext } from './context';
 import Login from './pages/login';
@@ -16,8 +15,12 @@ import checkLogin from './utils/checkLogin';
 import changeTheme from './utils/changeTheme';
 import useStorage from './utils/useStorage';
 import './mock';
-
-const store = createStore(rootReducer);
+import {
+  LOADING_START,
+  LOADING_STOP,
+  UPDATE_LOADING,
+  UPDATE_USERINFO,
+} from '@/store/action';
 
 function Index() {
   const [lang, setLang] = useStorage('arco-lang', 'en-US');
@@ -35,15 +38,11 @@ function Index() {
   }
 
   function fetchUserInfo() {
-    store.dispatch({
-      type: 'update-userInfo',
-      payload: { userLoading: true },
-    });
-    axios.get('/api/user/userInfo').then((res) => {
-      store.dispatch({
-        type: 'update-userInfo',
-        payload: { userInfo: res.data, userLoading: false },
-      });
+    store.dispatch({ type: LOADING_START });
+    api.user.info({}).then((res) => {
+      console.log('res:', res.data);
+      store.dispatch({ type: LOADING_STOP });
+      store.dispatch({ type: UPDATE_USERINFO, payload: res.data || {} });
     });
   }
 
