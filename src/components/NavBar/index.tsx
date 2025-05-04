@@ -20,7 +20,6 @@ import {
   IconPoweroff,
   IconExperiment,
   IconDashboard,
-  IconInteraction,
   IconTag,
 } from '@arco-design/web-react/icon';
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,6 +27,7 @@ import store, { RootState } from '@/store';
 import { GlobalContext } from '@/context';
 import useLocale from '@/utils/useLocale';
 import Logo from '@/assets/logo.svg';
+import UserIcon from '@/assets/face-smile-fill.svg';
 import MessageBox from '@/components/MessageBox';
 import IconButton from './IconButton';
 import Settings from '../Settings';
@@ -201,7 +201,11 @@ function Navbar({ show }: { show: boolean }) {
           <li>
             <Dropdown droplist={droplist} position="br">
               <Avatar size={32} style={{ cursor: 'pointer' }}>
-                <img alt="avatar" src={userInfo.avatar} />
+                {!!userInfo?.avatar ? (
+                  <img alt="avatar" src={userInfo.avatar} />
+                ) : (
+                  <UserIcon />
+                )}
               </Avatar>
             </Dropdown>
           </li>
