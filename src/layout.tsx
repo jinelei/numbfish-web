@@ -18,7 +18,7 @@ import { isArray } from './utils/is';
 import useLocale from './utils/useLocale';
 import getUrlParams from './utils/getUrlParams';
 import lazyload from './utils/lazyload';
-import { GlobalState } from './store';
+import { RootState } from './store';
 import styles from './style/layout.module.less';
 
 const MenuItem = Menu.Item;
@@ -44,7 +44,9 @@ function getFlattenRoutes(routes) {
   const mod = import.meta.glob('./pages/**/[a-z[]*.tsx');
   const res = [];
   function travel(_routes) {
-    _routes.forEach((route) => {
+    console.log('_routes', _routes);
+    (_routes || []).forEach((route) => {
+      console.log('foreach', 'route', route);
       if (route.key && !route.children) {
         route.component = lazyload(mod[`./pages/${route.key}/index.tsx`]);
         res.push(route);
@@ -54,6 +56,8 @@ function getFlattenRoutes(routes) {
     });
   }
   travel(routes);
+
+  console.log('_routes res', res);
   return res;
 }
 
@@ -63,8 +67,8 @@ function PageLayout() {
   const pathname = history.location.pathname;
   const currentComponent = qs.parseUrl(pathname).url.slice(1);
   const locale = useLocale();
-  const { settings, userLoading, userInfo } = useSelector(
-    (state: GlobalState) => state
+  const { settings, loading, userInfo } = useSelector(
+    (state: RootState) => state
   );
 
   const [routes, defaultRoute] = useRoute(userInfo?.permissions);
@@ -178,6 +182,7 @@ function PageLayout() {
   }
 
   useEffect(() => {
+    console.log('flattenRoutes', flattenRoutes);
     const routeConfig = routeMap.current.get(pathname);
     setBreadCrumb(routeConfig || []);
     updateMenuStatus();
@@ -191,7 +196,7 @@ function PageLayout() {
       >
         <Navbar show={showNavbar} />
       </div>
-      {userLoading ? (
+      {loading ? (
         <Spin className={styles['spin']} />
       ) : (
         <Layout>

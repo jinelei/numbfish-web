@@ -11,10 +11,10 @@ import store from './store';
 import PageLayout from './layout';
 import { GlobalContext } from './context';
 import Login from './pages/login';
-import checkLogin from './utils/checkLogin';
 import changeTheme from './utils/changeTheme';
 import useStorage from './utils/useStorage';
 import { LOADING_START, LOADING_STOP, UPDATE_USERINFO } from '@/store/action';
+import Setup from '@/pages/setup';
 
 function Index() {
   const [lang, setLang] = useStorage('arco-lang', 'en-US');
@@ -40,11 +40,13 @@ function Index() {
   }
 
   useEffect(() => {
-    if (checkLogin()) {
-      fetchUserInfo();
-    } else if (window.location.pathname.replace(/\//g, '') !== 'login') {
-      window.location.pathname = '/login';
-    }
+    // if (window.location.pathname.replace(/\//g, '') !== 'login') {
+    //   window.location.pathname = '/login';
+    // } else if (window.location.pathname.replace(/\//g, '') !== 'setup') {
+    //   window.location.pathname = '/setup';
+    // } else if (checkLogin()) {
+    //   fetchUserInfo();
+    // }
   }, []);
 
   useEffect(() => {
@@ -78,6 +80,7 @@ function Index() {
           <GlobalContext.Provider value={contextValue}>
             <Switch>
               <Route path="/login" component={Login} />
+              <Route path="/setup" component={Setup} />
               <Route path="/" component={PageLayout} />
             </Switch>
           </GlobalContext.Provider>

@@ -27,6 +27,10 @@ export const routes: IRoute[] = [
     key: 'userinfo',
   },
   {
+    name: 'menu.setting',
+    key: 'setting',
+  },
+  {
     name: 'Example',
     key: 'example',
   },

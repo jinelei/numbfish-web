@@ -7,7 +7,7 @@ export interface RootState {
     menu: boolean;
     footer: boolean;
     themeColor: string;
-    menuWidth: number | boolean;
+    menuWidth: number | string;
   };
   loading: boolean;
   userInfo?: Partial<UserInfoResponse>;
