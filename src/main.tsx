@@ -14,13 +14,7 @@ import Login from './pages/login';
 import checkLogin from './utils/checkLogin';
 import changeTheme from './utils/changeTheme';
 import useStorage from './utils/useStorage';
-import './mock';
-import {
-  LOADING_START,
-  LOADING_STOP,
-  UPDATE_LOADING,
-  UPDATE_USERINFO,
-} from '@/store/action';
+import { LOADING_START, LOADING_STOP, UPDATE_USERINFO } from '@/store/action';
 
 function Index() {
   const [lang, setLang] = useStorage('arco-lang', 'en-US');

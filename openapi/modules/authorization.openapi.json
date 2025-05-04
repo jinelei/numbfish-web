@@ -15,7 +15,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:9998/authorization",
+      "url": "authorization",
       "description": "Generated server url"
     }
   ],

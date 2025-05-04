@@ -11,7 +11,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:9998/authorization",
+      "url": "authorization",
       "description": "Generated server url"
     }
   ],
@@ -20,7 +20,7 @@
     "url": "https://springshop.wiki.github.org/docs"
   },
   "paths": {
-    "/user/update": {
+    "/authorization/user/update": {
       "post": {
         "tags": ["用户管理"],
         "summary": "更新用户",
@@ -49,7 +49,7 @@
         }
       }
     },
-    "/user/updatePassword": {
+    "/authorization/user/updatePassword": {
       "post": {
         "tags": ["用户管理"],
         "summary": "用户修改密码",
@@ -78,7 +78,7 @@
         }
       }
     },
-    "/user/page": {
+    "/authorization/user/page": {
       "post": {
         "tags": ["用户管理"],
         "summary": "获取用户分页",
@@ -107,7 +107,7 @@
         }
       }
     },
-    "/user/logout": {
+    "/authorization/user/logout": {
       "post": {
         "tags": ["用户管理"],
         "summary": "用户登出",
@@ -126,7 +126,7 @@
         }
       }
     },
-    "/user/login": {
+    "/authorization/user/login": {
       "post": {
         "tags": ["用户管理"],
         "summary": "用户登陆",
@@ -155,7 +155,7 @@
         }
       }
     },
-    "/user/list": {
+    "/authorization/user/list": {
       "post": {
         "tags": ["用户管理"],
         "summary": "获取用户列表",
@@ -184,7 +184,7 @@
         }
       }
     },
-    "/user/info": {
+    "/authorization/user/info": {
       "post": {
         "tags": ["用户管理"],
         "summary": "用户信息",
@@ -203,7 +203,7 @@
         }
       }
     },
-    "/user/get": {
+    "/authorization/user/get": {
       "post": {
         "tags": ["用户管理"],
         "summary": "获取用户",
@@ -232,7 +232,7 @@
         }
       }
     },
-    "/user/delete": {
+    "/authorization/user/delete": {
       "post": {
         "tags": ["用户管理"],
         "summary": "删除用户",
@@ -261,7 +261,7 @@
         }
       }
     },
-    "/user/create": {
+    "/authorization/user/create": {
       "post": {
         "tags": ["用户管理"],
         "summary": "创建用户",
@@ -290,7 +290,7 @@
         }
       }
     },
-    "/setup/init": {
+    "/authorization/setup/init": {
       "post": {
         "tags": ["任务管理"],
         "operationId": "init",
@@ -318,7 +318,7 @@
         }
       }
     },
-    "/setup/check": {
+    "/authorization/setup/check": {
       "post": {
         "tags": ["任务管理"],
         "operationId": "checkIsSetup",
@@ -336,7 +336,7 @@
         }
       }
     },
-    "/role/update": {
+    "/authorization/role/update": {
       "post": {
         "tags": ["角色管理"],
         "summary": "更新角色",
@@ -365,7 +365,7 @@
         }
       }
     },
-    "/role/tree": {
+    "/authorization/role/tree": {
       "post": {
         "tags": ["角色管理"],
         "summary": "获取角色树",
@@ -394,7 +394,7 @@
         }
       }
     },
-    "/role/regist": {
+    "/authorization/role/regist": {
       "post": {
         "tags": ["角色管理"],
         "summary": "注册角色",
@@ -426,7 +426,7 @@
         }
       }
     },
-    "/role/page": {
+    "/authorization/role/page": {
       "post": {
         "tags": ["角色管理"],
         "summary": "获取角色分页",
@@ -455,7 +455,7 @@
         }
       }
     },
-    "/role/list": {
+    "/authorization/role/list": {
       "post": {
         "tags": ["角色管理"],
         "summary": "获取角色列表",
@@ -484,7 +484,7 @@
         }
       }
     },
-    "/role/get": {
+    "/authorization/role/get": {
       "post": {
         "tags": ["角色管理"],
         "summary": "获取角色",
@@ -513,7 +513,7 @@
         }
       }
     },
-    "/role/delete": {
+    "/authorization/role/delete": {
       "post": {
         "tags": ["角色管理"],
         "summary": "删除角色",
@@ -542,7 +542,7 @@
         }
       }
     },
-    "/role/create": {
+    "/authorization/role/create": {
       "post": {
         "tags": ["角色管理"],
         "summary": "创建角色",
@@ -571,7 +571,7 @@
         }
       }
     },
-    "/permission/update": {
+    "/authorization/permission/update": {
       "post": {
         "tags": ["权限管理"],
         "summary": "更新权限",
@@ -600,7 +600,7 @@
         }
       }
     },
-    "/permission/tree": {
+    "/authorization/permission/tree": {
       "post": {
         "tags": ["权限管理"],
         "summary": "获取权限树",
@@ -629,7 +629,7 @@
         }
       }
     },
-    "/permission/regist": {
+    "/authorization/permission/regist": {
       "post": {
         "tags": ["权限管理"],
         "summary": "注册权限",
@@ -661,7 +661,7 @@
         }
       }
     },
-    "/permission/page": {
+    "/authorization/permission/page": {
       "post": {
         "tags": ["权限管理"],
         "summary": "获取权限分页",
@@ -690,7 +690,7 @@
         }
       }
     },
-    "/permission/list": {
+    "/authorization/permission/list": {
       "post": {
         "tags": ["权限管理"],
         "summary": "获取权限列表",
@@ -719,7 +719,7 @@
         }
       }
     },
-    "/permission/get": {
+    "/authorization/permission/get": {
       "post": {
         "tags": ["权限管理"],
         "summary": "获取权限",
@@ -748,7 +748,7 @@
         }
       }
     },
-    "/permission/delete": {
+    "/authorization/permission/delete": {
       "post": {
         "tags": ["权限管理"],
         "summary": "删除权限",
@@ -777,7 +777,7 @@
         }
       }
     },
-    "/permission/create": {
+    "/authorization/permission/create": {
       "post": {
         "tags": ["权限管理"],
         "summary": "创建权限",
@@ -806,7 +806,7 @@
         }
       }
     },
-    "/client/update": {
+    "/authorization/client/update": {
       "post": {
         "tags": ["客户端管理"],
         "summary": "更新客户端",
@@ -835,7 +835,7 @@
         }
       }
     },
-    "/client/page": {
+    "/authorization/client/page": {
       "post": {
         "tags": ["客户端管理"],
         "summary": "获取客户端分页",
@@ -864,7 +864,7 @@
         }
       }
     },
-    "/client/list": {
+    "/authorization/client/list": {
       "post": {
         "tags": ["客户端管理"],
         "summary": "获取客户端列表",
@@ -893,7 +893,7 @@
         }
       }
     },
-    "/client/get": {
+    "/authorization/client/get": {
       "post": {
         "tags": ["客户端管理"],
         "summary": "获取客户端",
@@ -922,7 +922,7 @@
         }
       }
     },
-    "/client/delete": {
+    "/authorization/client/delete": {
       "post": {
         "tags": ["客户端管理"],
         "summary": "删除客户端",
@@ -951,7 +951,7 @@
         }
       }
     },
-    "/client/create": {
+    "/authorization/client/create": {
       "post": {
         "tags": ["客户端管理"],
         "summary": "创建客户端",
@@ -980,7 +980,7 @@
         }
       }
     },
-    "/structure/update": {
+    "/equipment/structure/update": {
       "post": {
         "tags": ["结构管理"],
         "summary": "更新结构",
@@ -1009,7 +1009,7 @@
         }
       }
     },
-    "/structure/page": {
+    "/equipment/structure/page": {
       "post": {
         "tags": ["结构管理"],
         "summary": "获取结构分页列表",
@@ -1038,7 +1038,7 @@
         }
       }
     },
-    "/structure/list": {
+    "/equipment/structure/list": {
       "post": {
         "tags": ["结构管理"],
         "summary": "获取结构列表",
@@ -1067,7 +1067,7 @@
         }
       }
     },
-    "/structure/get": {
+    "/equipment/structure/get": {
       "post": {
         "tags": ["结构管理"],
         "summary": "获取结构",
@@ -1096,7 +1096,7 @@
         }
       }
     },
-    "/structure/delete": {
+    "/equipment/structure/delete": {
       "post": {
         "tags": ["结构管理"],
         "summary": "删除结构",
@@ -1125,7 +1125,7 @@
         }
       }
     },
-    "/structure/create": {
+    "/equipment/structure/create": {
       "post": {
         "tags": ["结构管理"],
         "summary": "创建结构",
@@ -1154,7 +1154,7 @@
         }
       }
     },
-    "/oeeRule/update": {
+    "/equipment/oeeRule/update": {
       "post": {
         "tags": ["Oee规则管理"],
         "summary": "更新Oee规则",
@@ -1183,7 +1183,7 @@
         }
       }
     },
-    "/oeeRule/page": {
+    "/equipment/oeeRule/page": {
       "post": {
         "tags": ["Oee规则管理"],
         "summary": "获取Oee规则分页列表",
@@ -1212,7 +1212,7 @@
         }
       }
     },
-    "/oeeRule/list": {
+    "/equipment/oeeRule/list": {
       "post": {
         "tags": ["Oee规则管理"],
         "summary": "获取Oee规则列表",
@@ -1241,7 +1241,7 @@
         }
       }
     },
-    "/oeeRule/get": {
+    "/equipment/oeeRule/get": {
       "post": {
         "tags": ["Oee规则管理"],
         "summary": "获取Oee规则",
@@ -1270,7 +1270,7 @@
         }
       }
     },
-    "/oeeRule/delete": {
+    "/equipment/oeeRule/delete": {
       "post": {
         "tags": ["Oee规则管理"],
         "summary": "删除Oee规则",
@@ -1299,7 +1299,7 @@
         }
       }
     },
-    "/oeeRule/create": {
+    "/equipment/oeeRule/create": {
       "post": {
         "tags": ["Oee规则管理"],
         "summary": "创建Oee规则",
@@ -1328,7 +1328,7 @@
         }
       }
     },
-    "/oeeHistory/page": {
+    "/equipment/oeeHistory/page": {
       "post": {
         "tags": ["Oee历史管理"],
         "summary": "获取Oee历史分页列表",
@@ -1357,7 +1357,7 @@
         }
       }
     },
-    "/oeeHistory/list": {
+    "/equipment/oeeHistory/list": {
       "post": {
         "tags": ["Oee历史管理"],
         "summary": "获取Oee历史列表",
@@ -1386,7 +1386,7 @@
         }
       }
     },
-    "/oeeHistory/get": {
+    "/equipment/oeeHistory/get": {
       "post": {
         "tags": ["Oee历史管理"],
         "summary": "获取Oee历史",
@@ -1415,7 +1415,7 @@
         }
       }
     },
-    "/oeeHistory/delete": {
+    "/equipment/oeeHistory/delete": {
       "post": {
         "tags": ["Oee历史管理"],
         "summary": "删除Oee历史",
@@ -1444,7 +1444,7 @@
         }
       }
     },
-    "/dict/update": {
+    "/equipment/dict/update": {
       "post": {
         "tags": ["字典管理"],
         "summary": "更新字典",
@@ -1473,7 +1473,7 @@
         }
       }
     },
-    "/dict/page": {
+    "/equipment/dict/page": {
       "post": {
         "tags": ["字典管理"],
         "summary": "获取字典分页列表",
@@ -1502,7 +1502,7 @@
         }
       }
     },
-    "/dict/list": {
+    "/equipment/dict/list": {
       "post": {
         "tags": ["字典管理"],
         "summary": "获取字典列表",
@@ -1531,7 +1531,7 @@
         }
       }
     },
-    "/dict/get": {
+    "/equipment/dict/get": {
       "post": {
         "tags": ["字典管理"],
         "summary": "获取字典",
@@ -1560,7 +1560,7 @@
         }
       }
     },
-    "/dict/delete": {
+    "/equipment/dict/delete": {
       "post": {
         "tags": ["字典管理"],
         "summary": "删除字典",
@@ -1589,7 +1589,7 @@
         }
       }
     },
-    "/dict/create": {
+    "/equipment/dict/create": {
       "post": {
         "tags": ["字典管理"],
         "summary": "创建字典",
@@ -1618,7 +1618,7 @@
         }
       }
     },
-    "/device/update": {
+    "/equipment/device/update": {
       "post": {
         "tags": ["设备管理"],
         "summary": "更新设备",
@@ -1647,7 +1647,7 @@
         }
       }
     },
-    "/device/update/runningState": {
+    "/equipment/device/update/runningState": {
       "post": {
         "tags": ["设备管理"],
         "summary": "更新设备运行状态",
@@ -1676,7 +1676,7 @@
         }
       }
     },
-    "/device/update/activateState": {
+    "/equipment/device/update/activateState": {
       "post": {
         "tags": ["设备管理"],
         "summary": "更新设备激活状态",
@@ -1705,7 +1705,7 @@
         }
       }
     },
-    "/device/page": {
+    "/equipment/device/page": {
       "post": {
         "tags": ["设备管理"],
         "summary": "获取设备分页列表",
@@ -1734,7 +1734,7 @@
         }
       }
     },
-    "/device/list": {
+    "/equipment/device/list": {
       "post": {
         "tags": ["设备管理"],
         "summary": "获取设备列表",
@@ -1763,7 +1763,7 @@
         }
       }
     },
-    "/device/get": {
+    "/equipment/device/get": {
       "post": {
         "tags": ["设备管理"],
         "summary": "获取设备",
@@ -1792,7 +1792,7 @@
         }
       }
     },
-    "/device/delete": {
+    "/equipment/device/delete": {
       "post": {
         "tags": ["设备管理"],
         "summary": "删除设备",
@@ -1821,7 +1821,7 @@
         }
       }
     },
-    "/device/create": {
+    "/equipment/device/create": {
       "post": {
         "tags": ["设备管理"],
         "summary": "创建设备",
@@ -1850,7 +1850,7 @@
         }
       }
     },
-    "/alarmRule/update": {
+    "/equipment/alarmRule/update": {
       "post": {
         "tags": ["报警规则管理"],
         "summary": "更新报警规则",
@@ -1879,7 +1879,7 @@
         }
       }
     },
-    "/alarmRule/page": {
+    "/equipment/alarmRule/page": {
       "post": {
         "tags": ["报警规则管理"],
         "summary": "获取报警规则分页列表",
@@ -1908,7 +1908,7 @@
         }
       }
     },
-    "/alarmRule/list": {
+    "/equipment/alarmRule/list": {
       "post": {
         "tags": ["报警规则管理"],
         "summary": "获取报警规则列表",
@@ -1937,7 +1937,7 @@
         }
       }
     },
-    "/alarmRule/get": {
+    "/equipment/alarmRule/get": {
       "post": {
         "tags": ["报警规则管理"],
         "summary": "获取报警规则",
@@ -1966,7 +1966,7 @@
         }
       }
     },
-    "/alarmRule/delete": {
+    "/equipment/alarmRule/delete": {
       "post": {
         "tags": ["报警规则管理"],
         "summary": "删除报警规则",
@@ -1995,7 +1995,7 @@
         }
       }
     },
-    "/alarmRule/create": {
+    "/equipment/alarmRule/create": {
       "post": {
         "tags": ["报警规则管理"],
         "summary": "创建报警规则",
@@ -2024,7 +2024,7 @@
         }
       }
     },
-    "/alarmHistory/page": {
+    "/equipment/alarmHistory/page": {
       "post": {
         "tags": ["报警历史管理"],
         "summary": "获取报警历史分页列表",
@@ -2053,7 +2053,7 @@
         }
       }
     },
-    "/alarmHistory/list": {
+    "/equipment/alarmHistory/list": {
       "post": {
         "tags": ["报警历史管理"],
         "summary": "获取报警历史列表",
@@ -2082,7 +2082,7 @@
         }
       }
     },
-    "/alarmHistory/get": {
+    "/equipment/alarmHistory/get": {
       "post": {
         "tags": ["报警历史管理"],
         "summary": "获取报警历史",
@@ -2111,7 +2111,7 @@
         }
       }
     },
-    "/alarmHistory/delete": {
+    "/equipment/alarmHistory/delete": {
       "post": {
         "tags": ["报警历史管理"],
         "summary": "删除报警历史",

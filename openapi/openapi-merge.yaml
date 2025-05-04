@@ -3,6 +3,7 @@
     [
       {
         'inputFile': './modules/authorization.openapi.json',
+        'pathModification': { 'prepend': '/authorization' },
         'description':
           {
             'append': true,
@@ -11,6 +12,7 @@
       },
       {
         'inputFile': './modules/equipment.openapi.json',
+        'pathModification': { 'prepend': '/equipment' },
         'description':
           {
             'append': true,

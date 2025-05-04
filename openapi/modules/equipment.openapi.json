@@ -12,7 +12,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:9999/equipment",
+      "url": "equipment",
       "description": "Generated server url"
     }
   ],
