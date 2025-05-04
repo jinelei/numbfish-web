@@ -37,11 +37,14 @@ import useStorage from '@/utils/useStorage';
 import { generatePermission } from '@/routes';
 import { user } from '@/apis';
 import { USER_LOGOUT } from '@/store/action';
+import NProgress from 'nprogress';
+import { useHistory } from 'react-router';
 
 function Navbar({ show }: { show: boolean }) {
   const t = useLocale();
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [role, setRole] = useStorage('userRole', 'admin');
 
@@ -60,6 +63,10 @@ function Navbar({ show }: { show: boolean }) {
   function onMenuItemClick(key) {
     if (key === 'logout') {
       logout();
+    } else if (key === 'setting') {
+      NProgress.start();
+      history.push('/setting');
+      NProgress.done();
     } else {
       Message.info(`You clicked ${key}`);
     }

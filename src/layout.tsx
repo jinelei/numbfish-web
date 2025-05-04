@@ -33,6 +33,8 @@ function getIconFromKey(key) {
       return <IconDashboard className={styles.icon} />;
     case 'example':
       return <IconTag className={styles.icon} />;
+    case 'setting':
+      return <IconTag className={styles.icon} />;
     default:
       return <div className={styles['icon-empty']} />;
   }
