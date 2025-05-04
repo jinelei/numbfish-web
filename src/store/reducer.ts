@@ -22,10 +22,16 @@ export const reducer = (
     }
     case USER_LOGIN: {
       localStorage.setItem(USER_TOKEN_KEY, action.payload);
+      setTimeout(() => {
+        window.location.href = '/';
+      }, 100);
       return { ...state };
     }
     case USER_LOGOUT: {
       localStorage.removeItem(USER_TOKEN_KEY);
+      setTimeout(() => {
+        window.location.href = '/login';
+      }, 100);
       return { ...initialState };
     }
     case UPDATE_USERINFO: {

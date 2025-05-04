@@ -24,7 +24,7 @@ import {
   IconTag,
 } from '@arco-design/web-react/icon';
 import { useSelector, useDispatch } from 'react-redux';
-import { GlobalState } from '@/store';
+import store, { RootState } from '@/store';
 import { GlobalContext } from '@/context';
 import useLocale from '@/utils/useLocale';
 import Logo from '@/assets/logo.svg';
@@ -35,20 +35,26 @@ import styles from './style/index.module.less';
 import defaultLocale from '@/locale';
 import useStorage from '@/utils/useStorage';
 import { generatePermission } from '@/routes';
+import { user } from '@/apis';
+import { USER_LOGOUT } from '@/store/action';
 
 function Navbar({ show }: { show: boolean }) {
   const t = useLocale();
-  const userInfo = useSelector((state: GlobalState) => state.userInfo);
+  const userInfo = useSelector((state: RootState) => state.userInfo);
   const dispatch = useDispatch();
 
-  const [_, setUserStatus] = useStorage('userStatus');
   const [role, setRole] = useStorage('userRole', 'admin');
 
   const { setLang, lang, theme, setTheme } = useContext(GlobalContext);
 
   function logout() {
-    setUserStatus('logout');
-    window.location.href = '/login';
+    user.logout({}).then((res) => {
+      if (res.data.code === 200) {
+        store.dispatch({ type: USER_LOGOUT });
+      } else {
+        Message.error(res.data.message);
+      }
+    });
   }
 
   function onMenuItemClick(key) {

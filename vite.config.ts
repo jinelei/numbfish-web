@@ -9,12 +9,10 @@ export default defineConfig(({ command, mode }) => {
     '/authorization': {
       target: env['VITE_AUTHORIZATION_API_URL'],
       changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/authorization/, ''),
     },
     '/equipment': {
       target: env['VITE_EQUIPMENT_API_URL'],
       changeOrigin: true,
-      rewrite: (path) => path.replace(/^\/equipment/, ''),
     },
   };
   return {

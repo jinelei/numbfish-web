@@ -6,7 +6,7 @@ import { ConfigProvider } from '@arco-design/web-react';
 import zhCN from '@arco-design/web-react/es/locale/zh-CN';
 import enUS from '@arco-design/web-react/es/locale/en-US';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import api from '@/apis';
+import { user } from '@/apis';
 import store from './store';
 import PageLayout from './layout';
 import { GlobalContext } from './context';
@@ -14,7 +14,12 @@ import Login from './pages/login';
 import checkLogin from './utils/checkLogin';
 import changeTheme from './utils/changeTheme';
 import useStorage from './utils/useStorage';
-import { LOADING_START, LOADING_STOP, UPDATE_USERINFO } from '@/store/action';
+import {
+  LOADING_START,
+  LOADING_STOP,
+  UPDATE_USERINFO,
+  USER_TOKEN_KEY,
+} from '@/store/action';
 
 function Index() {
   const [lang, setLang] = useStorage('arco-lang', 'en-US');
@@ -33,8 +38,7 @@ function Index() {
 
   function fetchUserInfo() {
     store.dispatch({ type: LOADING_START });
-    api.user.info({}).then((res) => {
-      console.log('res:', res.data);
+    user.info({}).then((res) => {
       store.dispatch({ type: LOADING_STOP });
       store.dispatch({ type: UPDATE_USERINFO, payload: res.data || {} });
     });
