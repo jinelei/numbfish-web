@@ -10,7 +10,6 @@ import {
 import { useSelector } from 'react-redux';
 import { IconCaretUp } from '@arco-design/web-react/icon';
 import OverviewAreaLine from '@/components/Chart/overview-area-line';
-import axios from 'axios';
 import locale from './locale';
 import useLocale from '@/utils/useLocale';
 import styles from './style/overview.module.less';
@@ -65,14 +64,14 @@ function Overview() {
 
   const fetchData = () => {
     setLoading(true);
-    axios
-      .get('/api/workplace/overview-content')
-      .then((res) => {
-        setData(res.data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    // axios
+    //   .get('/api/workplace/overview-content')
+    //   .then((res) => {
+    //     setData(res.data);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
 
   useEffect(() => {

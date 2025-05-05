@@ -18,7 +18,7 @@ import { isArray } from './utils/is';
 import useLocale from './utils/useLocale';
 import getUrlParams from './utils/getUrlParams';
 import lazyload from './utils/lazyload';
-import { RootState } from './store';
+import store, { RootState } from './store';
 import styles from './style/layout.module.less';
 
 const MenuItem = Menu.Item;
@@ -44,9 +44,7 @@ function getFlattenRoutes(routes) {
   const mod = import.meta.glob('./pages/**/[a-z[]*.tsx');
   const res = [];
   function travel(_routes) {
-    console.log('_routes', _routes);
     (_routes || []).forEach((route) => {
-      console.log('foreach', 'route', route);
       if (route.key && !route.children) {
         route.component = lazyload(mod[`./pages/${route.key}/index.tsx`]);
         res.push(route);
@@ -57,7 +55,6 @@ function getFlattenRoutes(routes) {
   }
   travel(routes);
 
-  console.log('_routes res', res);
   return res;
 }
 
@@ -182,11 +179,155 @@ function PageLayout() {
   }
 
   useEffect(() => {
-    console.log('flattenRoutes', flattenRoutes);
     const routeConfig = routeMap.current.get(pathname);
     setBreadCrumb(routeConfig || []);
     updateMenuStatus();
   }, [pathname]);
+
+  useEffect(() => {
+    console.log('store get state', userInfo);
+    const permissions = [
+      {
+        id: 143450355309697,
+        name: '系统管理',
+        code: 'SYSTEM_MANAGE',
+        type: 'DIRECTORY',
+        children: [
+          {
+            id: 143450355309696,
+            name: '角色管理',
+            code: 'ROLE_MANAGE',
+            type: 'MENU',
+            children: [
+              {
+                id: 143450355310592,
+                name: '创建角色',
+                code: 'ROLE_CREATE',
+                type: 'ACTION',
+              },
+              {
+                id: 143450355310656,
+                name: '删除角色',
+                code: 'ROLE_DELETE',
+                type: 'ACTION',
+              },
+              {
+                id: 143450355310848,
+                name: '查看角色概要',
+                code: 'ROLE_SUMMARY',
+                type: 'ACTION',
+              },
+              {
+                id: 143450355311360,
+                name: '查看角色详情',
+                code: 'ROLE_DETAIL',
+                type: 'ACTION',
+              },
+              {
+                id: 143450355310464,
+                name: '更新客户端',
+                code: 'CLIENT_UPDATE',
+                type: 'ACTION',
+              },
+              {
+                id: 143450355310528,
+                name: '查看客户端概要',
+                code: 'CLIENT_SUMMARY',
+                type: 'ACTION',
+              },
+            ],
+          },
+          {
+            id: 143450355309632,
+            name: '用户管理',
+            code: 'USER_MANAGE',
+            type: 'MENU',
+            children: [
+              {
+                id: 143450355309760,
+                name: '创建用户',
+                code: 'USER_CREATE',
+                type: 'ACTION',
+                children: [
+                  {
+                    id: 143450355311424,
+                    name: '更新权限',
+                    code: 'PERMISSION_UPDATE',
+                    type: 'ACTION',
+                  },
+                  {
+                    id: 143450355311488,
+                    name: '查看权限概要',
+                    code: 'PERMISSION_SUMMARY',
+                    type: 'ACTION',
+                  },
+                  {
+                    id: 143450355311552,
+                    name: '查看权限详情',
+                    code: 'PERMISSION_DETAIL',
+                    type: 'ACTION',
+                  },
+                ],
+              },
+              {
+                id: 143450355309824,
+                name: '删除用户',
+                code: 'USER_DELETE',
+                type: 'ACTION',
+              },
+              {
+                id: 143450355309888,
+                name: '查看用户概要',
+                code: 'USER_SUMMARY',
+                type: 'ACTION',
+              },
+              {
+                id: 143450355310400,
+                name: '查看用户详情',
+                code: 'USER_DETAIL',
+                type: 'ACTION',
+              },
+            ],
+          },
+        ],
+      },
+    ];
+    const shouldShowInMenu = (permission) => {
+      const { type } = permission;
+      if (type === 'MENU') {
+        return true;
+      } else if (type === 'DIRECTORY') {
+        return (permission.children || []).some((child) =>
+          shouldShowInMenu(child)
+        );
+      } else {
+        return false;
+      }
+    };
+    const coverShowInMenu = (permission) => {
+      const { type, children } = permission;
+      if (type === 'DIRECTORY') {
+        return {
+          ...permission,
+          children: (children || [])
+            .map((c) => coverShowInMenu(c))
+            .filter((c) => !!c),
+        };
+      } else if (type === 'MENU') {
+        return {
+          ...permission,
+          children: (children || [])
+            .filter((c) => coverShowInMenu(c))
+            .filter((c) => !!c),
+        };
+      } else if (type === 'ACTION') {
+        return null;
+      }
+    };
+    const result = permissions.map((item) => coverShowInMenu(item));
+    console.log('result', result);
+  });
+
   return (
     <Layout className={styles.layout}>
       <div

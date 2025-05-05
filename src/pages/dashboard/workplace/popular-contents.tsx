@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Link, Card, Radio, Table, Typography } from '@arco-design/web-react';
 import { IconCaretDown, IconCaretUp } from '@arco-design/web-react/icon';
-import axios from 'axios';
 import useLocale from '@/utils/useLocale';
 import locale from './locale';
 import styles from './style/popular-contents.module.less';
@@ -16,17 +15,17 @@ function PopularContent() {
 
   const fetchData = useCallback(() => {
     setLoading(true);
-    axios
-      .get(
-        `/api/workplace/popular-contents?page=${page}&pageSize=5&category=${type}`
-      )
-      .then((res) => {
-        setData(res.data.list);
-        setTotal(res.data.total);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    // axios
+    //   .get(
+    //     `/api/workplace/popular-contents?page=${page}&pageSize=5&category=${type}`
+    //   )
+    //   .then((res) => {
+    //     setData(res.data.list);
+    //     setTotal(res.data.total);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   }, [page, type]);
 
   useEffect(() => {

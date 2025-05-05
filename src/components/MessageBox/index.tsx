@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import groupBy from 'lodash/groupBy';
 import {
   Trigger,
@@ -29,25 +28,25 @@ function DropContent() {
 
   function fetchSourceData(showLoading = true) {
     showLoading && setLoading(true);
-    axios
-      .get('/api/message/list')
-      .then((res) => {
-        setSourceData(res.data);
-      })
-      .finally(() => {
-        showLoading && setLoading(false);
-      });
+    // axios
+    //   .get('/api/message/list')
+    //   .then((res) => {
+    //     setSourceData(res.data);
+    //   })
+    //   .finally(() => {
+    //     showLoading && setLoading(false);
+    //   });
   }
 
   function readMessage(data: MessageListType) {
     const ids = data.map((item) => item.id);
-    axios
-      .post('/api/message/read', {
-        ids,
-      })
-      .then(() => {
-        fetchSourceData();
-      });
+    // axios
+    //   .post('/api/message/read', {
+    //     ids,
+    //   })
+    //   .then(() => {
+    //     fetchSourceData();
+    //   });
   }
 
   useEffect(() => {

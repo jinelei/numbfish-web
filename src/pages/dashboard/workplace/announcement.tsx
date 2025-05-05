@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Link, Card, Skeleton, Tag, Typography } from '@arco-design/web-react';
 import useLocale from '@/utils/useLocale';
 import locale from './locale';
@@ -13,14 +12,14 @@ function Announcement() {
 
   const fetchData = () => {
     setLoading(true);
-    axios
-      .get('/api/workplace/announcement')
-      .then((res) => {
-        setData(res.data);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    // axios
+    //   .get('/api/workplace/announcement')
+    //   .then((res) => {
+    //     setData(res.data);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
 
   useEffect(() => {

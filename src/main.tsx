@@ -13,7 +13,12 @@ import { GlobalContext } from './context';
 import Login from './pages/login';
 import changeTheme from './utils/changeTheme';
 import useStorage from './utils/useStorage';
-import { LOADING_START, LOADING_STOP, UPDATE_USERINFO } from '@/store/action';
+import {
+  LOADING_START,
+  LOADING_STOP,
+  UPDATE_USERINFO,
+  USER_TOKEN_KEY,
+} from '@/store/action';
 import Setup from '@/pages/setup';
 
 function Index() {
@@ -31,15 +36,21 @@ function Index() {
     }
   }
 
-  function fetchUserInfo() {
-    store.dispatch({ type: LOADING_START });
-    user.info({}).then((res) => {
-      store.dispatch({ type: LOADING_STOP });
-      store.dispatch({ type: UPDATE_USERINFO, payload: res.data || {} });
-    });
-  }
-
   useEffect(() => {
+    if (!!localStorage.getItem(USER_TOKEN_KEY)) {
+      store.dispatch({ type: LOADING_START });
+      user
+        .info({})
+        .then((res) => {
+          store.dispatch({
+            type: UPDATE_USERINFO,
+            payload: res?.data?.data || {},
+          });
+        })
+        .finally(() => {
+          store.dispatch({ type: LOADING_STOP });
+        });
+    }
     // if (window.location.pathname.replace(/\//g, '') !== 'login') {
     //   window.location.pathname = '/login';
     // } else if (window.location.pathname.replace(/\//g, '') !== 'setup') {
@@ -47,7 +58,7 @@ function Index() {
     // } else if (checkLogin()) {
     //   fetchUserInfo();
     // }
-  }, []);
+  });
 
   useEffect(() => {
     changeTheme(theme);

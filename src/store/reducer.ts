@@ -1,7 +1,7 @@
+import UserInfo from '@/pages/userinfo';
 import {
   LOADING_START,
   LOADING_STOP,
-  UPDATE_LOADING,
   UPDATE_USERINFO,
   USER_LOGIN,
   USER_LOGOUT,
@@ -35,11 +35,9 @@ export const reducer = (
       return { ...initialState };
     }
     case UPDATE_USERINFO: {
-      const { userInfo = initialState.userInfo, userLoading } = action.payload;
       return {
         ...state,
-        userLoading,
-        userInfo,
+        userInfo: action.payload,
       };
     }
     default:
