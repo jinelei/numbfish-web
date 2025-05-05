@@ -1,10 +1,10 @@
 {
-  "name": "arco-design-pro",
+  "name": "numbfish-web",
   "version": "1.0.0",
-  "description": "Arco Design Pro",
+  "description": "Numbfish",
   "scripts": {
     "start": "vite",
-    "dev": "vite",
+    "dev": "vite --host",
     "preview": "vite preview",
     "build": "vite build",
     "eslint": "eslint src/ --ext .ts,.tsx,.js,.jsx --fix --cache",

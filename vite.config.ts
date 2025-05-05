@@ -20,6 +20,7 @@ export default defineConfig(({ command, mode }) => {
       alias: [{ find: '@', replacement: '/src' }],
     },
     server: {
+      port: 3000,
       proxy: env['VITE_ENV'] === 'development' ? proxyConfig : {},
     },
     plugins: [
