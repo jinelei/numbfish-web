@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Footer from '@/components/Footer';
 import styles from './style/index.module.less';
 
-function Setting() {
+function Permission() {
   useEffect(() => {
     document.body.setAttribute('arco-theme', 'light');
   }, []);
@@ -10,8 +10,7 @@ function Setting() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={styles['content-inner']}>setting</div>
-        <div className={styles['content-inner']}>setting</div>
+        <div className={styles['content-inner']}>permission page</div>
         <div className={styles.footer}>
           <Footer />
         </div>
@@ -20,6 +19,6 @@ function Setting() {
   );
 }
 
-Setting.displayName = 'SettingPage';
+Permission.displayName = 'PermissionPage';
 
-export default Setting;
+export default Permission;
