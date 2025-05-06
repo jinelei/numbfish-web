@@ -70,7 +70,9 @@ function PageLayout() {
     (state: RootState) => state
   );
 
-  const [routes, defaultRoute] = useRoute(userInfo?.permissions);
+  const [routes, defaultRoute] = useRoute(
+    (userInfo?.permissions || []).map((item) => item.code)
+  );
   const defaultSelectedKeys = [currentComponent || defaultRoute];
   const paths = (currentComponent || defaultRoute).split('/');
   const defaultOpenKeys = paths.slice(0, paths.length - 1);
@@ -186,6 +188,10 @@ function PageLayout() {
     updateMenuStatus();
   }, [pathname]);
 
+  useEffect(() => {
+    console.log('flattenRoutes', flattenRoutes);
+  });
+
   return (
     <Layout className={styles.layout}>
       <div
@@ -247,7 +253,7 @@ function PageLayout() {
                     return (
                       <Route
                         key={index}
-                        path={`/${route.path}`}
+                        path={`/${route.key}`}
                         component={route.component}
                       />
                     );

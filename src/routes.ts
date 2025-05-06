@@ -24,10 +24,35 @@ export const routes: IRoute[] = [
   {
     name: 'menu.userinfo',
     key: 'userinfo',
+    requiredPermissions: ['ROLE_MANAGE'],
   },
   {
     name: 'menu.setting',
     key: 'setting',
+    requiredPermissions: [
+      'PERMISSION_MANAGE',
+      'ROLE_MANAGE',
+      'USER_MANAGE',
+      'CLIENT_MANAGE',
+    ],
+    oneOfPermissions: true,
+    children: [
+      {
+        name: 'menu.setting.permission',
+        key: 'setting/permission',
+        requiredPermissions: ['PERMISSION_MANAGE'],
+      },
+      {
+        name: 'menu.setting.role',
+        key: 'setting/role',
+        requiredPermissions: ['ROLE_MANAGE'],
+      },
+      {
+        name: 'menu.setting.user',
+        key: 'setting/user',
+        requiredPermissions: ['USER_MANAGE'],
+      },
+    ],
   },
   {
     name: 'Example',
@@ -47,19 +72,20 @@ export const getName = (path: string, routes) => {
 };
 
 export const generatePermission = (role: string) => {
-  const actions = role === 'admin' ? ['*'] : ['read'];
+  // const actions = role === 'admin' ? ['*'] : ['read'];
   const result = {};
-  routes.forEach((item) => {
-    if (item.children) {
-      item.children.forEach((child) => {
-        result[child.name] = actions;
-      });
-    }
-  });
+  // routes.forEach((item) => {
+  //   if (item.children) {
+  //     item.children.forEach((child) => {
+  //       result[child.name] = actions;
+  //     });
+  //   }
+  // });
   return result;
 };
 
 const useRoute = (userPermission): [IRoute[], string] => {
+  console.log('userPermission', userPermission);
   const filterRoute = (routes: IRoute[], arr = []): IRoute[] => {
     if (!routes.length) {
       return [];
