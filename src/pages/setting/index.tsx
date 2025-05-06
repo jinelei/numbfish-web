@@ -10,7 +10,8 @@ function Setting() {
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <div className={styles['content-inner']}>asdfasdfas</div>
+        <div className={styles['content-inner']}>setting</div>
+        <div className={styles['content-inner']}>setting</div>
         <div className={styles.footer}>
           <Footer />
         </div>
