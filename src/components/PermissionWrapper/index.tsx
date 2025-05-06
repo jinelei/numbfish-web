@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from 'react';
-import { GlobalState } from '@/store';
+import { RootState } from '@/store';
 import { useSelector } from 'react-redux';
-import authentication, { AuthParams } from '@/utils/authentication';
+import {
+  determinePermissionAuthorized,
+  PermissionDeclare,
+} from '@/utils/authentication';
 
-type PermissionWrapperProps = AuthParams & {
+type PermissionWrapperProps = PermissionDeclare & {
   backup?: React.ReactNode;
 };
 
 const PermissionWrapper = (
   props: React.PropsWithChildren<PermissionWrapperProps>
 ) => {
-  const { backup, requiredPermissions, oneOfPerm } = props;
+  const { backup, requiredPermissions, oneOfPermissions } = props;
   const [hasPermission, setHasPermission] = useState(false);
-  const userInfo = useSelector((state: GlobalState) => state.userInfo);
+  const userInfo = useSelector((state: RootState) => state.userInfo);
 
   useEffect(() => {
-    const hasPermission = authentication(
-      { requiredPermissions, oneOfPerm },
-      userInfo.permissions
+    const hasPermission = determinePermissionAuthorized(
+      { requiredPermissions, oneOfPermissions },
+      (userInfo?.permissions || []).map((item) => item.code)
     );
     setHasPermission(hasPermission);
-  }, [requiredPermissions, oneOfPerm, userInfo.permissions]);
+  }, [requiredPermissions, oneOfPermissions, userInfo.permissions]);
 
   if (hasPermission) {
     return <>{convertReactElement(props.children)}</>;

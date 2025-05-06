@@ -8,13 +8,12 @@ import Announcement from './announcement';
 import Carousel from './carousel';
 import Docs from './docs';
 import styles from './style/index.module.less';
-import './mock';
 
 const { Row, Col } = Grid;
 
 const gutter = 16;
 
-function Workplace() {
+const Dashboard = () => {
   return (
     <Space size={16} align="start">
       <Space size={16} direction="vertical">
@@ -36,6 +35,6 @@ function Workplace() {
       </Space>
     </Space>
   );
-}
+};
 
-export default Workplace;
+export default Dashboard;

@@ -13,12 +13,7 @@ import qs from 'query-string';
 import NProgress from 'nprogress';
 import Navbar from './components/NavBar';
 import Footer from './components/Footer';
-import useRoute, {
-  IRoute,
-  permissions,
-  renderMenus,
-  renderRoutes as renderRoutes2,
-} from '@/routes';
+import useRoute, { IRoute } from '@/routes';
 import { isArray } from './utils/is';
 import useLocale from './utils/useLocale';
 import getUrlParams from './utils/getUrlParams';
@@ -48,6 +43,7 @@ function getIconFromKey(key) {
 function getFlattenRoutes(routes) {
   const mod = import.meta.glob('./pages/**/[a-z[]*.tsx');
   const res = [];
+
   function travel(_routes) {
     (_routes || []).forEach((route) => {
       if (route.key && !route.children) {
@@ -58,6 +54,7 @@ function getFlattenRoutes(routes) {
       }
     });
   }
+
   travel(routes);
 
   return res;
@@ -96,21 +93,10 @@ function PageLayout() {
   const showMenu = settings.menu && urlParams.menu !== false;
   const showFooter = settings.footer && urlParams.footer !== false;
 
-  const renderRoutesResult = useMemo(() => {
-    const renderRoutesResult = [];
-    permissions
-      .map((item) => renderRoutes2(item))
-      .forEach((c) => renderRoutesResult.push(...c));
-    return renderRoutesResult;
-  }, [permissions]);
-
-  const renderMenusResult = useMemo(() => {
-    const renderMenusResult = permissions.map((item) => renderMenus(item));
-    return renderMenusResult;
-  }, [permissions]);
+  const flattenRoutes = useMemo(() => getFlattenRoutes(routes) || [], [routes]);
 
   function onClickMenuItem(key) {
-    const currentRoute = renderRoutesResult.find((r) => r.key === key);
+    const currentRoute = flattenRoutes.find((r) => r.key === key);
     const component = currentRoute.component;
     const preload = component.preload();
     NProgress.start();
@@ -200,11 +186,6 @@ function PageLayout() {
     updateMenuStatus();
   }, [pathname]);
 
-  useEffect(() => {
-    console.log('render menus', renderMenusResult);
-    console.log('render routes', renderRoutesResult);
-  });
-
   return (
     <Layout className={styles.layout}>
       <div
@@ -239,8 +220,7 @@ function PageLayout() {
                     setOpenKeys(openKeys);
                   }}
                 >
-                  {renderMenusResult}
-                  {/* {renderRoutes(locale)(routes, 1)} */}
+                  {renderRoutes(locale)(routes, 1)}
                 </Menu>
               </div>
               <div className={styles['collapse-btn']} onClick={toggleCollapse}>
@@ -263,7 +243,7 @@ function PageLayout() {
               )}
               <Content>
                 <Switch>
-                  {/* {renderRoutesResult.map((route, index) => {
+                  {flattenRoutes.map((route, index) => {
                     return (
                       <Route
                         key={index}
@@ -271,7 +251,7 @@ function PageLayout() {
                         component={route.component}
                       />
                     );
-                  })} */}
+                  })}
                   <Route exact path="/">
                     <Redirect to={`/${defaultRoute}`} />
                   </Route>
