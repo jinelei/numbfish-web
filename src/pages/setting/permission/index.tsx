@@ -1,19 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Footer from '@/components/Footer';
+import { useEffect, useRef, useState } from 'react';
 import styles from './style/index.module.less';
 import {
   Button,
-  FormInstance,
+  Form,
+  Input,
+  Message,
   Modal,
+  Select,
   Space,
-  Switch,
   Table,
 } from '@arco-design/web-react';
 import Row from '@arco-design/web-react/es/Grid/row';
 import Col from '@arco-design/web-react/es/Grid/col';
 import { permissions } from '@/apis';
-import Form from './form';
-import FormComponent from './form';
 
 const Permission = () => {
   const formRef = useRef(null);
@@ -111,6 +110,16 @@ const Permission = () => {
     });
   }, []);
 
+  // 添加验证表单的方法
+  const validateForm = async () => {
+    try {
+      const values = await formRef.current?.validate();
+      return { isValid: true, values };
+    } catch (error) {
+      return { isValid: false, error };
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -133,21 +142,74 @@ const Permission = () => {
         title="Modal Title"
         visible={visible}
         onOk={() => {
-          console.log('onOk', formRef.current);
           formRef.current
-            ?.validateForm()
+            ?.validate()
             .then((res) => {
-              console.log(res);
+              permissions
+                .update2({ ...res })
+                .then((res) => {
+                  if (res.data.code === 200) {
+                    Message.success(res.data.message);
+                  } else {
+                    Message.error(res.data.message);
+                  }
+                })
+                .finally(() => {
+                  setVisible(false);
+                });
             })
             .catch((err) => {
-              console.log(err);
+              Message.error(err);
             });
         }}
         onCancel={() => setVisible(false)}
         autoFocus={false}
         focusLock={true}
       >
-        <FormComponent ref={formRef} form={form} />
+        <Form ref={formRef} layout="vertical" initialValues={form}>
+          <Form.Item
+            label="权限id"
+            field="id"
+            disabled={!!form.id}
+            rules={[{ required: true, message: '请输入权限id' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="权限名称"
+            field="name"
+            rules={[{ required: true, message: '请输入权限名称' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="权限代码"
+            field="code"
+            rules={[{ required: true, message: '请输入权限代码' }]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            label="权限类型"
+            field="type"
+            rules={[{ required: true, message: '请选择权限类型' }]}
+          >
+            <Select>
+              <Select.Option value="DIRECTORY">目录</Select.Option>
+              <Select.Option value="MENU">菜单</Select.Option>
+              <Select.Option value="ACTION">操作</Select.Option>
+            </Select>
+          </Form.Item>
+          <Form.Item label="权限排序值" field="sortValue">
+            <Input type="number" />
+          </Form.Item>
+          <Form.Item label="父权限 ID" field="parentId">
+            <Input type="number" />
+          </Form.Item>
+          <Form.Item label="权限备注信息" field="remark">
+            <Input.TextArea />
+          </Form.Item>
+        </Form>
       </Modal>
     </div>
   );
