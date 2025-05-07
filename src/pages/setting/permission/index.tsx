@@ -1,129 +1,154 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Footer from '@/components/Footer';
 import styles from './style/index.module.less';
-import { Space, Switch, Table } from '@arco-design/web-react';
-
-const columns = [
-  {
-    title: 'Name',
-    dataIndex: 'name',
-  },
-  {
-    title: 'Salary',
-    dataIndex: 'salary',
-  },
-  {
-    title: 'Address',
-    dataIndex: 'address',
-  },
-  {
-    title: 'Email',
-    dataIndex: 'email',
-  },
-];
-const data = [
-  {
-    key: '1',
-    name: 'Jane Doe',
-    salary: 23000,
-    address: '32 Park Road, London',
-    email: 'jane.doe@example.com',
-    children: [
-      {
-        key: '1-1',
-        name: 'Christina',
-        address: '332 Park Road, London',
-        email: 'christina@example.com',
-      },
-    ],
-  },
-  {
-    key: '2',
-    name: 'Alisa Ross',
-    salary: 25000,
-    address: '35 Park Road, London',
-    email: 'alisa.ross@example.com',
-    children: [
-      {
-        key: '2-1',
-        name: 'Ed Hellen',
-        salary: 17000,
-        address: '42 Park Road, London',
-        email: 'ed.hellen@example.com',
-        children: [
-          {
-            key: '2-1-1',
-            name: 'Eric Miller',
-            salary: 23000,
-            address: '67 Park Road, London',
-            email: 'eric.miller@example.com',
-          },
-          {
-            key: '2-1-2',
-            name: 'Tom Jerry',
-            salary: 666,
-            address: '67 Park Road, London',
-            email: 'tom.jerry@example.com',
-          },
-        ],
-      },
-      {
-        key: '2-2',
-        name: 'William Smith',
-        salary: 27000,
-        address: '62 Park Road, London',
-        email: 'william.smith@example.com',
-      },
-      {
-        key: '2-3',
-        name: 'George Bush',
-        salary: 24000,
-        address: '62 Park Road, London',
-        email: 'george.bush@example.com',
-      },
-    ],
-  },
-  {
-    key: '7',
-    name: 'Kevin Sandra',
-    salary: 22000,
-    address: '31 Park Road, London',
-    email: 'kevin.sandra@example.com',
-  },
-];
+import {
+  Button,
+  FormInstance,
+  Modal,
+  Space,
+  Switch,
+  Table,
+} from '@arco-design/web-react';
+import Row from '@arco-design/web-react/es/Grid/row';
+import Col from '@arco-design/web-react/es/Grid/col';
+import { permissions } from '@/apis';
+import Form from './form';
+import FormComponent from './form';
 
 const Permission = () => {
-  const [checkStrictly, setCheckStrictly] = useState(true);
+  const formRef = useRef(null);
+  const [dataSource, setDataSource] = useState([]);
+  const [form, setForm] = useState({});
+  const [visible, setVisible] = useState(false);
+
+  const columns = [
+    {
+      title: 'id',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Name',
+      dataIndex: 'name',
+    },
+    {
+      title: 'code',
+      dataIndex: 'code',
+    },
+    {
+      title: 'type',
+      dataIndex: 'type',
+    },
+    {
+      title: 'sortValue',
+      dataIndex: 'sortValue',
+    },
+    // {
+    //   title: 'createdUserId',
+    //   dataIndex: 'createdUserId',
+    // },
+    // {
+    //   title: 'updatedTime',
+    //   dataIndex: 'updatedTime',
+    // },
+    // {
+    //   title: 'updatedUserId',
+    //   dataIndex: 'updatedUserId',
+    // },
+    // {
+    //   title: 'createdTime',
+    //   dataIndex: 'createdTime',
+    // },
+    {
+      title: 'remark',
+      dataIndex: 'remark',
+    },
+    {
+      title: 'Operation',
+      width: 120,
+      render: (_, record) => (
+        <Space size="small">
+          <Button
+            type="primary"
+            size="small"
+            onClick={() => {
+              setForm(record);
+              setVisible(true);
+            }}
+          >
+            Add
+          </Button>
+          <Button type="primary" size="small">
+            Edit
+          </Button>
+          <Button type="primary" size="small">
+            Delete
+          </Button>
+          <Button type="primary" size="small">
+            Copy
+          </Button>
+          <Button type="primary" size="small">
+            View
+          </Button>
+        </Space>
+      ),
+    },
+  ];
 
   useEffect(() => {
     document.body.setAttribute('arco-theme', 'light');
+    permissions.tree1({}).then((res) => {
+      console.log('permissions tree', res);
+      if (res.data.code === 200) {
+        setDataSource(
+          res.data?.data?.map((i) => {
+            return {
+              ...i,
+              key: i.id,
+            };
+          })
+        );
+      }
+    });
   }, []);
 
   return (
     <div className={styles.container}>
       <div className={styles.content}>
-        <Space style={{ marginBottom: 16 }}>
-          checkStrictly:
-          <Switch
-            onChange={(checked) => setCheckStrictly(checked)}
-            checked={checkStrictly}
-          />
-        </Space>
-        <Table
-          rowSelection={{
-            type: 'checkbox',
-            onChange: (selectedRowKeys, selectedRows) => {
-              console.log(selectedRowKeys, selectedRows);
-            },
-            checkStrictly,
-          }}
-          columns={columns}
-          data={data}
-        />
-        <div className={styles.footer}>
-          <Footer />
-        </div>
+        <Row>
+          <Col span={24}>
+            <Table
+              rowSelection={{
+                type: 'checkbox',
+                onChange: (selectedRowKeys, selectedRows) => {
+                  console.log(selectedRowKeys, selectedRows);
+                },
+              }}
+              columns={columns}
+              data={dataSource}
+            />
+          </Col>
+        </Row>
       </div>
+      <Modal
+        title="Modal Title"
+        visible={visible}
+        onOk={() => {
+          console.log('onOk', formRef.current);
+          formRef.current
+            ?.validateForm()
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        }}
+        onCancel={() => setVisible(false)}
+        autoFocus={false}
+        focusLock={true}
+      >
+        <FormComponent ref={formRef} form={form} />
+      </Modal>
     </div>
   );
 };

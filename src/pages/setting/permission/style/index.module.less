@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  height: 100vh;
+  min-height: calc(100vh - 156px);
 
   .content {
     flex: 1;
@@ -19,5 +19,8 @@
 .content {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
+  padding: 1rem;
+  width: 100%;
+  background-color: white;
 }
