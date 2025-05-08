@@ -1,11 +1,45 @@
 .container {
   display: flex;
   min-height: calc(100vh - 156px);
+  width: 100%;
 
   .content {
+    width: 100%;
     flex: 1;
     position: relative;
     padding-bottom: 40px;
+    flex-direction: row;
+
+    .searchForm {
+      width: unset;
+      padding: 1rem;
+      background-color: #fff;
+    }
+
+    .operationBar {
+      padding: 1rem;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+
+      .title {
+        margin: 5px 5px;
+      }
+    }
+
+    .tableWrapper {
+      padding: 1rem;
+      background-color: #fff;
+    }
+
+    .modalForm {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
   }
 
   .footer {
@@ -14,13 +48,4 @@
     bottom: 0;
     right: 0;
   }
-}
-
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 1rem;
-  width: 100%;
-  background-color: white;
 }

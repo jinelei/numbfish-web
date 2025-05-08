@@ -85,7 +85,6 @@ export const generatePermission = (role: string) => {
 };
 
 const useRoute = (userPermission): [IRoute[], string] => {
-  console.log('userPermission', userPermission);
   const filterRoute = (routes: IRoute[], arr = []): IRoute[] => {
     if (!routes.length) {
       return [];

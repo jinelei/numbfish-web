@@ -188,10 +188,6 @@ function PageLayout() {
     updateMenuStatus();
   }, [pathname]);
 
-  useEffect(() => {
-    console.log('flattenRoutes', flattenRoutes);
-  });
-
   return (
     <Layout className={styles.layout}>
       <div
