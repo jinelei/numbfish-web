@@ -7,9 +7,12 @@ import {
   InputNumber,
   Message,
   Modal,
+  Popconfirm,
   Select,
   Space,
   Table,
+  Tag,
+  Tooltip,
   Typography,
 } from '@arco-design/web-react';
 import Row from '@arco-design/web-react/es/Grid/row';
@@ -22,7 +25,19 @@ import {
   PermissionResponse,
   PermissionUpdateRequest,
 } from '@/apis/api/data-contracts';
-import { useSelector } from 'react-redux';
+import {
+  IconCopy,
+  IconDelete,
+  IconEdit,
+  IconPlus,
+} from '@arco-design/web-react/icon';
+import { dayjs } from '@arco-design/web-react/es/_util/dayjs';
+
+const PERMISSION_LABEL_MAP = [
+  { key: 'DIRECTORY', value: '目录', color: 'arcoblue' },
+  { key: 'MENU', value: '菜单', color: 'gold' },
+  { key: 'ACTION', value: '按钮', color: 'magenta' },
+];
 
 const Permission = () => {
   const [searchForm] = Form.useForm();
@@ -47,51 +62,72 @@ const Permission = () => {
 
   const columns = [
     {
-      title: 'id',
-      dataIndex: 'id',
-    },
-    {
-      title: 'Name',
+      title: '权限名称',
       dataIndex: 'name',
+      render: (text, record) => <Tooltip content={record.id}>{text}</Tooltip>,
     },
     {
-      title: 'code',
+      title: '权限编码',
       dataIndex: 'code',
     },
     {
-      title: 'type',
+      title: '权限类型',
       dataIndex: 'type',
+      render: (text, record) => {
+        return PERMISSION_LABEL_MAP.filter((i) => i.key === text).map((i) => (
+          <Tag color={i.color} key={i.value}>
+            {i.value}
+          </Tag>
+        ));
+      },
     },
     {
-      title: 'sortValue',
+      title: '排序值',
       dataIndex: 'sortValue',
     },
-    // {
-    //   title: 'createdUserId',
-    //   dataIndex: 'createdUserId',
-    // },
-    // {
-    //   title: 'updatedTime',
-    //   dataIndex: 'updatedTime',
-    // },
-    // {
-    //   title: 'updatedUserId',
-    //   dataIndex: 'updatedUserId',
-    // },
-    // {
-    //   title: 'createdTime',
-    //   dataIndex: 'createdTime',
-    // },
     {
-      title: 'remark',
+      title: '更新时间',
+      dataIndex: 'updatedTime',
+      render: (text, record) => {
+        return (
+          <Tooltip
+            content={
+              <Row>
+                <Col span={8}>创建人：</Col>
+                <Col span={16}>{record.createdUserId}</Col>
+                <Col span={8}>创建时间：</Col>
+                <Col span={16}>
+                  {record.createdTime
+                    ? dayjs(record.createdTime).format('YYYY-MM-DD HH:mm:ss')
+                    : '-'}
+                </Col>
+                <Col span={8}>更新人：</Col>
+                <Col span={16}>{record.updatedUserId}</Col>
+                <Col span={8}>更新时间：</Col>
+                <Col span={16}>
+                  {record.updatedTime
+                    ? dayjs(record.updatedTime).format('YYYY-MM-DD HH:mm:ss')
+                    : '-'}
+                </Col>
+              </Row>
+            }
+          >
+            {text ? dayjs(text).format('YYYY-MM-DD HH:mm:ss') : '-'}
+          </Tooltip>
+        );
+      },
+    },
+    {
+      title: '备注',
       dataIndex: 'remark',
     },
     {
-      title: 'Operation',
+      title: '操作',
       width: 120,
       render: (_, record) => (
         <Space size="small">
           <Button
+            icon={<IconPlus />}
             type="primary"
             size="small"
             onClick={() => {
@@ -101,38 +137,60 @@ const Permission = () => {
               });
               setVisible(true);
             }}
-          >
-            Add
-          </Button>
+          ></Button>
           <Button
-            type="primary"
+            icon={<IconEdit />}
             size="small"
             onClick={() => {
               setFormMode(!!record.parentId ? 'update_with_parent' : 'update');
               form.setFieldsValue(record);
               setVisible(true);
             }}
+          ></Button>
+          <Popconfirm
+            title={'确定删除吗？'}
+            onConfirm={() => {
+              handleDelete([record.id]);
+            }}
           >
-            Edit
-          </Button>
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => handleDelete([record.id])}
+            <Tooltip
+              content={'删除后，该权限下的所有子权限也会被删除，无法恢复。'}
+            >
+              <Button
+                icon={<IconDelete />}
+                status="danger"
+                size="small"
+              ></Button>
+            </Tooltip>
+          </Popconfirm>
+          <Tooltip
+            content={
+              '复制后，会自动生成一个新的权限，名称为原权限名称+copy，code为原权限code+_copy'
+            }
           >
-            Delete
-          </Button>
-          <Button type="primary" size="small">
-            Copy
-          </Button>
-          <Button type="primary" size="small">
-            View
-          </Button>
+            <Button
+              icon={<IconCopy />}
+              size="small"
+              onClick={() => {
+                setFormMode(
+                  !!record.parentId ? 'create_with_parent' : 'create'
+                );
+                form.setFieldsValue({
+                  name: record.name + ' copy',
+                  code: record.code + '_copy',
+                  type: record.type,
+                  parentId: record.parentId,
+                  remark: record.remark + ' copy',
+                  sortValue: record.sortValue + 1,
+                });
+                setVisible(true);
+              }}
+            ></Button>
+          </Tooltip>
         </Space>
       ),
     },
   ];
-
   const fetchData = () => {
     console.log('请求参数：', searchValues);
     setLoading(true);
@@ -195,6 +253,7 @@ const Permission = () => {
               });
       })
       .catch((err) => {
+        console.log(err.errors);
         Message.error(err.errors);
       });
   };
@@ -226,7 +285,7 @@ const Permission = () => {
             layout="inline"
             autoComplete="false"
             labelCol={{ span: 8 }}
-            wrapperCol={{ span: 20 }}
+            wrapperCol={{ span: 16 }}
             colon={true}
             className={styles.searchForm}
             style={{ maxWidth: 'none' }}
@@ -238,26 +297,27 @@ const Permission = () => {
             >
               <Col span={6}>
                 <Form.Item label="权限id" field="id">
-                  <InputNumber style={{ minWidth: '20rem' }} />
+                  <InputNumber style={{ minWidth: '12rem' }} />
                 </Form.Item>
               </Col>
               <Col span={6}>
                 <Form.Item label="权限名称" field="name">
-                  <Input type={'text'} style={{ minWidth: '20rem' }} />
+                  <Input type={'text'} style={{ minWidth: '12rem' }} />
                 </Form.Item>
               </Col>
               <Col span={6}>
                 <Form.Item label="权限代码" field="code">
-                  <Input type={'text'} style={{ minWidth: '20rem' }} />
+                  <Input type={'text'} style={{ minWidth: '12rem' }} />
                 </Form.Item>
               </Col>
               <Col span={6}>
                 <Form.Item label="权限类型" field="type">
-                  <Select style={{ minWidth: '20rem' }}>
-                    <Select.Option value="">全部</Select.Option>
-                    <Select.Option value="DIRECTORY">目录</Select.Option>
-                    <Select.Option value="MENU">菜单</Select.Option>
-                    <Select.Option value="ACTION">操作</Select.Option>
+                  <Select style={{ minWidth: '12rem' }}>
+                    {PERMISSION_LABEL_MAP.map((i) => (
+                      <Select.Option key={i.key} value={i.key}>
+                        {i.value}
+                      </Select.Option>
+                    ))}
                   </Select>
                 </Form.Item>
               </Col>
@@ -304,6 +364,7 @@ const Permission = () => {
           </Typography.Paragraph>
           <Space>
             <Button
+              icon={<IconPlus />}
               type="primary"
               onClick={() => {
                 form.resetFields();
@@ -311,23 +372,27 @@ const Permission = () => {
                 setVisible(true);
               }}
             >
-              {' '}
-              添加{' '}
+              添加
             </Button>
             {selectedRowKeys.length > 0 && (
-              <Button
-                type="primary"
-                onClick={() => {
-                  if (selectedRowKeys.length === 0) {
-                    Message.error('请选择要删除的项');
-                    return;
-                  }
-                  handleDelete(selectedRowKeys);
-                }}
+              <Tooltip
+                content={'删除后，该权限下的所有子权限也会被删除，无法恢复。'}
               >
-                {' '}
-                批量删除{' '}
-              </Button>
+                <Button
+                  icon={<IconDelete />}
+                  type="primary"
+                  onClick={() => {
+                    if (selectedRowKeys.length === 0) {
+                      Message.error('请选择要删除的项');
+                      return;
+                    }
+                    handleDelete(selectedRowKeys);
+                  }}
+                >
+                  {' '}
+                  批量删除{' '}
+                </Button>
+              </Tooltip>
             )}
           </Space>
         </Col>
@@ -367,11 +432,12 @@ const Permission = () => {
                 style={{
                   display: formMode.startsWith('create') ? 'none' : 'block',
                 }}
-                rules={
-                  formMode.startsWith('create')
-                    ? []
-                    : [{ required: true, message: '请输入权限id' }]
-                }
+                rules={[
+                  {
+                    required: !formMode.startsWith('create'),
+                    message: '请输入权限id',
+                  },
+                ]}
               >
                 <Input />
               </Form.Item>
@@ -410,16 +476,12 @@ const Permission = () => {
                 style={{
                   display: formMode.endsWith('with_parent') ? 'block' : 'none',
                 }}
-                rules={
-                  formMode.endsWith('with_parent')
-                    ? []
-                    : [
-                        {
-                          required: true,
-                          message: '请输入父权限id',
-                        },
-                      ]
-                }
+                rules={[
+                  {
+                    required: formMode.endsWith('with_parent'),
+                    message: '请输入父权限id',
+                  },
+                ]}
               >
                 <Input type="number" />
               </Form.Item>
