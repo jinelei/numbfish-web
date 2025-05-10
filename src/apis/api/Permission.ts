@@ -11,7 +11,6 @@
  */
 
 import {
-  BaseViewBoolean,
   BaseViewListPermissionResponse,
   BaseViewPermissionResponse,
   BaseViewVoid,
@@ -19,7 +18,6 @@ import {
   PageRequestPermissionQueryRequest,
   PageViewPermissionResponse,
   PermissionCreateRequest,
-  PermissionDeclarationObject,
   PermissionDeleteRequest,
   PermissionQueryRequest,
   PermissionUpdateRequest,
@@ -59,26 +57,6 @@ export class Permission<
       method: 'POST',
       body: data,
       type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 权限管理
-   * @name Regist1
-   * @summary 注册权限
-   * @request POST:/authorization/permission/regist
-   */
-  regist1 = (
-    query: {
-      permissions: PermissionDeclarationObject[];
-    },
-    params: RequestParams = {}
-  ) =>
-    this.request<BaseViewBoolean, any>({
-      path: `/authorization/permission/regist`,
-      method: 'POST',
-      query: query,
       ...params,
     });
   /**

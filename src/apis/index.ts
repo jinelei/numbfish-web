@@ -64,7 +64,7 @@ const onResponseFailure = (error: { message }) => {
     return Promise.reject('未知错误：' + msg);
   }
 };
-const permissions = new Permission(axiosConfig);
+const permission = new Permission(axiosConfig);
 const role = new Role(axiosConfig);
 const user = new User(axiosConfig);
 const client = new Client(axiosConfig);
@@ -77,8 +77,8 @@ const alarmRule = new AlarmRule(axiosConfig);
 const alarmHistory = new AlarmHistory(axiosConfig);
 const setup = new Setup(axiosConfig);
 
-permissions.instance.interceptors.request.use(onRequest);
-permissions.instance.interceptors.response.use(
+permission.instance.interceptors.request.use(onRequest);
+permission.instance.interceptors.response.use(
   onResponseSuccess,
   onResponseFailure
 );
@@ -121,7 +121,7 @@ setup.instance.interceptors.request.use(onRequest);
 setup.instance.interceptors.response.use(onResponseSuccess, onResponseFailure);
 
 export {
-  permissions,
+  permission,
   role,
   user,
   client,

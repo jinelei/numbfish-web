@@ -11,7 +11,6 @@
  */
 
 import {
-  BaseViewBoolean,
   BaseViewListRoleResponse,
   BaseViewRoleResponse,
   BaseViewVoid,
@@ -19,7 +18,6 @@ import {
   PageRequestRoleQueryRequest,
   PageViewRoleResponse,
   RoleCreateRequest,
-  RoleDeclarationObject,
   RoleDeleteRequest,
   RoleQueryRequest,
   RoleUpdateRequest,
@@ -59,26 +57,6 @@ export class Role<
       method: 'POST',
       body: data,
       type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 角色管理
-   * @name Regist
-   * @summary 注册角色
-   * @request POST:/authorization/role/regist
-   */
-  regist = (
-    query: {
-      roles: RoleDeclarationObject[];
-    },
-    params: RequestParams = {}
-  ) =>
-    this.request<BaseViewBoolean, any>({
-      path: `/authorization/role/regist`,
-      method: 'POST',
-      query: query,
       ...params,
     });
   /**

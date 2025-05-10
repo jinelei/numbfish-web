@@ -13,12 +13,6 @@
     "description": "外部文档",
     "url": "https://springshop.wiki.github.org/docs"
   },
-  "servers": [
-    {
-      "url": "authorization",
-      "description": "Generated server url"
-    }
-  ],
   "paths": {
     "/user/update": {
       "post": {
@@ -28,7 +22,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UserUpdateRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UserUpdateRequest"
+              }
             }
           },
           "required": true
@@ -38,7 +34,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -65,7 +63,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewString" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewString"
+                }
               }
             }
           }
@@ -111,7 +111,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -126,7 +128,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UserLoginRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UserLoginRequest"
+              }
             }
           },
           "required": true
@@ -136,7 +140,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewString" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewString"
+                }
               }
             }
           }
@@ -151,7 +157,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UserQueryRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UserQueryRequest"
+              }
             }
           },
           "required": true
@@ -197,7 +205,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UserQueryRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UserQueryRequest"
+              }
             }
           },
           "required": true
@@ -224,7 +234,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UserDeleteRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UserDeleteRequest"
+              }
             }
           },
           "required": true
@@ -234,7 +246,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -249,7 +263,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/UserCreateRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/UserCreateRequest"
+              }
             }
           },
           "required": true
@@ -259,7 +275,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -273,7 +291,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/SetupRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/SetupRequest"
+              }
             }
           },
           "required": true
@@ -283,7 +303,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewBoolean" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewBoolean"
+                }
               }
             }
           }
@@ -299,7 +321,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewBoolean" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewBoolean"
+                }
               }
             }
           }
@@ -314,7 +338,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/RoleUpdateRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/RoleUpdateRequest"
+              }
             }
           },
           "required": true
@@ -324,7 +350,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -339,7 +367,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/RoleQueryRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/RoleQueryRequest"
+              }
             }
           },
           "required": true
@@ -352,34 +382,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/BaseViewListRoleResponse"
                 }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/role/regist": {
-      "post": {
-        "tags": ["角色管理"],
-        "summary": "注册角色",
-        "operationId": "regist",
-        "parameters": [
-          {
-            "name": "roles",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": { "$ref": "#/components/schemas/RoleDeclarationObject" }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewBoolean" }
               }
             }
           }
@@ -423,7 +425,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/RoleQueryRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/RoleQueryRequest"
+              }
             }
           },
           "required": true
@@ -450,7 +454,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/RoleQueryRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/RoleQueryRequest"
+              }
             }
           },
           "required": true
@@ -477,7 +483,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/RoleDeleteRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/RoleDeleteRequest"
+              }
             }
           },
           "required": true
@@ -487,7 +495,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -502,7 +512,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/RoleCreateRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/RoleCreateRequest"
+              }
             }
           },
           "required": true
@@ -512,7 +524,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -539,7 +553,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -569,36 +585,6 @@
                 "schema": {
                   "$ref": "#/components/schemas/BaseViewListPermissionResponse"
                 }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/permission/regist": {
-      "post": {
-        "tags": ["权限管理"],
-        "summary": "注册权限",
-        "operationId": "regist_1",
-        "parameters": [
-          {
-            "name": "permissions",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/PermissionDeclarationObject"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewBoolean" }
               }
             }
           }
@@ -712,7 +698,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -739,7 +727,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -754,7 +744,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ClientUpdateRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/ClientUpdateRequest"
+              }
             }
           },
           "required": true
@@ -764,7 +756,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -808,7 +802,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ClientQueryRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/ClientQueryRequest"
+              }
             }
           },
           "required": true
@@ -835,7 +831,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ClientQueryRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/ClientQueryRequest"
+              }
             }
           },
           "required": true
@@ -862,7 +860,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ClientDeleteRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/ClientDeleteRequest"
+              }
             }
           },
           "required": true
@@ -872,7 +872,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -887,7 +889,9 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": { "$ref": "#/components/schemas/ClientCreateRequest" }
+              "schema": {
+                "$ref": "#/components/schemas/ClientCreateRequest"
+              }
             }
           },
           "required": true
@@ -897,7 +901,9 @@
             "description": "OK",
             "content": {
               "*/*": {
-                "schema": { "$ref": "#/components/schemas/BaseViewVoid" }
+                "schema": {
+                  "$ref": "#/components/schemas/BaseViewVoid"
+                }
               }
             }
           }
@@ -911,13 +917,35 @@
         "required": ["id", "roleIds", "username"],
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
-          "username": { "type": "string", "description": "用户名称" },
-          "password": { "type": "string", "description": "密码" },
-          "avatar": { "type": "string", "description": "用户头像" },
-          "email": { "type": "string", "description": "邮箱" },
-          "phone": { "type": "string", "description": "手机号" },
-          "remark": { "type": "string", "description": "用户备注" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
           "roleIds": {
             "type": "array",
             "description": "角色列表",
@@ -938,8 +966,14 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "type": "object", "description": "数据" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "object",
+            "description": "数据"
+          }
         },
         "description": "基础视图对象"
       },
@@ -947,8 +981,14 @@
         "required": ["username"],
         "type": "object",
         "properties": {
-          "username": { "type": "string", "description": "用户名称" },
-          "password": { "type": "string", "description": "密码" }
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          }
         },
         "description": "用户更新密码请求对象"
       },
@@ -960,8 +1000,14 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "type": "string", "description": "数据" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "string",
+            "description": "数据"
+          }
         },
         "description": "基础视图对象"
       },
@@ -978,14 +1024,20 @@
             "description": "分页大小",
             "format": "int32"
           },
-          "params": { "$ref": "#/components/schemas/UserQueryRequest" }
+          "params": {
+            "$ref": "#/components/schemas/UserQueryRequest"
+          }
         },
         "description": "分页请求对象"
       },
       "UserQueryRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
           "ids": {
             "type": "array",
             "description": "id列表",
@@ -995,10 +1047,22 @@
               "format": "int64"
             }
           },
-          "username": { "type": "string", "description": "用户名称" },
-          "email": { "type": "string", "description": "邮箱" },
-          "phone": { "type": "string", "description": "手机号" },
-          "remark": { "type": "string", "description": "用户备注" },
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
           "roleIds": {
             "type": "array",
             "description": "角色列表",
@@ -1019,11 +1083,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/UserResponse" }
+            "items": {
+              "$ref": "#/components/schemas/UserResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -1051,8 +1120,14 @@
             "description": "权限实体的唯一标识",
             "format": "int64"
           },
-          "name": { "type": "string", "description": "权限名称" },
-          "code": { "type": "string", "description": "权限代码" },
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限代码"
+          },
           "type": {
             "type": "string",
             "description": "权限类型",
@@ -1068,33 +1143,34 @@
             "description": "父权限 ID",
             "format": "int64"
           },
-          "remark": { "type": "string", "description": "权限备注信息" },
-          "deleted": {
-            "type": "boolean",
-            "description": "是否启用，0 表示启用，1 表示禁用"
+          "remark": {
+            "type": "string",
+            "description": "权限备注信息"
           },
-          "createdUserId": { "type": "string", "description": "创建人用户 ID" },
+          "createdUserId": {
+            "type": "string",
+            "description": "创建人用户 ID"
+          },
           "createdTime": {
             "type": "string",
             "description": "创建时间",
             "format": "date-time"
           },
-          "updatedUserId": { "type": "string", "description": "更新人用户 ID" },
+          "updatedUserId": {
+            "type": "string",
+            "description": "更新人用户 ID"
+          },
           "updatedTime": {
             "type": "string",
             "description": "更新时间",
             "format": "date-time"
           },
-          "deletedUserId": { "type": "string", "description": "删除人用户 ID" },
-          "deletedTime": {
-            "type": "string",
-            "description": "删除时间",
-            "format": "date-time"
-          },
           "children": {
             "type": "array",
             "description": "子级",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           }
         },
         "description": "权限响应对象"
@@ -1107,8 +1183,14 @@
             "description": "角色实体的唯一标识",
             "format": "int64"
           },
-          "name": { "type": "string", "description": "角色名称" },
-          "code": { "type": "string", "description": "角色代码" },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色代码"
+          },
           "type": {
             "type": "string",
             "description": "角色类型",
@@ -1124,24 +1206,36 @@
             "description": "父角色 ID",
             "format": "int64"
           },
-          "remark": { "type": "string", "description": "角色备注信息" },
+          "remark": {
+            "type": "string",
+            "description": "角色备注信息"
+          },
           "deleted": {
             "type": "boolean",
             "description": "是否启用，0 表示启用，1 表示禁用"
           },
-          "createdUserId": { "type": "string", "description": "创建人用户 ID" },
+          "createdUserId": {
+            "type": "string",
+            "description": "创建人用户 ID"
+          },
           "createdTime": {
             "type": "string",
             "description": "创建时间",
             "format": "date-time"
           },
-          "updatedUserId": { "type": "string", "description": "更新人用户 ID" },
+          "updatedUserId": {
+            "type": "string",
+            "description": "更新人用户 ID"
+          },
           "updatedTime": {
             "type": "string",
             "description": "更新时间",
             "format": "date-time"
           },
-          "deletedUserId": { "type": "string", "description": "删除人用户 ID" },
+          "deletedUserId": {
+            "type": "string",
+            "description": "删除人用户 ID"
+          },
           "deletedTime": {
             "type": "string",
             "description": "删除时间",
@@ -1150,7 +1244,9 @@
           "children": {
             "type": "array",
             "description": "子级",
-            "items": { "$ref": "#/components/schemas/RoleResponse" }
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
           },
           "whitePermissionIds": {
             "type": "array",
@@ -1164,7 +1260,9 @@
           "whitePermissions": {
             "type": "array",
             "description": "白名单权限实体列表",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           },
           "blackPermissionIds": {
             "type": "array",
@@ -1178,7 +1276,9 @@
           "blackPermissions": {
             "type": "array",
             "description": "黑名单权限列表",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           }
         },
         "description": "角色响应对象"
@@ -1191,10 +1291,22 @@
             "description": "用户实体的唯一标识",
             "format": "int64"
           },
-          "username": { "type": "string", "description": "用户名称" },
-          "email": { "type": "string", "description": "邮箱" },
-          "phone": { "type": "string", "description": "手机号" },
-          "remark": { "type": "string", "description": "用户备注" },
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
           "roleIds": {
             "type": "array",
             "description": "角色列表",
@@ -1207,12 +1319,16 @@
           "roles": {
             "type": "array",
             "description": "角色实体列表",
-            "items": { "$ref": "#/components/schemas/RoleResponse" }
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
           },
           "permissions": {
             "type": "array",
             "description": "权限列表",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           }
         },
         "description": "用户响应对象"
@@ -1221,8 +1337,14 @@
         "required": ["password", "username"],
         "type": "object",
         "properties": {
-          "username": { "type": "string", "description": "用户名称" },
-          "password": { "type": "string", "description": "密码" }
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          }
         },
         "description": "用户登陆请求对象"
       },
@@ -1234,11 +1356,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/UserResponse" }
+            "items": {
+              "$ref": "#/components/schemas/UserResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -1256,28 +1383,53 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "$ref": "#/components/schemas/UserInfoResponse" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserInfoResponse"
+          }
         },
         "description": "基础视图对象"
       },
       "UserInfoResponse": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
-          "username": { "type": "string", "description": "用户名" },
-          "phone": { "type": "string", "description": "手机号" },
-          "email": { "type": "string", "description": "邮箱" },
-          "remark": { "type": "string", "description": "备注" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string",
+            "description": "用户名"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
           "permissions": {
             "type": "array",
             "description": "权限列表",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           },
           "roles": {
             "type": "array",
             "description": "角色列表",
-            "items": { "$ref": "#/components/schemas/RoleResponse" }
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
           }
         },
         "description": "用户信息响应对象"
@@ -1290,15 +1442,24 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "$ref": "#/components/schemas/UserResponse" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserResponse"
+          }
         },
         "description": "基础视图对象"
       },
       "UserDeleteRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
           "ids": {
             "type": "array",
             "description": "id列表",
@@ -1315,12 +1476,30 @@
         "required": ["roleIds", "username"],
         "type": "object",
         "properties": {
-          "username": { "type": "string", "description": "用户名称" },
-          "password": { "type": "string", "description": "密码" },
-          "avatar": { "type": "string", "description": "用户头像" },
-          "email": { "type": "string", "description": "邮箱" },
-          "phone": { "type": "string", "description": "手机号" },
-          "remark": { "type": "string", "description": "用户备注" },
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          },
           "roleIds": {
             "type": "array",
             "description": "角色列表",
@@ -1336,12 +1515,30 @@
       "SetupRequest": {
         "type": "object",
         "properties": {
-          "username": { "type": "string", "description": "用户名称" },
-          "password": { "type": "string", "description": "密码" },
-          "avatar": { "type": "string", "description": "用户头像" },
-          "email": { "type": "string", "description": "邮箱" },
-          "phone": { "type": "string", "description": "手机号" },
-          "remark": { "type": "string", "description": "用户备注" }
+          "username": {
+            "type": "string",
+            "description": "用户名称"
+          },
+          "password": {
+            "type": "string",
+            "description": "密码"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "用户头像"
+          },
+          "email": {
+            "type": "string",
+            "description": "邮箱"
+          },
+          "phone": {
+            "type": "string",
+            "description": "手机号"
+          },
+          "remark": {
+            "type": "string",
+            "description": "用户备注"
+          }
         },
         "description": "用户权限初始化请求对象"
       },
@@ -1353,8 +1550,14 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "type": "boolean", "description": "数据" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "type": "boolean",
+            "description": "数据"
+          }
         },
         "description": "基础视图对象"
       },
@@ -1369,9 +1572,19 @@
         ],
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
-          "name": { "type": "string", "description": "角色名称" },
-          "code": { "type": "string", "description": "角色编码" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色编码"
+          },
           "type": {
             "type": "string",
             "description": "角色类型",
@@ -1387,7 +1600,10 @@
             "description": "上级角色编码",
             "format": "int64"
           },
-          "remark": { "type": "string", "description": "角色备注" },
+          "remark": {
+            "type": "string",
+            "description": "角色备注"
+          },
           "whitePermissionIds": {
             "type": "array",
             "description": "白名单权限列表",
@@ -1412,7 +1628,11 @@
       "RoleQueryRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
           "ids": {
             "type": "array",
             "description": "id列表",
@@ -1422,8 +1642,14 @@
               "format": "int64"
             }
           },
-          "name": { "type": "string", "description": "角色名称" },
-          "code": { "type": "string", "description": "角色编码" },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色编码"
+          },
           "type": {
             "type": "string",
             "description": "角色类型",
@@ -1434,8 +1660,14 @@
             "description": "排序值",
             "format": "int32"
           },
-          "parentId": { "type": "string", "description": "上级角色编码" },
-          "remark": { "type": "string", "description": "角色备注" },
+          "parentId": {
+            "type": "string",
+            "description": "上级角色编码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "角色备注"
+          },
           "mode": {
             "type": "string",
             "description": "树构建模式",
@@ -1458,61 +1690,19 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/RoleResponse" }
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
           }
         },
         "description": "基础视图对象"
-      },
-      "PermissionDeclarationObject": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string", "description": "权限名称" },
-          "parent": { "type": "object", "description": "父级权限" },
-          "type": {
-            "type": "string",
-            "description": "权限类型",
-            "enum": ["DIRECTORY", "MENU", "ACTION"]
-          },
-          "code": { "type": "string", "description": "权限编码" },
-          "remark": { "type": "string", "description": "权限描述" },
-          "sortValue": {
-            "type": "integer",
-            "description": "排序值",
-            "format": "int32"
-          }
-        },
-        "description": "权限声明对象"
-      },
-      "RoleDeclarationObject": {
-        "type": "object",
-        "properties": {
-          "name": { "type": "string", "description": "角色名称" },
-          "parent": { "type": "object", "description": "父级角色" },
-          "permissions": {
-            "type": "array",
-            "description": "关联权限",
-            "items": {
-              "$ref": "#/components/schemas/PermissionDeclarationObject"
-            }
-          },
-          "type": {
-            "type": "string",
-            "description": "角色类型",
-            "enum": ["NORMAL", "ADMIN"]
-          },
-          "code": { "type": "string", "description": "角色编码" },
-          "remark": { "type": "string", "description": "角色描述" },
-          "sortValue": {
-            "type": "integer",
-            "description": "排序值",
-            "format": "int32"
-          }
-        },
-        "description": "角色声明对象"
       },
       "PageRequestRoleQueryRequest": {
         "type": "object",
@@ -1527,7 +1717,9 @@
             "description": "分页大小",
             "format": "int32"
           },
-          "params": { "$ref": "#/components/schemas/RoleQueryRequest" }
+          "params": {
+            "$ref": "#/components/schemas/RoleQueryRequest"
+          }
         },
         "description": "分页请求对象"
       },
@@ -1539,11 +1731,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/RoleResponse" }
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -1571,11 +1768,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/RoleResponse" }
+            "items": {
+              "$ref": "#/components/schemas/RoleResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -1593,15 +1795,24 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "$ref": "#/components/schemas/RoleResponse" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/RoleResponse"
+          }
         },
         "description": "基础视图对象"
       },
       "RoleDeleteRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
           "ids": {
             "type": "array",
             "description": "id列表",
@@ -1629,8 +1840,14 @@
         ],
         "type": "object",
         "properties": {
-          "name": { "type": "string", "description": "角色名称" },
-          "code": { "type": "string", "description": "角色编码" },
+          "name": {
+            "type": "string",
+            "description": "角色名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "角色编码"
+          },
           "type": {
             "type": "string",
             "description": "角色类型",
@@ -1646,7 +1863,10 @@
             "description": "上级角色编码",
             "format": "int64"
           },
-          "remark": { "type": "string", "description": "角色备注" },
+          "remark": {
+            "type": "string",
+            "description": "角色备注"
+          },
           "whitePermissionIds": {
             "type": "array",
             "description": "白名单权限列表",
@@ -1672,9 +1892,19 @@
         "required": ["code", "id", "name", "type"],
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
-          "name": { "type": "string", "description": "权限名称" },
-          "code": { "type": "string", "description": "权限编码" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限编码"
+          },
           "type": {
             "type": "string",
             "description": "权限类型",
@@ -1690,14 +1920,21 @@
             "description": "上级权限编码",
             "format": "int64"
           },
-          "remark": { "type": "string", "description": "权限备注" }
+          "remark": {
+            "type": "string",
+            "description": "权限备注"
+          }
         },
         "description": "权限修改请求对象"
       },
       "PermissionQueryRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
           "ids": {
             "type": "array",
             "description": "id列表",
@@ -1707,8 +1944,14 @@
               "format": "int64"
             }
           },
-          "name": { "type": "string", "description": "权限名称" },
-          "code": { "type": "string", "description": "权限编码" },
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限编码"
+          },
           "type": {
             "type": "string",
             "description": "权限类型",
@@ -1719,8 +1962,14 @@
             "description": "排序值",
             "format": "int32"
           },
-          "parentId": { "type": "string", "description": "上级权限编码" },
-          "remark": { "type": "string", "description": "权限备注" },
+          "parentId": {
+            "type": "string",
+            "description": "上级权限编码"
+          },
+          "remark": {
+            "type": "string",
+            "description": "权限备注"
+          },
           "mode": {
             "type": "string",
             "description": "树构建模式",
@@ -1743,11 +1992,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           }
         },
         "description": "基础视图对象"
@@ -1765,7 +2019,9 @@
             "description": "分页大小",
             "format": "int32"
           },
-          "params": { "$ref": "#/components/schemas/PermissionQueryRequest" }
+          "params": {
+            "$ref": "#/components/schemas/PermissionQueryRequest"
+          }
         },
         "description": "分页请求对象"
       },
@@ -1777,11 +2033,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -1809,11 +2070,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -1831,15 +2097,24 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "$ref": "#/components/schemas/PermissionResponse" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/PermissionResponse"
+          }
         },
         "description": "基础视图对象"
       },
       "PermissionDeleteRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
           "ids": {
             "type": "array",
             "description": "id列表",
@@ -1861,8 +2136,14 @@
         "required": ["code", "name", "type"],
         "type": "object",
         "properties": {
-          "name": { "type": "string", "description": "权限名称" },
-          "code": { "type": "string", "description": "权限编码" },
+          "name": {
+            "type": "string",
+            "description": "权限名称"
+          },
+          "code": {
+            "type": "string",
+            "description": "权限编码"
+          },
           "type": {
             "type": "string",
             "description": "权限类型",
@@ -1878,7 +2159,10 @@
             "description": "上级权限编码",
             "format": "int64"
           },
-          "remark": { "type": "string", "description": "权限备注" }
+          "remark": {
+            "type": "string",
+            "description": "权限备注"
+          }
         },
         "description": "权限创建请求对象"
       },
@@ -1886,15 +2170,28 @@
         "required": ["id"],
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
-          "accessKey": { "type": "string", "description": "访问主键" },
-          "secretKey": { "type": "string", "description": "访问密钥" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
           "expiredAt": {
             "type": "string",
             "description": "过期时间",
             "format": "date-time"
           },
-          "remark": { "type": "string", "description": "备注" },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
           "permissionIds": {
             "type": "array",
             "description": "权限Id列表",
@@ -1910,15 +2207,28 @@
       "ClientQueryRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
-          "accessKey": { "type": "string", "description": "访问主键" },
-          "secretKey": { "type": "string", "description": "访问密钥" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
           "expiredAt": {
             "type": "string",
             "description": "过期时间",
             "format": "date-time"
           },
-          "remark": { "type": "string", "description": "备注" }
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          }
         },
         "description": "客户端查询请求对象"
       },
@@ -1935,26 +2245,43 @@
             "description": "分页大小",
             "format": "int32"
           },
-          "params": { "$ref": "#/components/schemas/ClientQueryRequest" }
+          "params": {
+            "$ref": "#/components/schemas/ClientQueryRequest"
+          }
         },
         "description": "分页请求对象"
       },
       "ClientResponse": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
-          "accessKey": { "type": "string", "description": "访问主键" },
-          "secretKey": { "type": "string", "description": "访问密钥" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
           "expiredAt": {
             "type": "string",
             "description": "过期时间",
             "format": "date-time"
           },
-          "remark": { "type": "string", "description": "备注" },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
           "permissions": {
             "type": "array",
             "description": "权限列表",
-            "items": { "$ref": "#/components/schemas/PermissionResponse" }
+            "items": {
+              "$ref": "#/components/schemas/PermissionResponse"
+            }
           }
         },
         "description": "客户端响应对象"
@@ -1967,11 +2294,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/ClientResponse" }
+            "items": {
+              "$ref": "#/components/schemas/ClientResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -1999,11 +2331,16 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
           "data": {
             "type": "array",
             "description": "数据",
-            "items": { "$ref": "#/components/schemas/ClientResponse" }
+            "items": {
+              "$ref": "#/components/schemas/ClientResponse"
+            }
           },
           "total": {
             "type": "integer",
@@ -2021,15 +2358,24 @@
             "description": "错误码",
             "format": "int32"
           },
-          "message": { "type": "string", "description": "错误信息" },
-          "data": { "$ref": "#/components/schemas/ClientResponse" }
+          "message": {
+            "type": "string",
+            "description": "错误信息"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ClientResponse"
+          }
         },
         "description": "基础视图对象"
       },
       "ClientDeleteRequest": {
         "type": "object",
         "properties": {
-          "id": { "type": "integer", "description": "id", "format": "int64" },
+          "id": {
+            "type": "integer",
+            "description": "id",
+            "format": "int64"
+          },
           "ids": {
             "type": "array",
             "description": "id列表",
@@ -2046,14 +2392,23 @@
         "required": ["accessKey", "expiredAt", "secretKey"],
         "type": "object",
         "properties": {
-          "accessKey": { "type": "string", "description": "访问主键" },
-          "secretKey": { "type": "string", "description": "访问密钥" },
+          "accessKey": {
+            "type": "string",
+            "description": "访问主键"
+          },
+          "secretKey": {
+            "type": "string",
+            "description": "访问密钥"
+          },
           "expiredAt": {
             "type": "string",
             "description": "过期时间",
             "format": "date-time"
           },
-          "remark": { "type": "string", "description": "备注" },
+          "remark": {
+            "type": "string",
+            "description": "备注"
+          },
           "permissionIds": {
             "type": "array",
             "description": "权限Id列表",

@@ -157,8 +157,6 @@ export interface PermissionResponse {
   parentId?: number;
   /** 权限备注信息 */
   remark?: string;
-  /** 是否启用，0 表示启用，1 表示禁用 */
-  deleted?: boolean;
   /** 创建人用户 ID */
   createdUserId?: string;
   /**
@@ -173,13 +171,6 @@ export interface PermissionResponse {
    * @format date-time
    */
   updatedTime?: string;
-  /** 删除人用户 ID */
-  deletedUserId?: string;
-  /**
-   * 删除时间
-   * @format date-time
-   */
-  deletedTime?: string;
   /** 子级 */
   children?: PermissionResponse[];
 }
@@ -473,46 +464,6 @@ export interface BaseViewListRoleResponse {
   message?: string;
   /** 数据 */
   data?: RoleResponse[];
-}
-
-/** 权限声明对象 */
-export interface PermissionDeclarationObject {
-  /** 权限名称 */
-  name?: string;
-  /** 父级权限 */
-  parent?: object;
-  /** 权限类型 */
-  type?: 'DIRECTORY' | 'MENU' | 'ACTION';
-  /** 权限编码 */
-  code?: string;
-  /** 权限描述 */
-  remark?: string;
-  /**
-   * 排序值
-   * @format int32
-   */
-  sortValue?: number;
-}
-
-/** 角色声明对象 */
-export interface RoleDeclarationObject {
-  /** 角色名称 */
-  name?: string;
-  /** 父级角色 */
-  parent?: object;
-  /** 关联权限 */
-  permissions?: PermissionDeclarationObject[];
-  /** 角色类型 */
-  type?: 'NORMAL' | 'ADMIN';
-  /** 角色编码 */
-  code?: string;
-  /** 角色描述 */
-  remark?: string;
-  /**
-   * 排序值
-   * @format int32
-   */
-  sortValue?: number;
 }
 
 /** 分页请求对象 */

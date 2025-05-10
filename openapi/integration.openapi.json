@@ -9,6 +9,12 @@
     },
     "version": "v1"
   },
+  "servers": [
+    {
+      "url": "equipment",
+      "description": "Generated server url"
+    }
+  ],
   "externalDocs": {
     "description": "外部文档",
     "url": "https://springshop.wiki.github.org/docs"
@@ -388,38 +394,6 @@
         }
       }
     },
-    "/authorization/role/regist": {
-      "post": {
-        "tags": ["角色管理"],
-        "summary": "注册角色",
-        "operationId": "regist",
-        "parameters": [
-          {
-            "name": "roles",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/RoleDeclarationObject"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseViewBoolean"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/authorization/role/page": {
       "post": {
         "tags": ["角色管理"],
@@ -616,38 +590,6 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/BaseViewListPermissionResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/authorization/permission/regist": {
-      "post": {
-        "tags": ["权限管理"],
-        "summary": "注册权限",
-        "operationId": "regist_1",
-        "parameters": [
-          {
-            "name": "permissions",
-            "in": "query",
-            "required": true,
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/PermissionDeclarationObject"
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseViewBoolean"
                 }
               }
             }
@@ -2371,10 +2313,6 @@
             "type": "string",
             "description": "权限备注信息"
           },
-          "deleted": {
-            "type": "boolean",
-            "description": "是否启用，0 表示启用，1 表示禁用"
-          },
           "createdUserId": {
             "type": "string",
             "description": "创建人用户 ID"
@@ -2391,15 +2329,6 @@
           "updatedTime": {
             "type": "string",
             "description": "更新时间",
-            "format": "date-time"
-          },
-          "deletedUserId": {
-            "type": "string",
-            "description": "删除人用户 ID"
-          },
-          "deletedTime": {
-            "type": "string",
-            "description": "删除时间",
             "format": "date-time"
           },
           "children": {
@@ -2940,77 +2869,6 @@
           }
         },
         "description": "基础视图对象"
-      },
-      "PermissionDeclarationObject": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "权限名称"
-          },
-          "parent": {
-            "type": "object",
-            "description": "父级权限"
-          },
-          "type": {
-            "type": "string",
-            "description": "权限类型",
-            "enum": ["DIRECTORY", "MENU", "ACTION"]
-          },
-          "code": {
-            "type": "string",
-            "description": "权限编码"
-          },
-          "remark": {
-            "type": "string",
-            "description": "权限描述"
-          },
-          "sortValue": {
-            "type": "integer",
-            "description": "排序值",
-            "format": "int32"
-          }
-        },
-        "description": "权限声明对象"
-      },
-      "RoleDeclarationObject": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "角色名称"
-          },
-          "parent": {
-            "type": "object",
-            "description": "父级角色"
-          },
-          "permissions": {
-            "type": "array",
-            "description": "关联权限",
-            "items": {
-              "$ref": "#/components/schemas/PermissionDeclarationObject"
-            }
-          },
-          "type": {
-            "type": "string",
-            "description": "角色类型",
-            "enum": ["NORMAL", "ADMIN"]
-          },
-          "code": {
-            "type": "string",
-            "description": "角色编码"
-          },
-          "remark": {
-            "type": "string",
-            "description": "角色描述"
-          },
-          "sortValue": {
-            "type": "integer",
-            "description": "排序值",
-            "format": "int32"
-          }
-        },
-        "description": "角色声明对象"
       },
       "PageRequestRoleQueryRequest": {
         "type": "object",
