@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './style/index.module.less';
 import {
   Button,
   Form,
   Grid,
   Input,
-  InputNumber,
   Message,
   Modal,
   Popconfirm,
@@ -152,9 +151,7 @@ const Permission = () => {
           ></Button>
           <Popconfirm
             title={'确定删除吗？'}
-            onConfirm={() => {
-              handleDelete([record.id]);
-            }}
+            onOk={() => handleDelete([record.id])}
           >
             <Tooltip
               content={'删除后，该权限下的所有子权限也会被删除，无法恢复。'}
@@ -194,6 +191,7 @@ const Permission = () => {
       ),
     },
   ];
+
   const fetchData = () => {
     console.log('请求参数：', searchValues);
     setLoading(true);
@@ -223,7 +221,6 @@ const Permission = () => {
   }, [searchValues]);
 
   const handleFormSubmit = () => {
-    console.log('ok', form.getFieldsValue());
     form
       .validate()
       .then((res) => {
@@ -239,6 +236,7 @@ const Permission = () => {
               })
               .finally(() => {
                 fetchData();
+                form.resetFields();
                 setVisible(false);
               })
           : permissions
@@ -252,6 +250,7 @@ const Permission = () => {
               })
               .finally(() => {
                 fetchData();
+                form.resetFields();
                 setVisible(false);
               });
       })
@@ -335,21 +334,20 @@ const Permission = () => {
                         </Space>
                       ) : (
                         <Space>
-                          <IconDoubleUp /> 收起
+                          <IconDoubleUp />
+                          收起
                         </Space>
                       )}
                     </Button>
                     <Button
                       type="primary"
-                      onClick={() => {
-                        console.log('提交成功', searchForm.getFieldsValue());
+                      onClick={() =>
                         setSearchValues(
                           searchForm.getFieldsValue() as PermissionQueryRequest
-                        );
-                      }}
+                        )
+                      }
                     >
-                      {' '}
-                      搜索{' '}
+                      搜索
                     </Button>
                     <Button
                       status={'warning'}
@@ -376,7 +374,6 @@ const Permission = () => {
               icon={<IconPlus />}
               type="primary"
               onClick={() => {
-                form.resetFields();
                 setFormMode('create');
                 setVisible(true);
               }}
@@ -398,8 +395,7 @@ const Permission = () => {
                     handleDelete(selectedRowKeys);
                   }}
                 >
-                  {' '}
-                  批量删除{' '}
+                  批量删除
                 </Button>
               </Tooltip>
             )}
