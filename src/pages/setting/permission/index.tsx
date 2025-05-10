@@ -19,6 +19,7 @@ import Row from '@arco-design/web-react/es/Grid/row';
 import Col from '@arco-design/web-react/es/Grid/col';
 import { permission } from '@/apis';
 import {
+  PageRequestPermissionQueryRequest,
   PermissionCreateRequest,
   PermissionDeleteRequest,
   PermissionQueryRequest,
@@ -44,6 +45,9 @@ const PERMISSION_LABEL_MAP = [
 const Permission = () => {
   const [searchForm] = Form.useForm();
   const [dataSource, setDataSource] = useState([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pageNo, setPageNo] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm<
     | PermissionResponse
@@ -58,8 +62,11 @@ const Permission = () => {
   const [visible, setVisible] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<boolean>(true);
   const [searchValues, setSearchValues] = useState<
-    Partial<PermissionQueryRequest>
-  >({});
+    Partial<PageRequestPermissionQueryRequest>
+  >({
+    page: pageNo,
+    size: pageSize,
+  });
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
 
   const columns = [
@@ -193,13 +200,15 @@ const Permission = () => {
   ];
 
   const fetchData = () => {
-    console.log('请求参数：', searchValues);
     setLoading(true);
     permission
-      .tree1(searchValues as PermissionQueryRequest)
+      .page2(searchValues as PageRequestPermissionQueryRequest)
       .then((res) => {
         if (res.data.code === 200) {
           setDataSource(res.data.data);
+          setPageNo(res.data.page);
+          setPageSize(res.data.size);
+          setTotal(res.data.total);
         } else {
           Message.error(res.data.message);
         }
@@ -343,7 +352,7 @@ const Permission = () => {
                       type="primary"
                       onClick={() =>
                         setSearchValues(
-                          searchForm.getFieldsValue() as PermissionQueryRequest
+                          searchForm.getFieldsValue() as PageRequestPermissionQueryRequest
                         )
                       }
                     >
@@ -409,6 +418,21 @@ const Permission = () => {
               checkStrictly: false,
               type: 'checkbox',
               onChange: (keys) => setSelectedRowKeys(keys),
+            }}
+            pagination={{
+              total: total,
+              current: pageNo,
+              pageSize: pageSize,
+              showTotal: (total, range) =>
+                `共 ${total} 条记录，当前显示 ${range[0]}-${range[1]} 条`,
+              onChange: (page, pageSize) => {
+                console.log(page, pageSize);
+                setSearchValues({
+                  ...searchForm.getFieldsValue(),
+                  page: page,
+                  size: pageSize,
+                });
+              },
             }}
             stripe
             rowKey={'id'}

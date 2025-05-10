@@ -11,7 +11,6 @@
  */
 
 import {
-  BaseViewListRoleResponse,
   BaseViewRoleResponse,
   BaseViewVoid,
   ListViewRoleResponse,
@@ -38,22 +37,6 @@ export class Role<
   update1 = (data: RoleUpdateRequest, params: RequestParams = {}) =>
     this.request<BaseViewVoid, any>({
       path: `/authorization/role/update`,
-      method: 'POST',
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 角色管理
-   * @name Tree
-   * @summary 获取角色树
-   * @request POST:/authorization/role/tree
-   */
-  tree = (data: RoleQueryRequest, params: RequestParams = {}) =>
-    this.request<BaseViewListRoleResponse, any>({
-      path: `/authorization/role/tree`,
       method: 'POST',
       body: data,
       type: ContentType.Json,

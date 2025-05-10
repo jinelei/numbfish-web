@@ -11,7 +11,6 @@
  */
 
 import {
-  BaseViewListPermissionResponse,
   BaseViewPermissionResponse,
   BaseViewVoid,
   ListViewPermissionResponse,
@@ -38,22 +37,6 @@ export class Permission<
   update2 = (data: PermissionUpdateRequest, params: RequestParams = {}) =>
     this.request<BaseViewVoid, any>({
       path: `/authorization/permission/update`,
-      method: 'POST',
-      body: data,
-      type: ContentType.Json,
-      ...params,
-    });
-  /**
-   * No description
-   *
-   * @tags 权限管理
-   * @name Tree1
-   * @summary 获取权限树
-   * @request POST:/authorization/permission/tree
-   */
-  tree1 = (data: PermissionQueryRequest, params: RequestParams = {}) =>
-    this.request<BaseViewListPermissionResponse, any>({
-      path: `/authorization/permission/tree`,
       method: 'POST',
       body: data,
       type: ContentType.Json,

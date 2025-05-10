@@ -365,35 +365,6 @@
         }
       }
     },
-    "/role/tree": {
-      "post": {
-        "tags": ["角色管理"],
-        "summary": "获取角色树",
-        "operationId": "tree",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RoleQueryRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseViewListRoleResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/role/page": {
       "post": {
         "tags": ["角色管理"],
@@ -561,35 +532,6 @@
               "*/*": {
                 "schema": {
                   "$ref": "#/components/schemas/BaseViewVoid"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/permission/tree": {
-      "post": {
-        "tags": ["权限管理"],
-        "summary": "获取权限树",
-        "operationId": "tree_1",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/PermissionQueryRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "*/*": {
-                "schema": {
-                  "$ref": "#/components/schemas/BaseViewListPermissionResponse"
                 }
               }
             }
@@ -1154,8 +1096,9 @@
             "description": "权限备注信息"
           },
           "createdUserId": {
-            "type": "string",
-            "description": "创建人用户 ID"
+            "type": "integer",
+            "description": "创建人用户 ID",
+            "format": "int64"
           },
           "createdTime": {
             "type": "string",
@@ -1163,8 +1106,9 @@
             "format": "date-time"
           },
           "updatedUserId": {
-            "type": "string",
-            "description": "更新人用户 ID"
+            "type": "integer",
+            "description": "更新人用户 ID",
+            "format": "int64"
           },
           "updatedTime": {
             "type": "string",
@@ -1221,8 +1165,9 @@
             "description": "是否启用，0 表示启用，1 表示禁用"
           },
           "createdUserId": {
-            "type": "string",
-            "description": "创建人用户 ID"
+            "type": "integer",
+            "description": "创建人用户 ID",
+            "format": "int64"
           },
           "createdTime": {
             "type": "string",
@@ -1230,8 +1175,9 @@
             "format": "date-time"
           },
           "updatedUserId": {
-            "type": "string",
-            "description": "更新人用户 ID"
+            "type": "integer",
+            "description": "更新人用户 ID",
+            "format": "int64"
           },
           "updatedTime": {
             "type": "string",
@@ -1568,14 +1514,7 @@
         "description": "基础视图对象"
       },
       "RoleUpdateRequest": {
-        "required": [
-          "blackPermissionIds",
-          "code",
-          "id",
-          "name",
-          "type",
-          "whitePermissionIds"
-        ],
+        "required": ["code", "id", "name", "type"],
         "type": "object",
         "properties": {
           "id": {
@@ -1630,6 +1569,25 @@
           }
         },
         "description": "角色修改请求对象"
+      },
+      "PageRequestRoleQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/RoleQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
       },
       "RoleQueryRequest": {
         "type": "object",
@@ -1687,47 +1645,6 @@
           }
         },
         "description": "角色查询请求对象"
-      },
-      "BaseViewListRoleResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "description": "错误码",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "description": "错误信息"
-          },
-          "data": {
-            "type": "array",
-            "description": "数据",
-            "items": {
-              "$ref": "#/components/schemas/RoleResponse"
-            }
-          }
-        },
-        "description": "基础视图对象"
-      },
-      "PageRequestRoleQueryRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "description": "分页页码",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "description": "分页大小",
-            "format": "int32"
-          },
-          "params": {
-            "$ref": "#/components/schemas/RoleQueryRequest"
-          }
-        },
-        "description": "分页请求对象"
       },
       "PageViewRoleResponse": {
         "type": "object",
@@ -1837,13 +1754,7 @@
         "description": "角色删除请求对象"
       },
       "RoleCreateRequest": {
-        "required": [
-          "blackPermissionIds",
-          "code",
-          "name",
-          "type",
-          "whitePermissionIds"
-        ],
+        "required": ["code", "name", "type"],
         "type": "object",
         "properties": {
           "name": {
@@ -1933,6 +1844,25 @@
         },
         "description": "权限修改请求对象"
       },
+      "PageRequestPermissionQueryRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer",
+            "description": "分页页码",
+            "format": "int32"
+          },
+          "size": {
+            "type": "integer",
+            "description": "分页大小",
+            "format": "int32"
+          },
+          "params": {
+            "$ref": "#/components/schemas/PermissionQueryRequest"
+          }
+        },
+        "description": "分页请求对象"
+      },
       "PermissionQueryRequest": {
         "type": "object",
         "properties": {
@@ -1989,47 +1919,6 @@
           }
         },
         "description": "权限查询请求对象"
-      },
-      "BaseViewListPermissionResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "description": "错误码",
-            "format": "int32"
-          },
-          "message": {
-            "type": "string",
-            "description": "错误信息"
-          },
-          "data": {
-            "type": "array",
-            "description": "数据",
-            "items": {
-              "$ref": "#/components/schemas/PermissionResponse"
-            }
-          }
-        },
-        "description": "基础视图对象"
-      },
-      "PageRequestPermissionQueryRequest": {
-        "type": "object",
-        "properties": {
-          "page": {
-            "type": "integer",
-            "description": "分页页码",
-            "format": "int32"
-          },
-          "size": {
-            "type": "integer",
-            "description": "分页大小",
-            "format": "int32"
-          },
-          "params": {
-            "$ref": "#/components/schemas/PermissionQueryRequest"
-          }
-        },
-        "description": "分页请求对象"
       },
       "PageViewPermissionResponse": {
         "type": "object",

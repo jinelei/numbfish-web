@@ -13,12 +13,15 @@ import {
   Table,
   Tag,
   Tooltip,
+  Tree,
   Typography,
 } from '@arco-design/web-react';
 import Row from '@arco-design/web-react/es/Grid/row';
 import Col from '@arco-design/web-react/es/Grid/col';
-import { role } from '@/apis';
+import { permission, role } from '@/apis';
 import {
+  PageRequestRoleQueryRequest,
+  PermissionResponse,
   RoleCreateRequest,
   RoleDeleteRequest,
   RoleQueryRequest,
@@ -31,6 +34,7 @@ import {
   IconDoubleDown,
   IconDoubleUp,
   IconEdit,
+  IconLink,
   IconPlus,
 } from '@arco-design/web-react/icon';
 import { dayjs } from '@arco-design/web-react/es/_util/dayjs';
@@ -43,6 +47,9 @@ const ROLE_LABEL_MAP = [
 const Role = () => {
   const [searchForm] = Form.useForm();
   const [dataSource, setDataSource] = useState([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pageNo, setPageNo] = useState<number>(1);
+  const [pageSize, setPageSize] = useState<number>(10);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm<
     | RoleResponse
@@ -56,10 +63,17 @@ const Role = () => {
   >('create');
   const [visible, setVisible] = useState<boolean>(false);
   const [collapsed, setCollapsed] = useState<boolean>(true);
-  const [searchValues, setSearchValues] = useState<Partial<RoleQueryRequest>>(
-    {}
+  const [searchValues, setSearchValues] = useState<
+    Partial<PageRequestRoleQueryRequest>
+  >({
+    page: pageNo,
+    size: pageSize,
+  });
+  const [permissionTree, setPermissionTree] = useState<PermissionResponse[]>(
+    []
   );
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
 
   const columns = [
     {
@@ -192,13 +206,15 @@ const Role = () => {
   ];
 
   const fetchData = () => {
-    console.log('请求参数：', searchValues);
     setLoading(true);
     role
-      .tree(searchValues as RoleQueryRequest)
+      .page1(searchValues as PageRequestRoleQueryRequest)
       .then((res) => {
         if (res.data.code === 200) {
           setDataSource(res.data.data);
+          setPageNo(res.data.page);
+          setPageSize(res.data.size);
+          setTotal(res.data.total);
         } else {
           Message.error(res.data.message);
         }
@@ -209,6 +225,11 @@ const Role = () => {
       .finally(() => {
         setLoading(false);
       });
+    permission.page2({}).then((res) => {
+      if (res.data.code === 200) {
+        setPermissionTree(res.data.data);
+      }
+    });
   };
 
   useEffect(() => {
@@ -342,7 +363,7 @@ const Role = () => {
                       type="primary"
                       onClick={() =>
                         setSearchValues(
-                          searchForm.getFieldsValue() as RoleQueryRequest
+                          searchForm.getFieldsValue() as PageRequestRoleQueryRequest
                         )
                       }
                     >
@@ -408,6 +429,21 @@ const Role = () => {
               checkStrictly: false,
               type: 'checkbox',
               onChange: (keys) => setSelectedRowKeys(keys),
+            }}
+            pagination={{
+              total: total,
+              current: pageNo,
+              pageSize: pageSize,
+              showTotal: (total, range) =>
+                `共 ${total} 条记录，当前显示 ${range[0]}-${range[1]} 条`,
+              onChange: (page, pageSize) => {
+                console.log(page, pageSize);
+                setSearchValues({
+                  ...searchForm.getFieldsValue(),
+                  page: page,
+                  size: pageSize,
+                });
+              },
             }}
             stripe
             rowKey={'id'}
@@ -490,6 +526,34 @@ const Role = () => {
                 ]}
               >
                 <Input type="number" />
+              </Form.Item>
+              <Form.Item label="权限树" field="whitePermissionIds">
+                <Tree
+                  checkable
+                  selectable
+                  checkedKeys={checkedKeys}
+                  actionOnClick={'check'}
+                  onCheck={(keys, extra) => {
+                    form.setFieldsValue({
+                      whitePermissionIds: keys.map((i) => parseInt(i)),
+                    });
+                    setCheckedKeys(keys);
+                  }}
+                  fieldNames={{
+                    title: 'name',
+                    key: 'id',
+                    children: 'children',
+                  }}
+                  renderTitle={(node) => (
+                    <Space>
+                      <Typography.Text>{node.title}</Typography.Text>
+                      <Typography.Text type={'secondary'}>
+                        {(node as RoleResponse).code}
+                      </Typography.Text>
+                    </Space>
+                  )}
+                  treeData={permissionTree}
+                ></Tree>
               </Form.Item>
               <Form.Item label="角色备注信息" field="remark">
                 <Input.TextArea />

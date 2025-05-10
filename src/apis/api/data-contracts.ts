@@ -157,15 +157,21 @@ export interface PermissionResponse {
   parentId?: number;
   /** 权限备注信息 */
   remark?: string;
-  /** 创建人用户 ID */
-  createdUserId?: string;
+  /**
+   * 创建人用户 ID
+   * @format int64
+   */
+  createdUserId?: number;
   /**
    * 创建时间
    * @format date-time
    */
   createdTime?: string;
-  /** 更新人用户 ID */
-  updatedUserId?: string;
+  /**
+   * 更新人用户 ID
+   * @format int64
+   */
+  updatedUserId?: number;
   /**
    * 更新时间
    * @format date-time
@@ -202,15 +208,21 @@ export interface RoleResponse {
   remark?: string;
   /** 是否启用，0 表示启用，1 表示禁用 */
   deleted?: boolean;
-  /** 创建人用户 ID */
-  createdUserId?: string;
+  /**
+   * 创建人用户 ID
+   * @format int64
+   */
+  createdUserId?: number;
   /**
    * 创建时间
    * @format date-time
    */
   createdTime?: string;
-  /** 更新人用户 ID */
-  updatedUserId?: string;
+  /**
+   * 更新人用户 ID
+   * @format int64
+   */
+  updatedUserId?: number;
   /**
    * 更新时间
    * @format date-time
@@ -415,9 +427,25 @@ export interface RoleUpdateRequest {
   /** 角色备注 */
   remark?: string;
   /** 白名单权限列表 */
-  whitePermissionIds: number[];
+  whitePermissionIds?: number[];
   /** 黑名单权限列表 */
-  blackPermissionIds: number[];
+  blackPermissionIds?: number[];
+}
+
+/** 分页请求对象 */
+export interface PageRequestRoleQueryRequest {
+  /**
+   * 分页页码
+   * @format int32
+   */
+  page?: number;
+  /**
+   * 分页大小
+   * @format int32
+   */
+  size?: number;
+  /** 角色查询请求对象 */
+  params?: RoleQueryRequest;
 }
 
 /** 角色查询请求对象 */
@@ -451,35 +479,6 @@ export interface RoleQueryRequest {
     | 'PARENT_AND_CURRENT'
     | 'CHILD'
     | 'CHILD_AND_CURRENT';
-}
-
-/** 基础视图对象 */
-export interface BaseViewListRoleResponse {
-  /**
-   * 错误码
-   * @format int32
-   */
-  code?: number;
-  /** 错误信息 */
-  message?: string;
-  /** 数据 */
-  data?: RoleResponse[];
-}
-
-/** 分页请求对象 */
-export interface PageRequestRoleQueryRequest {
-  /**
-   * 分页页码
-   * @format int32
-   */
-  page?: number;
-  /**
-   * 分页大小
-   * @format int32
-   */
-  size?: number;
-  /** 角色查询请求对象 */
-  params?: RoleQueryRequest;
 }
 
 /** 分页视图对象 */
@@ -578,9 +577,9 @@ export interface RoleCreateRequest {
   /** 角色备注 */
   remark?: string;
   /** 白名单权限列表 */
-  whitePermissionIds: number[];
+  whitePermissionIds?: number[];
   /** 黑名单权限列表 */
-  blackPermissionIds: number[];
+  blackPermissionIds?: number[];
 }
 
 /** 权限修改请求对象 */
@@ -608,6 +607,22 @@ export interface PermissionUpdateRequest {
   parentId?: number;
   /** 权限备注 */
   remark?: string;
+}
+
+/** 分页请求对象 */
+export interface PageRequestPermissionQueryRequest {
+  /**
+   * 分页页码
+   * @format int32
+   */
+  page?: number;
+  /**
+   * 分页大小
+   * @format int32
+   */
+  size?: number;
+  /** 权限查询请求对象 */
+  params?: PermissionQueryRequest;
 }
 
 /** 权限查询请求对象 */
@@ -641,35 +656,6 @@ export interface PermissionQueryRequest {
     | 'PARENT_AND_CURRENT'
     | 'CHILD'
     | 'CHILD_AND_CURRENT';
-}
-
-/** 基础视图对象 */
-export interface BaseViewListPermissionResponse {
-  /**
-   * 错误码
-   * @format int32
-   */
-  code?: number;
-  /** 错误信息 */
-  message?: string;
-  /** 数据 */
-  data?: PermissionResponse[];
-}
-
-/** 分页请求对象 */
-export interface PageRequestPermissionQueryRequest {
-  /**
-   * 分页页码
-   * @format int32
-   */
-  page?: number;
-  /**
-   * 分页大小
-   * @format int32
-   */
-  size?: number;
-  /** 权限查询请求对象 */
-  params?: PermissionQueryRequest;
 }
 
 /** 分页视图对象 */

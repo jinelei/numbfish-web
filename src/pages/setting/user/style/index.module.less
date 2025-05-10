@@ -1,11 +1,50 @@
 .container {
   display: flex;
-  height: 100vh;
+  min-height: calc(100vh - 156px);
+  width: 100%;
 
   .content {
+    width: 100%;
     flex: 1;
     position: relative;
     padding-bottom: 40px;
+    flex-direction: row;
+
+    .searchForm {
+      padding: 1rem;
+      background-color: #fff;
+      color: white;
+      text-align: center;
+
+      .action {
+        text-align: right;
+      }
+    }
+
+    .operationBar {
+      padding: 1rem;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 16px;
+
+      .title {
+        margin: 5px;
+      }
+    }
+
+    .tableWrapper {
+      padding: 1rem;
+      background-color: #fff;
+    }
+
+    .modalForm {
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
   }
 
   .footer {
@@ -14,10 +53,4 @@
     bottom: 0;
     right: 0;
   }
-}
-
-.content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
