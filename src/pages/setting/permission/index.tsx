@@ -3,6 +3,7 @@ import styles from './style/index.module.less';
 import {
   Button,
   Form,
+  Grid,
   Input,
   InputNumber,
   Message,
@@ -28,6 +29,8 @@ import {
 import {
   IconCopy,
   IconDelete,
+  IconDoubleDown,
+  IconDoubleUp,
   IconEdit,
   IconPlus,
 } from '@arco-design/web-react/icon';
@@ -54,7 +57,7 @@ const Permission = () => {
     'create' | 'create_with_parent' | 'update' | 'update_with_parent'
   >('create');
   const [visible, setVisible] = useState<boolean>(false);
-  const [collapsed, setCollapsed] = useState<boolean>(false);
+  const [collapsed, setCollapsed] = useState<boolean>(true);
   const [searchValues, setSearchValues] = useState<
     Partial<PermissionQueryRequest>
   >({});
@@ -280,82 +283,88 @@ const Permission = () => {
     <Row className={styles.container}>
       <Col span={24} className={styles.content}>
         <Col span={24}>
-          <Form
-            form={searchForm}
-            layout="inline"
-            autoComplete="false"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
-            colon={true}
-            className={styles.searchForm}
-            style={{ maxWidth: 'none' }}
-          >
-            <Row
-              gutter={16}
-              justify={'space-between'}
-              style={{ width: '100%' }}
+          <Col span={24} style={{ width: '100%' }}>
+            <Form
+              form={searchForm}
+              autoComplete="false"
+              labelCol={{ span: 8 }}
+              wrapperCol={{ span: 16 }}
+              colon={true}
+              style={{ maxWidth: '100%' }}
             >
-              <Col span={6}>
-                <Form.Item label="权限id" field="id">
-                  <InputNumber style={{ minWidth: '12rem' }} />
-                </Form.Item>
-              </Col>
-              <Col span={6}>
-                <Form.Item label="权限名称" field="name">
-                  <Input type={'text'} style={{ minWidth: '12rem' }} />
-                </Form.Item>
-              </Col>
-              <Col span={6}>
-                <Form.Item label="权限代码" field="code">
-                  <Input type={'text'} style={{ minWidth: '12rem' }} />
-                </Form.Item>
-              </Col>
-              <Col span={6}>
-                <Form.Item label="权限类型" field="type">
-                  <Select style={{ minWidth: '12rem' }}>
-                    {PERMISSION_LABEL_MAP.map((i) => (
-                      <Select.Option key={i.key} value={i.key}>
-                        {i.value}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16} style={{ width: '100%', marginTop: '1rem' }}>
-              <Col flex={'auto'} style={{ textAlign: 'right' }}>
-                <Space size="small">
-                  <Button
-                    onClick={() => {
-                      setCollapsed(!collapsed);
-                    }}
-                  >
-                    {collapsed ? '展开' : '收起'}
-                  </Button>
-                  <Button
-                    type="primary"
-                    onClick={() => {
-                      console.log('提交成功', searchForm.getFieldsValue());
-                      setSearchValues(
-                        searchForm.getFieldsValue() as PermissionQueryRequest
-                      );
-                    }}
-                  >
-                    {' '}
-                    搜索{' '}
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      searchForm.resetFields();
-                      setSearchValues({});
-                    }}
-                  >
-                    重置
-                  </Button>
-                </Space>
-              </Col>
-            </Row>
-          </Form>
+              <Grid
+                collapsed={collapsed}
+                cols={{ xs: 1, sm: 2, md: 3, lg: 4, xl: 5, xxl: 6 }}
+                colGap={12}
+                rowGap={16}
+                className={styles.searchForm}
+              >
+                <Grid.GridItem>
+                  <Form.Item labelAlign={'right'} label="权限id" field="id">
+                    <Input type={'number'} />
+                  </Form.Item>
+                </Grid.GridItem>
+                <Grid.GridItem>
+                  <Form.Item labelAlign={'right'} label="权限名称" field="name">
+                    <Input type={'text'} />
+                  </Form.Item>
+                </Grid.GridItem>
+                <Grid.GridItem>
+                  <Form.Item labelAlign={'right'} label="权限代码" field="code">
+                    <Input type={'text'} />
+                  </Form.Item>
+                </Grid.GridItem>
+                <Grid.GridItem>
+                  <Form.Item labelAlign={'right'} label="权限类型" field="type">
+                    <Select style={{ minWidth: '12rem' }}>
+                      {PERMISSION_LABEL_MAP.map((i) => (
+                        <Select.Option key={i.key} value={i.key}>
+                          {i.value}
+                        </Select.Option>
+                      ))}
+                    </Select>
+                  </Form.Item>
+                </Grid.GridItem>
+                <Grid.GridItem className={styles.action} suffix>
+                  <Space size="small">
+                    <Button onClick={() => setCollapsed(!collapsed)}>
+                      {collapsed ? (
+                        <Space>
+                          <IconDoubleDown />
+                          展开
+                        </Space>
+                      ) : (
+                        <Space>
+                          <IconDoubleUp /> 收起
+                        </Space>
+                      )}
+                    </Button>
+                    <Button
+                      type="primary"
+                      onClick={() => {
+                        console.log('提交成功', searchForm.getFieldsValue());
+                        setSearchValues(
+                          searchForm.getFieldsValue() as PermissionQueryRequest
+                        );
+                      }}
+                    >
+                      {' '}
+                      搜索{' '}
+                    </Button>
+                    <Button
+                      status={'warning'}
+                      onClick={() => {
+                        searchForm.resetFields();
+                        setSearchValues({});
+                      }}
+                    >
+                      重置
+                    </Button>
+                  </Space>
+                </Grid.GridItem>
+              </Grid>
+            </Form>
+          </Col>
         </Col>
 
         <Col span={24} className={styles.operationBar}>
