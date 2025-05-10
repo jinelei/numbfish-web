@@ -17,7 +17,7 @@ import {
 } from '@arco-design/web-react';
 import Row from '@arco-design/web-react/es/Grid/row';
 import Col from '@arco-design/web-react/es/Grid/col';
-import { permissions } from '@/apis';
+import { permission } from '@/apis';
 import {
   PermissionCreateRequest,
   PermissionDeleteRequest,
@@ -195,7 +195,7 @@ const Permission = () => {
   const fetchData = () => {
     console.log('请求参数：', searchValues);
     setLoading(true);
-    permissions
+    permission
       .tree1(searchValues as PermissionQueryRequest)
       .then((res) => {
         if (res.data.code === 200) {
@@ -225,7 +225,7 @@ const Permission = () => {
       .validate()
       .then((res) => {
         formMode.startsWith('create')
-          ? permissions
+          ? permission
               .create2(res as PermissionCreateRequest)
               .then((res) => {
                 if (res.data.code === 200) {
@@ -239,7 +239,7 @@ const Permission = () => {
                 form.resetFields();
                 setVisible(false);
               })
-          : permissions
+          : permission
               .update2(res as PermissionUpdateRequest)
               .then((res) => {
                 if (res.data.code === 200) {
@@ -261,7 +261,7 @@ const Permission = () => {
   };
 
   const handleDelete = (ids: number[]) => {
-    permissions
+    permission
       .delete2({ ids: ids })
       .then((res) => {
         if (res.data.code === 200) {
@@ -466,9 +466,11 @@ const Permission = () => {
                 rules={[{ required: true, message: '请选择权限类型' }]}
               >
                 <Select>
-                  <Select.Option value="DIRECTORY">目录</Select.Option>
-                  <Select.Option value="MENU">菜单</Select.Option>
-                  <Select.Option value="ACTION">操作</Select.Option>
+                  {PERMISSION_LABEL_MAP.map((i) => (
+                    <Select.Option key={i.key} value={i.key}>
+                      {i.value}
+                    </Select.Option>
+                  ))}
                 </Select>
               </Form.Item>
               <Form.Item label="权限排序值" field="sortValue">
