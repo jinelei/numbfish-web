@@ -8,6 +8,7 @@ import {
   Message,
   Modal,
   Popconfirm,
+  Popover,
   Select,
   Space,
   Table,
@@ -34,7 +35,6 @@ import {
   IconDoubleDown,
   IconDoubleUp,
   IconEdit,
-  IconLink,
   IconPlus,
 } from '@arco-design/web-react/icon';
 import { dayjs } from '@arco-design/web-react/es/_util/dayjs';
@@ -73,7 +73,7 @@ const Role = () => {
     []
   );
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [checkedKeys, setCheckedKeys] = useState<string[]>([]);
+  const [permissionIds, setPermissionIds] = useState<string[]>([]);
 
   const columns = [
     {
@@ -88,7 +88,7 @@ const Role = () => {
     {
       title: '角色类型',
       dataIndex: 'type',
-      render: (text, record) => {
+      render: (text, _) => {
         return ROLE_LABEL_MAP.filter((i) => i.key === text).map((i) => (
           <Tag color={i.color} key={i.value}>
             {i.value}
@@ -102,17 +102,47 @@ const Role = () => {
     },
     {
       title: '权限列表',
-      dataIndex: 'whitePermissions',
-      render: (text, record) => {
-        return (
-          <Space>
-            {((text || []) as PermissionResponse[]).map((i) => (
-              <Tag key={i.id} color={'green'} size={'small'}>
-                {i.name}
-              </Tag>
-            ))}
-          </Space>
-        );
+      dataIndex: 'permissions',
+      render: (text, _) => {
+        text = text || [];
+        if (text.length <= 3) {
+          return (
+            <Space>
+              {(text as PermissionResponse[]).map((i) => (
+                <Tag key={i.id} color={'green'} size={'small'}>
+                  {i.name}
+                </Tag>
+              ))}
+            </Space>
+          );
+        } else {
+          const context = (text as PermissionResponse[]).map((i) => (
+            <Tag key={i.id} color={'green'} size={'small'}>
+              {i.name}
+            </Tag>
+          ));
+          const prefix = context.slice(0, 2);
+          const suffix = (
+            <Grid cols={3} colGap={16} rowGap={16}>
+              {context.slice(2).map((i) => (
+                <Grid.GridItem> {i} </Grid.GridItem>
+              ))}
+            </Grid>
+          );
+          return (
+            <Space>
+              {prefix}
+              <Popover
+                style={{ width: '100%' }}
+                content={<Space>{suffix}</Space>}
+              >
+                <Tag color={'green'} size={'small'}>
+                  + {text.length - 2}
+                </Tag>
+              </Popover>
+            </Space>
+          );
+        }
       },
     },
     {
@@ -165,6 +195,7 @@ const Role = () => {
               form.setFieldsValue({
                 parentId: record.id,
               });
+              setPermissionIds([]);
               setVisible(true);
             }}
           ></Button>
@@ -174,6 +205,7 @@ const Role = () => {
             onClick={() => {
               setFormMode(!!record.parentId ? 'update_with_parent' : 'update');
               form.setFieldsValue(record);
+              setPermissionIds(record.permissionIds);
               setVisible(true);
             }}
           ></Button>
@@ -211,6 +243,7 @@ const Role = () => {
                   remark: record.remark + ' copy',
                   sortValue: record.sortValue + 1,
                 });
+                setPermissionIds(record.permissionIds);
                 setVisible(true);
               }}
             ></Button>
@@ -377,9 +410,10 @@ const Role = () => {
                     <Button
                       type="primary"
                       onClick={() =>
-                        setSearchValues(
-                          searchForm.getFieldsValue() as PageRequestRoleQueryRequest
-                        )
+                        setSearchValues({
+                          ...searchValues,
+                          params: { ...searchForm.getFieldsValue() },
+                        })
                       }
                     >
                       搜索
@@ -388,7 +422,10 @@ const Role = () => {
                       status={'warning'}
                       onClick={() => {
                         searchForm.resetFields();
-                        setSearchValues({});
+                        setSearchValues({
+                          ...searchValues,
+                          params: {},
+                        });
                       }}
                     >
                       重置
@@ -542,17 +579,17 @@ const Role = () => {
               >
                 <Input type="number" />
               </Form.Item>
-              <Form.Item label="权限树" field="whitePermissionIds">
+              <Form.Item label="权限树" field="permissionIds">
                 <Tree
                   checkable
                   selectable
-                  checkedKeys={checkedKeys}
+                  checkedKeys={permissionIds}
                   actionOnClick={'check'}
-                  onCheck={(keys, extra) => {
+                  onCheck={(keys, _) => {
                     form.setFieldsValue({
-                      whitePermissionIds: keys.map((i) => parseInt(i)),
+                      permissionIds: keys.map((i) => parseInt(i)),
                     });
-                    setCheckedKeys(keys);
+                    setPermissionIds(keys);
                   }}
                   fieldNames={{
                     title: 'name',

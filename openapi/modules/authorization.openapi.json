@@ -13,12 +13,6 @@
     "description": "外部文档",
     "url": "https://springshop.wiki.github.org/docs"
   },
-  "servers": [
-    {
-      "url": "authorization",
-      "description": "Generated server url"
-    }
-  ],
   "paths": {
     "/user/update": {
       "post": {
@@ -1200,34 +1194,17 @@
               "$ref": "#/components/schemas/RoleResponse"
             }
           },
-          "whitePermissionIds": {
+          "permissionIds": {
             "type": "array",
-            "description": "白名单权限列表",
+            "description": "权限列表",
             "items": {
               "type": "integer",
-              "description": "白名单权限列表",
+              "description": "权限列表",
               "format": "int64"
             }
           },
-          "whitePermissions": {
+          "permissions": {
             "type": "array",
-            "description": "白名单权限实体列表",
-            "items": {
-              "$ref": "#/components/schemas/PermissionResponse"
-            }
-          },
-          "blackPermissionIds": {
-            "type": "array",
-            "description": "黑名单权限列表",
-            "items": {
-              "type": "integer",
-              "description": "黑名单权限列表",
-              "format": "int64"
-            }
-          },
-          "blackPermissions": {
-            "type": "array",
-            "description": "黑名单权限列表",
             "items": {
               "$ref": "#/components/schemas/PermissionResponse"
             }
@@ -1549,21 +1526,12 @@
             "type": "string",
             "description": "角色备注"
           },
-          "whitePermissionIds": {
+          "permissionIds": {
             "type": "array",
-            "description": "白名单权限列表",
+            "description": "权限列表",
             "items": {
               "type": "integer",
-              "description": "白名单权限列表",
-              "format": "int64"
-            }
-          },
-          "blackPermissionIds": {
-            "type": "array",
-            "description": "黑名单权限列表",
-            "items": {
-              "type": "integer",
-              "description": "黑名单权限列表",
+              "description": "权限列表",
               "format": "int64"
             }
           }
@@ -1784,21 +1752,12 @@
             "type": "string",
             "description": "角色备注"
           },
-          "whitePermissionIds": {
+          "permissionIds": {
             "type": "array",
-            "description": "白名单权限列表",
+            "description": "权限列表",
             "items": {
               "type": "integer",
-              "description": "白名单权限列表",
-              "format": "int64"
-            }
-          },
-          "blackPermissionIds": {
-            "type": "array",
-            "description": "黑名单权限列表",
-            "items": {
-              "type": "integer",
-              "description": "黑名单权限列表",
+              "description": "权限列表",
               "format": "int64"
             }
           }

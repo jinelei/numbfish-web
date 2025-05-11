@@ -82,7 +82,7 @@ const Permission = () => {
     {
       title: '权限类型',
       dataIndex: 'type',
-      render: (text, record) => {
+      render: (text, _) => {
         return PERMISSION_LABEL_MAP.filter((i) => i.key === text).map((i) => (
           <Tag color={i.color} key={i.value}>
             {i.value}
@@ -351,9 +351,10 @@ const Permission = () => {
                     <Button
                       type="primary"
                       onClick={() =>
-                        setSearchValues(
-                          searchForm.getFieldsValue() as PageRequestPermissionQueryRequest
-                        )
+                        setSearchValues({
+                          ...searchValues,
+                          params: { ...searchForm.getFieldsValue() },
+                        })
                       }
                     >
                       搜索
@@ -362,7 +363,10 @@ const Permission = () => {
                       status={'warning'}
                       onClick={() => {
                         searchForm.resetFields();
-                        setSearchValues({});
+                        setSearchValues({
+                          ...searchValues,
+                          params: {},
+                        });
                       }}
                     >
                       重置
@@ -428,7 +432,7 @@ const Permission = () => {
               onChange: (page, pageSize) => {
                 console.log(page, pageSize);
                 setSearchValues({
-                  ...searchForm.getFieldsValue(),
+                  ...searchValues,
                   page: page,
                   size: pageSize,
                 });

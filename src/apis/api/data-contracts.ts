@@ -237,14 +237,9 @@ export interface RoleResponse {
   deletedTime?: string;
   /** 子级 */
   children?: RoleResponse[];
-  /** 白名单权限列表 */
-  whitePermissionIds?: number[];
-  /** 白名单权限实体列表 */
-  whitePermissions?: PermissionResponse[];
-  /** 黑名单权限列表 */
-  blackPermissionIds?: number[];
-  /** 黑名单权限列表 */
-  blackPermissions?: PermissionResponse[];
+  /** 权限列表 */
+  permissionIds?: number[];
+  permissions?: PermissionResponse[];
 }
 
 /** 用户响应对象 */
@@ -426,10 +421,8 @@ export interface RoleUpdateRequest {
   parentId?: number;
   /** 角色备注 */
   remark?: string;
-  /** 白名单权限列表 */
-  whitePermissionIds?: number[];
-  /** 黑名单权限列表 */
-  blackPermissionIds?: number[];
+  /** 权限列表 */
+  permissionIds?: number[];
 }
 
 /** 分页请求对象 */
@@ -576,10 +569,8 @@ export interface RoleCreateRequest {
   parentId?: number;
   /** 角色备注 */
   remark?: string;
-  /** 白名单权限列表 */
-  whitePermissionIds?: number[];
-  /** 黑名单权限列表 */
-  blackPermissionIds?: number[];
+  /** 权限列表 */
+  permissionIds?: number[];
 }
 
 /** 权限修改请求对象 */
