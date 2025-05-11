@@ -101,6 +101,21 @@ const Role = () => {
       dataIndex: 'sortValue',
     },
     {
+      title: '权限列表',
+      dataIndex: 'whitePermissions',
+      render: (text, record) => {
+        return (
+          <Space>
+            {((text || []) as PermissionResponse[]).map((i) => (
+              <Tag key={i.id} color={'green'} size={'small'}>
+                {i.name}
+              </Tag>
+            ))}
+          </Space>
+        );
+      },
+    },
+    {
       title: '更新时间',
       dataIndex: 'updatedTime',
       render: (text, record) => {
