@@ -579,7 +579,7 @@ const Role = () => {
               >
                 <Input type="number" />
               </Form.Item>
-              <Form.Item label="权限树" field="permissionIds">
+              <Form.Item label="关联权限" field="permissionIds">
                 <Tree
                   checkable
                   selectable

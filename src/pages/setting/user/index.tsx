@@ -7,24 +7,24 @@ import {
   Input,
   Message,
   Modal,
-  Popconfirm,
+  Popconfirm, Popover,
   Select,
   Space,
   Table,
   Tag,
-  Tooltip,
-  Typography,
+  Tooltip, Tree,
+  Typography
 } from '@arco-design/web-react';
 import Row from '@arco-design/web-react/es/Grid/row';
 import Col from '@arco-design/web-react/es/Grid/col';
-import { user } from '@/apis';
+import { role, user } from '@/apis';
 import {
-  PageRequestUserQueryRequest,
+  PageRequestUserQueryRequest, RoleResponse,
   UserCreateRequest,
   UserDeleteRequest,
   UserQueryRequest,
   UserResponse,
-  UserUpdateRequest,
+  UserUpdateRequest
 } from '@/apis/api/data-contracts';
 import {
   IconCopy,
@@ -32,13 +32,13 @@ import {
   IconDoubleDown,
   IconDoubleUp,
   IconEdit,
-  IconPlus,
+  IconPlus
 } from '@arco-design/web-react/icon';
 import { dayjs } from '@arco-design/web-react/es/_util/dayjs';
 
 const USER_LABEL_MAP = [
   { key: 'ADMIN', value: '管理员', color: 'arcoblue' },
-  { key: 'NORMAL', value: '普通用户', color: 'gold' },
+  { key: 'NORMAL', value: '普通用户', color: 'gold' }
 ];
 
 const User = () => {
@@ -64,27 +64,76 @@ const User = () => {
     Partial<PageRequestUserQueryRequest>
   >({
     page: pageNo,
-    size: pageSize,
+    size: pageSize
   });
+  const [roleTree, setRoleTree] = useState<RoleResponse[]>(
+    []
+  );
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+  const [roleIds, setRoleIds] = useState<string[]>([]);
 
   const columns = [
     {
       title: '用户名',
       dataIndex: 'username',
-      render: (text, record) => <Tooltip content={record.id}>{text}</Tooltip>,
+      render: (text, record) => <Tooltip content={record.id}>{text}</Tooltip>
     },
     {
       title: '邮箱',
-      dataIndex: 'email',
+      dataIndex: 'email'
     },
     {
       title: '手机号',
-      dataIndex: 'phone',
+      dataIndex: 'phone'
+    },
+    {
+      title: '角色列表',
+      dataIndex: 'roles',
+      render: (text, _) => {
+        text = text || [];
+        if (text.length <= 3) {
+          return (
+            <Space>
+              {(text as RoleResponse[]).map((i) => (
+                <Tag key={i.id} color={'green'} size={'small'}>
+                  {i.name}
+                </Tag>
+              ))}
+            </Space>
+          );
+        } else {
+          const context = (text as RoleResponse[]).map((i) => (
+            <Tag key={i.id} color={'green'} size={'small'}>
+              {i.name}
+            </Tag>
+          ));
+          const prefix = context.slice(0, 2);
+          const suffix = (
+            <Grid cols={3} colGap={16} rowGap={16}>
+              {context.slice(2).map((i) => (
+                <Grid.GridItem> {i} </Grid.GridItem>
+              ))}
+            </Grid>
+          );
+          return (
+            <Space>
+              {prefix}
+              <Popover
+                style={{ width: '100%' }}
+                content={<Space>{suffix}</Space>}
+              >
+                <Tag color={'green'} size={'small'}>
+                  + {text.length - 2}
+                </Tag>
+              </Popover>
+            </Space>
+          );
+        }
+      }
     },
     {
       title: '排序值',
-      dataIndex: 'sortValue',
+      dataIndex: 'sortValue'
     },
     {
       title: '更新时间',
@@ -116,11 +165,11 @@ const User = () => {
             {text ? dayjs(text).format('YYYY-MM-DD HH:mm:ss') : '-'}
           </Tooltip>
         );
-      },
+      }
     },
     {
       title: '备注',
-      dataIndex: 'remark',
+      dataIndex: 'remark'
     },
     {
       title: '操作',
@@ -145,6 +194,7 @@ const User = () => {
             onClick={() => {
               setFormMode(!!record.parentId ? 'update_with_parent' : 'update');
               form.setFieldsValue(record);
+              setRoleIds(record.roleIds)
               setVisible(true);
             }}
           ></Button>
@@ -179,16 +229,17 @@ const User = () => {
                   // code: record.code + '_copy',
                   // type: record.type,
                   // parentId: record.parentId,
-                  remark: record.remark + ' copy',
+                  remark: record.remark + ' copy'
                   // sortValue: record.sortValue + 1
                 });
+                setRoleIds(record.roleIds)
                 setVisible(true);
               }}
             ></Button>
           </Tooltip>
         </Space>
-      ),
-    },
+      )
+    }
   ];
 
   const fetchData = () => {
@@ -211,6 +262,11 @@ const User = () => {
       .finally(() => {
         setLoading(false);
       });
+    role.page1({}).then((res) => {
+      if (res.data.code === 200) {
+        setRoleTree(res.data.data);
+      }
+    });
   };
 
   useEffect(() => {
@@ -227,33 +283,33 @@ const User = () => {
       .then((res) => {
         formMode.startsWith('create')
           ? user
-              .create(res as UserCreateRequest)
-              .then((res) => {
-                if (res.data.code === 200) {
-                  Message.success(res.data.message);
-                } else {
-                  Message.error(res.data.message);
-                }
-              })
-              .finally(() => {
-                fetchData();
-                form.resetFields();
-                setVisible(false);
-              })
+            .create(res as UserCreateRequest)
+            .then((res) => {
+              if (res.data.code === 200) {
+                Message.success(res.data.message);
+              } else {
+                Message.error(res.data.message);
+              }
+            })
+            .finally(() => {
+              fetchData();
+              form.resetFields();
+              setVisible(false);
+            })
           : user
-              .update(res as UserUpdateRequest)
-              .then((res) => {
-                if (res.data.code === 200) {
-                  Message.success(res.data.message);
-                } else {
-                  Message.error(res.data.message);
-                }
-              })
-              .finally(() => {
-                fetchData();
-                form.resetFields();
-                setVisible(false);
-              });
+            .update(res as UserUpdateRequest)
+            .then((res) => {
+              if (res.data.code === 200) {
+                Message.success(res.data.message);
+              } else {
+                Message.error(res.data.message);
+              }
+            })
+            .finally(() => {
+              fetchData();
+              form.resetFields();
+              setVisible(false);
+            });
       })
       .catch((err) => {
         console.log(err.errors);
@@ -314,7 +370,12 @@ const User = () => {
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="用户代码" field="code">
+                  <Form.Item labelAlign={'right'} label="手机号" field="phone">
+                    <Input type={'text'} />
+                  </Form.Item>
+                </Grid.GridItem>
+                <Grid.GridItem>
+                  <Form.Item labelAlign={'right'} label="邮箱" field="email">
                     <Input type={'text'} />
                   </Form.Item>
                 </Grid.GridItem>
@@ -413,7 +474,7 @@ const User = () => {
             rowSelection={{
               checkStrictly: false,
               type: 'checkbox',
-              onChange: (keys) => setSelectedRowKeys(keys),
+              onChange: (keys) => setSelectedRowKeys(keys)
             }}
             pagination={{
               total: total,
@@ -426,9 +487,9 @@ const User = () => {
                 setSearchValues({
                   ...searchForm.getFieldsValue(),
                   page: page,
-                  size: pageSize,
+                  size: pageSize
                 });
-              },
+              }
             }}
             stripe
             rowKey={'id'}
@@ -455,13 +516,13 @@ const User = () => {
                 field="id"
                 disabled={formMode.startsWith('update')}
                 style={{
-                  display: formMode.startsWith('create') ? 'none' : 'block',
+                  display: formMode.startsWith('create') ? 'none' : 'block'
                 }}
                 rules={[
                   {
                     required: !formMode.startsWith('create'),
-                    message: '请输入用户id',
-                  },
+                    message: '请输入用户id'
+                  }
                 ]}
               >
                 <Input />
@@ -474,24 +535,44 @@ const User = () => {
                 <Input />
               </Form.Item>
               <Form.Item
-                label="用户代码"
-                field="code"
-                rules={[{ required: true, message: '请输入用户代码' }]}
+                label="手机号"
+                field="phone"
               >
                 <Input />
               </Form.Item>
               <Form.Item
-                label="用户类型"
-                field="type"
-                rules={[{ required: true, message: '请选择用户类型' }]}
+                label="邮箱"
+                field="email"
               >
-                <Select>
-                  {USER_LABEL_MAP.map((i) => (
-                    <Select.Option key={i.key} value={i.key}>
-                      {i.value}
-                    </Select.Option>
-                  ))}
-                </Select>
+                <Input />
+              </Form.Item>
+              <Form.Item label="关联角色" field="roleIds">
+                <Tree
+                  checkable
+                  selectable
+                  checkedKeys={roleIds}
+                  actionOnClick={'check'}
+                  onCheck={(keys, _) => {
+                    form.setFieldsValue({
+                      roleIds: keys.map((i) => parseInt(i))
+                    });
+                    setRoleIds(keys);
+                  }}
+                  fieldNames={{
+                    title: 'name',
+                    key: 'id',
+                    children: 'children'
+                  }}
+                  renderTitle={(node) => (
+                    <Space>
+                      <Typography.Text>{node.title}</Typography.Text>
+                      <Typography.Text type={'secondary'}>
+                        {(node as RoleResponse).code}
+                      </Typography.Text>
+                    </Space>
+                  )}
+                  treeData={roleTree}
+                ></Tree>
               </Form.Item>
               <Form.Item label="用户排序值" field="sortValue">
                 <Input type="number" />
@@ -501,13 +582,13 @@ const User = () => {
                 field="parentId"
                 disabled
                 style={{
-                  display: formMode.endsWith('with_parent') ? 'block' : 'none',
+                  display: formMode.endsWith('with_parent') ? 'block' : 'none'
                 }}
                 rules={[
                   {
                     required: formMode.endsWith('with_parent'),
-                    message: '请输入父用户id',
-                  },
+                    message: '请输入父用户id'
+                  }
                 ]}
               >
                 <Input type="number" />
