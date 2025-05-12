@@ -35,6 +35,7 @@ import {
   IconDoubleDown,
   IconDoubleUp,
   IconEdit,
+  IconLock,
   IconPlus,
 } from '@arco-design/web-react/icon';
 import { dayjs } from '@arco-design/web-react/es/_util/dayjs';
@@ -177,18 +178,26 @@ const User = () => {
       width: 120,
       render: (_, record) => (
         <Space size="small">
-          <Button
-            icon={<IconPlus />}
-            type="primary"
-            size="small"
-            onClick={() => {
-              setFormMode('create_with_parent');
-              form.setFieldsValue({
-                // parentId: record.id,
-              });
-              setVisible(true);
+          <Popconfirm
+            title="确认重置密码"
+            content={'是否重置密码为123456，该操作不可撤销！'}
+            onOk={() => {
+              user
+                .updatePassword({ username: record.username })
+                .then((res) => {
+                  if (res.data.code === 200) {
+                    Message.success(res.data.message);
+                  } else {
+                    Message.error(res.data.message);
+                  }
+                })
+                .catch((err) => {
+                  Message.error(err);
+                });
             }}
-          ></Button>
+          >
+            <Button icon={<IconLock />} type="primary" size="small"></Button>
+          </Popconfirm>
           <Button
             icon={<IconEdit />}
             size="small"
