@@ -7,24 +7,27 @@ import {
   Input,
   Message,
   Modal,
-  Popconfirm, Popover,
+  Popconfirm,
+  Popover,
   Select,
   Space,
   Table,
   Tag,
-  Tooltip, Tree,
-  Typography
+  Tooltip,
+  Tree,
+  Typography,
 } from '@arco-design/web-react';
 import Row from '@arco-design/web-react/es/Grid/row';
 import Col from '@arco-design/web-react/es/Grid/col';
 import { role, user } from '@/apis';
 import {
-  PageRequestUserQueryRequest, RoleResponse,
+  PageRequestUserQueryRequest,
+  RoleResponse,
   UserCreateRequest,
   UserDeleteRequest,
   UserQueryRequest,
   UserResponse,
-  UserUpdateRequest
+  UserUpdateRequest,
 } from '@/apis/api/data-contracts';
 import {
   IconCopy,
@@ -32,13 +35,13 @@ import {
   IconDoubleDown,
   IconDoubleUp,
   IconEdit,
-  IconPlus
+  IconPlus,
 } from '@arco-design/web-react/icon';
 import { dayjs } from '@arco-design/web-react/es/_util/dayjs';
 
 const USER_LABEL_MAP = [
   { key: 'ADMIN', value: '管理员', color: 'arcoblue' },
-  { key: 'NORMAL', value: '普通用户', color: 'gold' }
+  { key: 'NORMAL', value: '普通用户', color: 'gold' },
 ];
 
 const User = () => {
@@ -64,11 +67,9 @@ const User = () => {
     Partial<PageRequestUserQueryRequest>
   >({
     page: pageNo,
-    size: pageSize
+    size: pageSize,
   });
-  const [roleTree, setRoleTree] = useState<RoleResponse[]>(
-    []
-  );
+  const [roleTree, setRoleTree] = useState<RoleResponse[]>([]);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [roleIds, setRoleIds] = useState<string[]>([]);
 
@@ -76,15 +77,15 @@ const User = () => {
     {
       title: '用户名',
       dataIndex: 'username',
-      render: (text, record) => <Tooltip content={record.id}>{text}</Tooltip>
+      render: (text, record) => <Tooltip content={record.id}>{text}</Tooltip>,
     },
     {
       title: '邮箱',
-      dataIndex: 'email'
+      dataIndex: 'email',
     },
     {
       title: '手机号',
-      dataIndex: 'phone'
+      dataIndex: 'phone',
     },
     {
       title: '角色列表',
@@ -129,11 +130,11 @@ const User = () => {
             </Space>
           );
         }
-      }
+      },
     },
     {
       title: '排序值',
-      dataIndex: 'sortValue'
+      dataIndex: 'sortValue',
     },
     {
       title: '更新时间',
@@ -165,11 +166,11 @@ const User = () => {
             {text ? dayjs(text).format('YYYY-MM-DD HH:mm:ss') : '-'}
           </Tooltip>
         );
-      }
+      },
     },
     {
       title: '备注',
-      dataIndex: 'remark'
+      dataIndex: 'remark',
     },
     {
       title: '操作',
@@ -194,7 +195,7 @@ const User = () => {
             onClick={() => {
               setFormMode(!!record.parentId ? 'update_with_parent' : 'update');
               form.setFieldsValue(record);
-              setRoleIds(record.roleIds)
+              setRoleIds(record.roleIds);
               setVisible(true);
             }}
           ></Button>
@@ -229,17 +230,17 @@ const User = () => {
                   // code: record.code + '_copy',
                   // type: record.type,
                   // parentId: record.parentId,
-                  remark: record.remark + ' copy'
+                  remark: record.remark + ' copy',
                   // sortValue: record.sortValue + 1
                 });
-                setRoleIds(record.roleIds)
+                setRoleIds(record.roleIds);
                 setVisible(true);
               }}
             ></Button>
           </Tooltip>
         </Space>
-      )
-    }
+      ),
+    },
   ];
 
   const fetchData = () => {
@@ -283,33 +284,33 @@ const User = () => {
       .then((res) => {
         formMode.startsWith('create')
           ? user
-            .create(res as UserCreateRequest)
-            .then((res) => {
-              if (res.data.code === 200) {
-                Message.success(res.data.message);
-              } else {
-                Message.error(res.data.message);
-              }
-            })
-            .finally(() => {
-              fetchData();
-              form.resetFields();
-              setVisible(false);
-            })
+              .create(res as UserCreateRequest)
+              .then((res) => {
+                if (res.data.code === 200) {
+                  Message.success(res.data.message);
+                } else {
+                  Message.error(res.data.message);
+                }
+              })
+              .finally(() => {
+                fetchData();
+                form.resetFields();
+                setVisible(false);
+              })
           : user
-            .update(res as UserUpdateRequest)
-            .then((res) => {
-              if (res.data.code === 200) {
-                Message.success(res.data.message);
-              } else {
-                Message.error(res.data.message);
-              }
-            })
-            .finally(() => {
-              fetchData();
-              form.resetFields();
-              setVisible(false);
-            });
+              .update(res as UserUpdateRequest)
+              .then((res) => {
+                if (res.data.code === 200) {
+                  Message.success(res.data.message);
+                } else {
+                  Message.error(res.data.message);
+                }
+              })
+              .finally(() => {
+                fetchData();
+                form.resetFields();
+                setVisible(false);
+              });
       })
       .catch((err) => {
         console.log(err.errors);
@@ -408,9 +409,10 @@ const User = () => {
                     <Button
                       type="primary"
                       onClick={() =>
-                        setSearchValues(
-                          searchForm.getFieldsValue() as PageRequestUserQueryRequest
-                        )
+                        setSearchValues({
+                          ...searchValues,
+                          params: { ...searchForm.getFieldsValue() },
+                        })
                       }
                     >
                       搜索
@@ -419,7 +421,10 @@ const User = () => {
                       status={'warning'}
                       onClick={() => {
                         searchForm.resetFields();
-                        setSearchValues({});
+                        setSearchValues({
+                          ...searchValues,
+                          params: {},
+                        });
                       }}
                     >
                       重置
@@ -474,7 +479,7 @@ const User = () => {
             rowSelection={{
               checkStrictly: false,
               type: 'checkbox',
-              onChange: (keys) => setSelectedRowKeys(keys)
+              onChange: (keys) => setSelectedRowKeys(keys),
             }}
             pagination={{
               total: total,
@@ -483,13 +488,12 @@ const User = () => {
               showTotal: (total, range) =>
                 `共 ${total} 条记录，当前显示 ${range[0]}-${range[1]} 条`,
               onChange: (page, pageSize) => {
-                console.log(page, pageSize);
                 setSearchValues({
                   ...searchForm.getFieldsValue(),
                   page: page,
-                  size: pageSize
+                  size: pageSize,
                 });
-              }
+              },
             }}
             stripe
             rowKey={'id'}
@@ -516,13 +520,13 @@ const User = () => {
                 field="id"
                 disabled={formMode.startsWith('update')}
                 style={{
-                  display: formMode.startsWith('create') ? 'none' : 'block'
+                  display: formMode.startsWith('create') ? 'none' : 'block',
                 }}
                 rules={[
                   {
                     required: !formMode.startsWith('create'),
-                    message: '请输入用户id'
-                  }
+                    message: '请输入用户id',
+                  },
                 ]}
               >
                 <Input />
@@ -534,16 +538,10 @@ const User = () => {
               >
                 <Input />
               </Form.Item>
-              <Form.Item
-                label="手机号"
-                field="phone"
-              >
+              <Form.Item label="手机号" field="phone">
                 <Input />
               </Form.Item>
-              <Form.Item
-                label="邮箱"
-                field="email"
-              >
+              <Form.Item label="邮箱" field="email">
                 <Input />
               </Form.Item>
               <Form.Item label="关联角色" field="roleIds">
@@ -554,14 +552,14 @@ const User = () => {
                   actionOnClick={'check'}
                   onCheck={(keys, _) => {
                     form.setFieldsValue({
-                      roleIds: keys.map((i) => parseInt(i))
+                      roleIds: keys.map((i) => parseInt(i)),
                     });
                     setRoleIds(keys);
                   }}
                   fieldNames={{
                     title: 'name',
                     key: 'id',
-                    children: 'children'
+                    children: 'children',
                   }}
                   renderTitle={(node) => (
                     <Space>
@@ -582,13 +580,13 @@ const User = () => {
                 field="parentId"
                 disabled
                 style={{
-                  display: formMode.endsWith('with_parent') ? 'block' : 'none'
+                  display: formMode.endsWith('with_parent') ? 'block' : 'none',
                 }}
                 rules={[
                   {
                     required: formMode.endsWith('with_parent'),
-                    message: '请输入父用户id'
-                  }
+                    message: '请输入父用户id',
+                  },
                 ]}
               >
                 <Input type="number" />

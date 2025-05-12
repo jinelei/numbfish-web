@@ -489,7 +489,6 @@ const Role = () => {
               showTotal: (total, range) =>
                 `共 ${total} 条记录，当前显示 ${range[0]}-${range[1]} 条`,
               onChange: (page, pageSize) => {
-                console.log(page, pageSize);
                 setSearchValues({
                   ...searchForm.getFieldsValue(),
                   page: page,
