@@ -125,7 +125,7 @@ const Role = () => {
           const suffix = (
             <Grid cols={3} colGap={16} rowGap={16}>
               {context.slice(2).map((i) => (
-                <Grid.GridItem> {i} </Grid.GridItem>
+                <Grid.GridItem key={i.key}> {i} </Grid.GridItem>
               ))}
             </Grid>
           );
