@@ -15,8 +15,12 @@ function Exception403() {
           status="403"
           subTitle={t['exception.result.403.description']}
           extra={
-            <Button key="back" type="primary">
-              {t['exception.result.403.back']}
+            <Button
+              key="back"
+              type="primary"
+              onClick={() => (window.location.pathname = '/login')}
+            >
+              {t['exception.result.403.login']}
             </Button>
           }
         />

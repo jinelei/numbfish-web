@@ -281,10 +281,6 @@ const Role = () => {
   };
 
   useEffect(() => {
-    document.body.setAttribute('arco-theme', 'light');
-  });
-
-  useEffect(() => {
     fetchData();
   }, [searchValues]);
 
@@ -367,22 +363,42 @@ const Role = () => {
                 className={styles.searchForm}
               >
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="角色id" field="id">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="角色id"
+                    field="id"
+                  >
                     <Input type={'number'} />
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="角色名称" field="name">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="角色名称"
+                    field="name"
+                  >
                     <Input type={'text'} />
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="角色代码" field="code">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="角色代码"
+                    field="code"
+                  >
                     <Input type={'text'} />
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="角色类型" field="type">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="角色类型"
+                    field="type"
+                  >
                     <Select style={{ minWidth: '12rem' }}>
                       {ROLE_LABEL_MAP.map((i) => (
                         <Select.Option key={i.key} value={i.key}>

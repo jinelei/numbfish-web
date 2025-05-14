@@ -280,10 +280,6 @@ const User = () => {
   };
 
   useEffect(() => {
-    document.body.setAttribute('arco-theme', 'light');
-  });
-
-  useEffect(() => {
     fetchData();
   }, [searchValues]);
 
@@ -366,12 +362,18 @@ const User = () => {
                 className={styles.searchForm}
               >
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="用户id" field="id">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="用户id"
+                    field="id"
+                  >
                     <Input type={'number'} />
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
                   <Form.Item
+                    className={styles.searchFormItem}
                     labelAlign={'right'}
                     label="用户名"
                     field="username"
@@ -380,17 +382,32 @@ const User = () => {
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="手机号" field="phone">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="手机号"
+                    field="phone"
+                  >
                     <Input type={'text'} />
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="邮箱" field="email">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="邮箱"
+                    field="email"
+                  >
                     <Input type={'text'} />
                   </Form.Item>
                 </Grid.GridItem>
                 <Grid.GridItem>
-                  <Form.Item labelAlign={'right'} label="用户类型" field="type">
+                  <Form.Item
+                    className={styles.searchFormItem}
+                    labelAlign={'right'}
+                    label="用户类型"
+                    field="type"
+                  >
                     <Select style={{ minWidth: '12rem' }}>
                       {USER_LABEL_MAP.map((i) => (
                         <Select.Option key={i.key} value={i.key}>

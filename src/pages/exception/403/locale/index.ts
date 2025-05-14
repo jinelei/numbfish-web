@@ -4,13 +4,13 @@ const i18n = {
     'menu.exception.403': '403',
     'exception.result.403.description':
       'Access to this resource on the server is denied.',
-    'exception.result.403.back': 'Back',
+    'exception.result.403.login': 'Login',
   },
   'zh-CN': {
     'menu.exception': '异常页',
     'menu.exception.403': '403',
     'exception.result.403.description': '对不起，您没有访问该资源的权限',
-    'exception.result.403.back': '返回',
+    'exception.result.403.login': '登陆',
   },
 };
 

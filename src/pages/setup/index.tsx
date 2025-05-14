@@ -7,7 +7,6 @@ import { Form, Input, Button, Space, Message } from '@arco-design/web-react';
 
 function Setup() {
   useEffect(() => {
-    document.body.setAttribute('arco-theme', 'light');
     setup
       .checkIsSetup()
       .then((res) => {

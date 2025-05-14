@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Footer from '@/components/Footer';
 import styles from './style/index.module.less';
 
 function UserInfo() {
-  useEffect(() => {
-    document.body.setAttribute('arco-theme', 'light');
-  }, []);
-
   return (
     <div className={styles.container}>
       <div className={styles.content}>

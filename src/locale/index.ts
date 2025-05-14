@@ -57,6 +57,7 @@ const i18n = {
     'menu.user.switchRoles': '切换角色',
     'menu.user.role.admin': '管理员',
     'menu.user.role.user': '普通用户',
+    'navbar.login': '用户登录',
     'navbar.logout': '退出登录',
     'settings.title': '页面配置',
     'settings.themeColor': '主题色',

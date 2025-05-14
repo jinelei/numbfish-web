@@ -20,6 +20,7 @@ export const routes: IRoute[] = [
   {
     name: 'menu.dashboard',
     key: 'dashboard',
+    requiredPermissions: ['DASHBOARD'],
   },
   {
     name: 'menu.userinfo',

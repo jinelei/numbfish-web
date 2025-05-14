@@ -1,4 +1,3 @@
-import UserInfo from '@/pages/userinfo';
 import {
   LOADING_START,
   LOADING_STOP,
@@ -32,7 +31,7 @@ export const reducer = (
       setTimeout(() => {
         window.location.href = '/login';
       }, 100);
-      return { ...initialState };
+      return { ...state, userInfo: {} };
     }
     case UPDATE_USERINFO: {
       return {

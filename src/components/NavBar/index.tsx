@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
 import {
   Tooltip,
   Input,
@@ -15,12 +15,10 @@ import {
   IconNotification,
   IconSunFill,
   IconMoonFill,
-  IconUser,
   IconSettings,
   IconPoweroff,
   IconExperiment,
   IconDashboard,
-  IconTag,
 } from '@arco-design/web-react/icon';
 import { useSelector, useDispatch } from 'react-redux';
 import store, { RootState } from '@/store';
@@ -34,7 +32,6 @@ import Settings from '../Settings';
 import styles from './style/index.module.less';
 import defaultLocale from '@/locale';
 import useStorage from '@/utils/useStorage';
-import { generatePermission } from '@/routes';
 import { user } from '@/apis';
 import { USER_LOGOUT } from '@/store/action';
 import NProgress from 'nprogress';
@@ -45,8 +42,9 @@ function Navbar({ show }: { show: boolean }) {
   const userInfo = useSelector((state: RootState) => state.userInfo);
   const dispatch = useDispatch();
   const history = useHistory();
-
-  const [role, setRole] = useStorage('userRole', 'admin');
+  const isLogin = useSelector((state: RootState) => {
+    return !!state.userInfo && Object.keys(state.userInfo).length !== 0;
+  });
 
   const { setLang, lang, theme, setTheme } = useContext(GlobalContext);
 
@@ -72,18 +70,6 @@ function Navbar({ show }: { show: boolean }) {
     }
   }
 
-  useEffect(() => {
-    dispatch({
-      type: 'update-userInfo',
-      payload: {
-        userInfo: {
-          ...userInfo,
-          permissions: generatePermission(role),
-        },
-      },
-    });
-  }, [role]);
-
   if (!show) {
     return (
       <div className={styles['fixed-settings']}>
@@ -96,31 +82,8 @@ function Navbar({ show }: { show: boolean }) {
     );
   }
 
-  const handleChangeRole = () => {
-    const newRole = role === 'admin' ? 'user' : 'admin';
-    setRole(newRole);
-  };
-
   const droplist = (
     <Menu onClickMenuItem={onMenuItemClick}>
-      <Menu.SubMenu
-        key="role"
-        title={
-          <>
-            <IconUser className={styles['dropdown-icon']} />
-            <span className={styles['user-role']}>
-              {role === 'admin'
-                ? t['menu.user.role.admin']
-                : t['menu.user.role.user']}
-            </span>
-          </>
-        }
-      >
-        <Menu.Item onClick={handleChangeRole} key="switch role">
-          <IconTag className={styles['dropdown-icon']} />
-          {t['menu.user.switchRoles']}
-        </Menu.Item>
-      </Menu.SubMenu>
       <Menu.Item key="setting">
         <IconSettings className={styles['dropdown-icon']} />
         {t['menu.user.setting']}
@@ -141,10 +104,17 @@ function Navbar({ show }: { show: boolean }) {
       </Menu.SubMenu>
 
       <Divider style={{ margin: '4px 0' }} />
-      <Menu.Item key="logout">
-        <IconPoweroff className={styles['dropdown-icon']} />
-        {t['navbar.logout']}
-      </Menu.Item>
+      {isLogin ? (
+        <Menu.Item key="logout">
+          <IconPoweroff className={styles['dropdown-icon']} />
+          {t['navbar.logout']}
+        </Menu.Item>
+      ) : (
+        <Menu.Item key="login">
+          <IconPoweroff className={styles['dropdown-icon']} />
+          {t['navbar.login']}
+        </Menu.Item>
+      )}
     </Menu>
   );
 
@@ -204,8 +174,8 @@ function Navbar({ show }: { show: boolean }) {
           </Tooltip>
         </li>
         <Settings />
-        {userInfo && (
-          <li>
+        <li>
+          {isLogin ? (
             <Dropdown droplist={droplist} position="br">
               <Avatar size={32} style={{ cursor: 'pointer' }}>
                 {!!userInfo?.avatar ? (
@@ -215,8 +185,20 @@ function Navbar({ show }: { show: boolean }) {
                 )}
               </Avatar>
             </Dropdown>
-          </li>
-        )}
+          ) : (
+            <Avatar
+              size={32}
+              style={{ cursor: 'pointer' }}
+              onClick={() => (window.location.pathname = '/login')}
+            >
+              {!!userInfo?.avatar ? (
+                <img alt="avatar" src={userInfo.avatar} />
+              ) : (
+                <UserIcon />
+              )}
+            </Avatar>
+          )}
+        </li>
       </ul>
     </div>
   );

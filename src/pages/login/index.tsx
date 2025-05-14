@@ -1,14 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Footer from '@/components/Footer';
 import Logo from '@/assets/logo.svg';
 import LoginForm from './form';
 import styles from './style/index.module.less';
 
 function Login() {
-  useEffect(() => {
-    document.body.setAttribute('arco-theme', 'light');
-  }, []);
-
   return (
     <div className={styles.container}>
       <div className={styles.logo}>
@@ -26,6 +22,7 @@ function Login() {
     </div>
   );
 }
+
 Login.displayName = 'LoginPage';
 
 export default Login;
